@@ -82,6 +82,7 @@
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
     global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
     global.fadeScoreboard = ini_read_real("Settings", "Fade Scoreboard", 1);
+    global.corpseTrack = ini_read_real("Settings", "Corpse Tracking", 1);
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
