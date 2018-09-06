@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    /*image_speed=0;
+    image_index=6;
+    a = 255;
+    b = 0.3;
+    color = c_white;  
+    alpha=1;
+    size=1;*/
+    
+    image_speed = 0.4;
+    class = 0;
+    team = 0;
+    
+    sprite[0] = RedScoutMangleS;
+    sprite[1] = RedSoldierMangleS;
+    sprite[2] = RedSniperMangleS;
+    sprite[3] = RedDemomanMangleS;
+    sprite[4] = RedMedicMangleS;
+    sprite[5] = RedEngineerMangleS;
+    sprite[6] = RedHeavyMangleS;
+    sprite[7] = RedSpyMangleS;
+    sprite[8] = RedPyroMangleS;
+    
+    sprite[9] = BlueScoutMangleS;
+    sprite[10] = BlueSoldierMangleS;
+    sprite[11] = BlueSniperMangleS;
+    sprite[12] = BlueDemomanMangleS;
+    sprite[13] = BlueMedicMangleS;
+    sprite[14] = BlueEngineerMangleS;
+    sprite[15] = BlueHeavyMangleS;
+    sprite[16] = BlueSpyMangleS;
+    sprite[17] = BluePyroMangleS;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

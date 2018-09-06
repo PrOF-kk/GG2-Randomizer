@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if room == loadout xoffset = view_xview[0];
+else xoffset = view_xview[0]+100;
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+
+if mouse_x &gt; x+xoffset &amp;&amp; mouse_x &lt;x+48*2+xoffset {
+    if mouse_y &gt; y+yoffset &amp;&amp; mouse_y &lt; y+30*2+yoffset {
+        selection = 0;
+        LoadoutMenu.name = global.name[value+selection];
+        LoadoutMenu.description[0] = description[0,0];
+        LoadoutMenu.description[1] = description[0,1];
+        LoadoutMenu.description[2] = description[0,2];
+    } else if mouse_y &gt; y+30*2+yoffset &amp;&amp; mouse_y &lt; y+60*2+yoffset {
+        selection = 1;
+        LoadoutMenu.name = global.name[value+selection];
+        LoadoutMenu.description[0] = description[1,0];
+        LoadoutMenu.description[1] = description[1,1];
+        LoadoutMenu.description[2] = description[1,2];
+    }else if mouse_y &gt; y+60*2+yoffset &amp;&amp; mouse_y &lt; y+90*2+yoffset {
+        selection = 2;
+        LoadoutMenu.name = global.name[value+selection];
+        LoadoutMenu.description[0] = description[2,0];
+        LoadoutMenu.description[1] = description[2,1];
+        LoadoutMenu.description[2] = description[2,2];
+    } else if mouse_y &gt; y+90*2+yoffset &amp;&amp; mouse_y &lt; y+120*2+yoffset {
+        selection = 3;
+        LoadoutMenu.name = global.name[value+selection];
+        LoadoutMenu.description[0] = description[3,0];
+        LoadoutMenu.description[1] = description[3,1];
+        LoadoutMenu.description[2] = description[3,2];
+    } else if mouse_y &gt; y+120*2+yoffset &amp;&amp; mouse_y &lt; y+150*2+yoffset {
+        selection = 4;
+        LoadoutMenu.name = global.name[value+selection];
+        LoadoutMenu.description[0] = description[4,0];
+        LoadoutMenu.description[1] = description[4,1];
+        LoadoutMenu.description[2] = description[4,2];
+    } else selection = loaded-value;
+} else selection = loaded-value;
+
+image_alpha=1;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

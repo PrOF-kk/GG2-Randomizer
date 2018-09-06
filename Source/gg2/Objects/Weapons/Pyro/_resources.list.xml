@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Flamethrower" type="RESOURCE"/>
+  <resource name="Phlog" type="RESOURCE"/>
+  <resource name="Frostbite" type="RESOURCE"/>
+  <resource name="Backburner" type="RESOURCE"/>
+  <resource name="Transmutator" type="RESOURCE"/>
+  <resource name="PyroShotgun" type="RESOURCE"/>
+  <resource name="Flaregun" type="RESOURCE"/>
+  <resource name="Manmelter" type="RESOURCE"/>
+  <resource name="Detonator" type="RESOURCE"/>
+  <resource name="Axe" type="RESOURCE"/>
+  <resource name="Volcanofragment" type="RESOURCE"/>
+  <resource name="NapalmHand" type="RESOURCE"/>
+</resources>

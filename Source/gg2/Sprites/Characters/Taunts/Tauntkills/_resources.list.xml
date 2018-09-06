@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutTKill" type="RESOURCE"/>
+  <resource name="SniperTKill" type="RESOURCE"/>
+  <resource name="DemoTKill" type="RESOURCE"/>
+</resources>

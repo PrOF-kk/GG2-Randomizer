@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="HsMask">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if instance_exists(other.owner) victim = other.owner;
+else {
+    instance_destroy();
+    exit;
+}
+if(victim.id != ownerPlayer.object and victim.team != team  &amp;&amp; victim.hp &gt; 0 &amp;&amp; victim.ubered == 0) {
+    if victim.radioactive {
+        var text;
+        text=instance_create(x,y,Text);
+        text.sprite_index = MissS;
+        instance_destroy();
+        exit;
+    }
+        var text;
+        text=instance_create(x,y,Text);
+        text.sprite_index = HeadshotS;
+    
+        if !victim.invincible victim.hp -= hitDamage*(1+victim.pissed*0.35)*2;
+        victim.timeUnscathed = 0
+        if (victim.lastDamageDealer != ownerPlayer &amp;&amp; victim.lastDamageDealer != victim.player){
+            victim.secondToLastDamageDealer = victim.lastDamageDealer;
+            victim.alarm[4] = victim.alarm[3]
+        }
+        victim.alarm[3] = ASSIST_TIME;
+        victim.lastDamageDealer = ownerPlayer;
+        victim.lastDamageSource = WEAPON_HEADSHOT;
+        victim.lastDamageCrit = CRIT_FACTOR;
+        var blood;
+        if(global.gibLevel &gt; 0){
+            blood = instance_create(x,y,Blood);
+            blood.direction = direction-180;
+            }
+        
+        with(victim) {
+            motion_add(other.direction, other.speed*0.03);
+            cloakAlpha = min(cloakAlpha + 0.1, 1);    
+            }
+    instance_destroy();
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Make self invisible if behind enemy
+if (player.loaded1 == WEAPON_REVOLVER or player.loaded2 == WEAPON_REVOLVER    
+or player.loaded1 == WEAPON_ETRANGER or player.loaded2 == WEAPON_ETRANGER     
+or player.loaded1 == WEAPON_PREDATOR or player.loaded2 == WEAPON_PREDATOR     
+or player.loaded1 == WEAPON_NORDICGOLD or player.loaded2 == WEAPON_NORDICGOLD    
+or player.loaded1 == WEAPON_DIPLOMAT or player.loaded2 == WEAPON_DIPLOMAT) &amp;&amp; !pissed &amp;&amp; !stunned {   
+    invisible = false;
+    if bubble.alarm[0] &gt;0 bubble.visible = true;
+    if pissed exit;
+    
+    if (global.myself != -1) {
+        if (global.myself.object != -1) &amp;&amp; (!intel) {
+            if ((team != global.myself.object.team) &amp;&amp; (sign(x - global.myself.object.x) == -sign(global.myself.object.image_xscale))) {
+                invisible = true;
+                bubble.visible = false;
+            }
+        }
+    }
+} else invisible = false;
+
+//slowdown when shooting miniguns
+if (weapon_index == WEAPON_MINIGUN or weapon_index == WEAPON_NATACHA or weapon_index == WEAPON_IRON) &amp;&amp; !stunned{
+    if(keyState &amp; $10) {
+        runPower = runBkp-0.5;
+    } else {
+        runPower = runBkp;
+    }
+} else if weapon_index == WEAPON_TOMISLAV &amp;&amp; !stunned { 
+    if(keyState &amp; $10) {
+        runPower = runBkp-0.25;
+    } else {
+        runPower = runBkp;
+    }
+} else if weapon_index == WEAPON_BRASSBEAST &amp;&amp; !stunned {
+    if(keyState &amp; $10) {
+        runPower = 0;
+    } else {
+        runPower = runBkp;
+    }
+}
+
+//unscope when you don't have a rifle
+if weapon_index != WEAPON_RIFLE &amp;&amp; weapon_index != WEAPON_MACHINA &amp;&amp; weapon_index != WEAPON_SNIPEANATURE  
+&amp;&amp; weapon_index != WEAPON_BAZAARBARGAIN &amp;&amp; weapon_index != WEAPON_SYDNEYSLEEPER &amp;&amp; zoomed == 1 toggleZoom(id);
+</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING"> if(global.isHost &amp;&amp; hp&lt;=0) {
+    /*if lastDamageSource == WEAPON_ETRANGER {
+        if lastDamageDealer != -1 &amp;&amp; instance_exists(lastDamageDealer) {
+            if lastDamageDealer.object != -1 {
+                lastDamageDealer.object.stabspeed += 1;
+                write_ubyte(global.eventBuffer, STABSPEED);
+                write_ubyte(global.eventBuffer, ds_list_find_index(global.players,lastDamageDealer));
+            }
+        }
+    }*/
+    var assistant;
+    assistant = secondToLastDamageDealer;
+    if (lastDamageDealer and instance_exists(lastDamageDealer))
+        if (lastDamageDealer.object)
+            if (lastDamageDealer.object.healer)
+                assistant = lastDamageDealer.object.healer;
+                
+    sendEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource, lastDamageCrit+pissed);
+    doEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource, lastDamageCrit+pissed);
+
+    with(GameServer) {
+        ServerBalanceTeams();
+    }
+    exit;
+}
+    
+if(hp&gt;maxHp) {
+    hp=maxHp;
+}
+
+//overheal stuff
+if overheal &gt; 0 {
+    if hp &lt; maxHp {
+        var hpgained;
+        hpgained = maxHp-hp;
+        if overheal &gt; hpgained {
+            hp += hpgained;
+            overheal -= hpgained;
+        } else {
+            hp += overheal;
+            overheal = 0;
+        }
+    }
+    if overheal &gt; maxHp*OVERHEAL_FACTOR overheal = maxHp*OVERHEAL_FACTOR
+    else if healer == -1 &amp;&amp; !choconom overheal -= maxHp*OVERHEAL_FACTOR/450;
+    if overheal &lt; 0 overheal = 0;
+}
+    
+if(((aimDirection+270) mod 360)&gt;180) {
+    image_xscale=1;
+    currentWeapon.image_xscale=1;
+    currentWeapon.image_angle = aimDirection;
+} else {
+    image_xscale=-1;
+    currentWeapon.image_xscale=-1;
+    currentWeapon.image_angle = aimDirection+180;
+}
+    
+currentWeapon.x=round(x);
+currentWeapon.y=round(y);
+    
+// Limit people to the area of the room to prevent the
+// "Falling through the floors" issue.
+if(x&lt;0) {
+    x=0;
+}
+if(x&gt;map_width()){
+    x = map_width();
+}
+if(y&lt;0) {
+    y = 0;
+}
+if(y&gt;map_height()){
+    y = map_height();
+}
+if(!place_free(x,y+1))
+    moveStatus=0
+
+if !invisibeam
+    if !(weapon_index &gt;= WEAPON_REVOLVER &amp;&amp; weapon_index &lt;= WEAPON_ZAPPER or weapon_index == WEAPON_PREDATOR) or pissed or milked or bleeding cloak = false;
+     
+// Cloak
+if (cloak) {
+    cloakAlpha = max(cloakAlpha - 0.05, 0);
+    if drCharge &gt; 0 {
+        drCharge = max(0,drCharge-1);
+        invincible = true;
+    } else {
+        invincible = false;
+        if player.team == global.myself.team if invincible playsound(x,y,UbercloakSnd);
+    }
+} else {
+    cloakAlpha = min(cloakAlpha + 0.05, 1);
+    if player.team == global.myself.team &amp;&amp; invincible playsound(x,y,UbercloakSnd);
+    invincible = false;
+}
+    
+// Taunts
+if (taunting)
+{
+    tauntindex += tauntspeed*0.1;
+    if tauntindex &gt; tauntkill {
+        tauntkill = 9001;
+        if tauntsauce == DEMOMAN_TAUNTKILL {
+            instance_create(x,y,Explosion);
+            playsound(x,y,ExplosionSnd);
+            with(Character) {
+                if point_distance(x,y,other.x,other.y) &lt;= 32 &amp;&amp; player.team != other.player.team {
+                     if radioactive {
+                        var text;
+                        text=instance_create(x,y,Text);
+                        text=sprite_index = MissS
+                    } else {
+                        hp -= 300;
+                        lastDamageCrit=1;
+                        if (lastDamageDealer != other.player &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3]
+                        }
+                        alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.player;
+                        lastDamageSource = DEMOMAN_TAUNTKILL
+                    }
+                }
+            }
+        } else {
+            var shot;
+            shot = instance_create(x,y,Tauntkillmask);
+            shot.image_xscale=xscale;
+            shot.owner=id;
+            shot.ownerPlayer=player;
+            shot.team=player.team;
+            shot.weapon=tauntsauce;
+        }
+    } else if tauntkill &lt; 9001 image_xscale=xscale;
+    if tauntindex &gt;= tauntend {
+        taunting=false;
+        if weapon_index == WEAPON_EUREKAEFFECT {
+            if player.sentry != -1 {
+                if player.sentry.sapped &lt;= 0 {
+                    var xmid, ymid, afterglow;
+                    xmid = view_xview[0] + view_wview[0]/2;
+                    ymid = view_yview[0] + view_hview[0]/2;
+                    if sqrt((xmid-x)*(xmid-x) + (ymid-y)*(ymid-y)) &lt; 415 {
+                        PlayerControl.thunder = 1;
+                        playsound(x,y,EETPSnd);
+                    }
+                    afterglow = instance_create(x,y,EEFectGlow);
+                    afterglow.team = player.team;
+                    
+                    event_user(5);
+                    x=player.sentry.x;
+                    y=player.sentry.y-18;
+                }
+            }
+        }
+    }
+}
+    
+//sandvich
+if (omnomnomnom)
+{
+    omnomnomnomindex += 0.25;
+    image_xscale=xscale;
+    if hp &lt;= maxHp {
+        if choconom overheal += 0.33;
+        else hp += 0.4;
+    }
+    if omnomnomnomindex &gt;= omnomnomnomend {
+        omnomnomnom=false;
+        choconom = false;
+    }
+}
+
+//dripping piss
+if pissed {
+    repeat(random(floor(2))) instance_create(x+random(32)-16,y+random(32)-16,Piss);
+}
+//dripping milk
+if milked {
+    repeat(random(floor(2))) instance_create(x+random(32)-16,y+random(32)-16,Milk);
+}
+//bleeding
+if bleeding {
+    hp-=0.15;
+    repeat(random(floor(2))) instance_create(x+random(32)-16,y+random(32)-16,BloodDrop);
+    lastDamageSource = WEAPON_SHIV;
+}
+//unpissing/unmilking if ubered
+if ubered or megaHealed or critting {
+    pissed=0;
+    milked=0;
+    bleeding=0;
+}
+
+//for things polling whether the character is on a medcabinet
+onCabinet = place_meeting(x, y, HealingCabinet);
+
+// Last x/y position for death cam if player is dead
+player.lastKnownx=x;
+player.lastKnowny=y;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

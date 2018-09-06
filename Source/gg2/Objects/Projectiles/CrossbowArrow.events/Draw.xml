@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if crit &gt; 1 offset = 2
+else offset = 0;
+
+if attached != -1 &amp;&amp; instance_exists(attached) {
+    if !attached.invisible draw_sprite_ext(sprite_index,team+offset,x,y,image_xscale,1,image_angle,c_white,attached.cloakAlpha);
+} else if global.particles == PARTICLES_NORMAL {
+    if !variable_local_exists('old_pos') {
+        a = 0
+        while a &lt; 10 {
+            old_pos[a,0] = x;
+            old_pos[a,1] = y;  
+            a += 1;
+        }
+    }
+    a = 10-1
+    while a &gt; 0 {
+        old_pos[a,0] = old_pos[a-1,0]
+        old_pos[a,1] = old_pos[a-1,1]        
+        a -= 1
+    }      
+    
+    if crit &gt; 1 {
+        if team == TEAM_RED color = c_orange;
+        else color = c_aqua;
+    } else {
+        if team == TEAM_RED color = c_red;
+        else color = c_blue;
+    }
+     
+    old_pos[0,0] = x
+    old_pos[0,1] = y   
+        a = 0
+        while a &lt; 10-1 {
+            draw_set_alpha(0.2)
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]-2, old_pos[a+1,0], old_pos[a+1,1]-2, 1,color,color);
+            draw_set_alpha(0.4)
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]-1, old_pos[a+1,0], old_pos[a+1,1]-1, 1,color,color);
+            draw_set_alpha(0.6)
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]-0, old_pos[a+1,0], old_pos[a+1,1]-0, 1,color,color);
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]+1, old_pos[a+1,0], old_pos[a+1,1] +1, 1,color,color);
+            draw_set_alpha(0.4)
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]+2, old_pos[a+1,0], old_pos[a+1,1] +2, 1,color,color);
+            draw_set_alpha(0.2)
+            draw_line_width_color(old_pos[a,0], old_pos[a,1]+3, old_pos[a+1,0], old_pos[a+1,1] +3, 1,color,color);
+        a += 1;
+    }   
+draw_sprite_ext(sprite_index,team,x,y,image_xscale,1,image_angle,c_white,1);
+} else draw_sprite_ext(sprite_index,team,x,y,image_xscale,1,image_angle,c_white,1);
+
+if burning {
+    for(i = 0; i &lt; 2; i += 1)
+    {
+        draw_sprite_ext(FlameS, random(3), x + i*2, y+i*2, 1, 1, 0, c_white, 0.5);
+    }
+} 
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

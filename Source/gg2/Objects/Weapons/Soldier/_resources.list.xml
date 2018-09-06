@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="BuffBanner" type="RESOURCE"/>
+  <resource name="RBison" type="RESOURCE"/>
+  <resource name="RBison2" type="RESOURCE"/>
+  <resource name="Rocketlauncher" type="RESOURCE"/>
+  <resource name="Airstrike" type="RESOURCE"/>
+  <resource name="DirectHit" type="RESOURCE"/>
+  <resource name="CowMangler" type="RESOURCE"/>
+  <resource name="BlackBox" type="RESOURCE"/>
+  <resource name="SoldierShotgun" type="RESOURCE"/>
+  <resource name="Reserveshooter" type="RESOURCE"/>
+  <resource name="SoldierBuff" type="RESOURCE"/>
+  <resource name="Shovel" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">/*if buffbanner {
+    buffbanner = false;
+    currentWeapon.crit=1;
+}else if stunned == true {
+    stunned = false;
+    jumpStrength=8;
+} else if radioactive == true {
+    radioactive = false;
+} else if charge=true {
+    charge=false;
+    currentWeapon.crit=1;
+}
+runPower = runBkp;*/
+
+buffbanner = false;
+stunned = false;
+radioactive = false;
+charge=false;
+currentWeapon.crit=1;
+runPower = runBkp;
+jumpStrength=8;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

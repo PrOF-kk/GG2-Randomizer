@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Apply afterburn
+if (burnDuration &gt; 0)
+{
+    burnDuration -= durationDecay;
+    hp -= burnIntensity / (30*(frozen+1));
+    if instance_exists(lastDamageDealer)
+        if lastDamageDealer.object != -1 lastDamageDealer.object.phlogDmg += burnIntensity / (30*(frozen+1));
+    timeUnscathed = 0;
+    if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player) {
+        secondToLastDamageDealer = lastDamageDealer;
+        alarm[4] = alarm[3];
+    }
+    alarm[3] = ASSIST_TIME;
+    lastDamageDealer = burnedBy;
+    lastDamageSource = afterburnSource;
+}
+if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
+if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
+{
+    burnDuration = 0;
+    burnIntensity = 0;
+    burnedBy = -1;
+    afterburnSource = -1;
+    frozen = false;
+}
+
+if floating {
+    if((keyState | pressedKeys) &amp; $80) {
+        vspeed = -jumpStrength*0.9;
+        bootfuel -= 4;
+    } else vspeed = 0;
+    bootfuel -= 1;
+    if bootfuel &lt;= 0 floating = false;
+    moveStatus = 2;
+    if ((keyState &amp; $40) or (keyState &amp; $20)) {
+        floating = false;
+        vspeed=1.2;
+    }
+} else {
+    if ubered bootfuel = 150
+    else if bootfuel &lt; 150 bootfuel += 0.5;
+}
+// Handle input
+if(!taunting and !omnomnomnom &amp;&amp; !buffing &amp;&amp; !stunned)
+{
+    if(pressedKeys &amp; $01) &amp;&amp; !isSaxtonHale {
+        event_user(2); //taunt
+    } 
+        
+    if(pressedKeys &amp; $80)
+    {
+        if((!place_free(x,y+1) or player.fly) and place_free(x,y))
+        {
+            if(not stabbing)
+            {
+                playsound(x,y,JumpSnd);
+                vspeed = -jumpStrength;
+                if loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN vspeed -= 0.4*min(currentKills,5);
+                if highJump &amp;&amp; !cloak {
+                    stomping = true;
+                    vspeed -= 5;
+                    moveStatus = 1
+                    blur=instance_create(x,y,RadioBlur);
+                    blur.owner=id;
+                }
+                if raged &amp;&amp; !cloak &amp;&amp; currentWeapon.ammoCount &gt;= 20 {
+                    vspeed -= 4;
+                    currentWeapon.ammoCount -= 20;
+                }
+            }
+        }
+        else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength) {
+            if !((loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN) &amp;&amp; intel) {
+                vspeed = -jumpStrength;
+                playsound(x,y,JumpSnd);
+                doublejumpUsed = 1;
+                moveStatus = 0;
+                if canTriplejump triplejumpUsed = false;
+                if(global.particles == PARTICLES_NORMAL) effect_create_above(ef_smoke,x,y+16,0,c_gray);
+            }
+        } else if(canTriplejump and !triplejumpUsed and vspeed &gt; -jumpStrength) {
+            if !((loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN) &amp;&amp; intel) {
+                vspeed = -jumpStrength;
+                playsound(x,y,JumpSnd);
+                triplejumpUsed = 1;
+                moveStatus = 3;
+                if(global.particles == PARTICLES_NORMAL) effect_create_above(ef_smoke,x,y+16,0,c_purple);
+            }
+        } else if hasBoots &amp;&amp; bootfuel &gt; 5 &amp;&amp; moveStatus != 2 {
+            floating = true;
+            vspeed = -jumpStrength*0.9;
+            bootfuel -= 5
+            moveStatus = 2;
+            event_user(5);
+        }
+    }
+       
+    if((!radioactive or raged) &amp;&amp; (keyState | pressedKeys) &amp; $10)
+        with(currentWeapon) event_user(1);
+}
+        
+// Right click
+if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom and !stunned and !buffing and (!radioactive or raged))
+    with(currentWeapon)
+        event_user(2);
+
+// Cloak
+if ((pressedKeys &amp; $08) &amp;&amp; ((weapon_index &gt;= WEAPON_KNIFE &amp;&amp; weapon_index &lt;= WEAPON_ZAPPER) or ((weapon_index &gt;= WEAPON_REVOLVER &amp;&amp; weapon_index &lt;= WEAPON_ZAPPER or weapon_index == WEAPON_PREDATOR) &amp;&amp; player.class == CLASS_SPY)) &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10) &amp;&amp; !stunned &amp;&amp; !buffing)
+    if((currentWeapon.readyToStab or !stabbing) &amp;&amp; !pissed &amp;&amp; !invisibeam) {
+        cloak = !cloak;
+        if drCharge &gt; 0 &amp;&amp; player.team == global.myself.team  playsound(x,y,UbercloakSnd);
+    }
+
+switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
+{
+case 1: //If I am rocketing/mining myself
+    controlFactor = 0.65;
+    frictionFactor = 1;
+    break;
+case 2: //If I am rocketing/mining an enemy
+    controlFactor = 0.45;
+    frictionFactor = 1.05;
+    break;
+case 3: //Airblast
+    controlFactor = 0.35;
+    frictionFactor = 1.05;
+    break;
+case 4: //If I am rocketing/mining a teamate
+    controlFactor = baseControl;
+    frictionFactor = 1;
+    break;
+default:
+    if(!intel)
+        controlFactor = baseControl;
+    else {
+        controlFactor = baseControl-0.1;
+        if loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN controlFactor -= (0.17-min(currentKills,5)*0.017);
+        if loaded1 == WEAPON_STICKYJUMPER or loaded2 == WEAPON_STICKYJUMPER controlFactor -= (0.09);
+    }    
+    frictionFactor = baseFriction;
+}
+
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
+{
+    if !variable_local_exists("jumpFlameParticleType")
+    {
+        jumpFlameParticleType = part_type_create();
+        part_type_sprite(jumpFlameParticleType,FlameS,true,false,true);
+        part_type_alpha2(jumpFlameParticleType,1,0.3);
+        part_type_life(jumpFlameParticleType,2,5);
+        part_type_scale(jumpFlameParticleType,0.7,-0.65);
+    }
+    vspeed -= 0.06;
+    
+    if !variable_global_exists("jumpFlameParticleSystem")
+    {
+        global.jumpFlameParticleSystem = part_system_create();
+        part_system_depth(global.jumpFlameParticleSystem, 10);
+    }
+    
+    if(global.particles == PARTICLES_NORMAL)
+    {
+        if(random(1) &gt; (controlFactor+frictionFactor)/2)
+        {
+            effect_create_below(ef_smoke,x-hspeed*1.2,y-vspeed*1.2+20,0,c_gray);
+        }
+    }
+    if(global.particles == PARTICLES_NORMAL or global.particles == PARTICLES_ALTERNATIVE)
+    {
+        if(random(7) &lt; 5)
+        {
+            part_particles_create(global.jumpFlameParticleSystem,x,y+19,jumpFlameParticleType,1);
+        }
+    }
+}
+if(!taunting &amp;&amp; !omnomnomnom &amp;&amp; !buffing &amp;&amp; !charge)
+{
+    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -(runPower+speedboost) * controlFactor / (baseFriction - 1))
+        hspeed -= (runPower+speedboost)*controlFactor;
+        
+    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; (runPower+speedboost) * controlFactor / (baseFriction - 1))
+        hspeed += (runPower+speedboost)*controlFactor;
+} else if charge {
+    if (image_xscale = -1 &amp;&amp; hspeed &gt; -2 * controlFactor / (baseFriction - 1)) hspeed-=2*controlFactor;
+    else if (image_xscale = 1 &amp;&amp; hspeed &lt; 2 * controlFactor / (baseFriction - 1)) hspeed+=2*controlFactor;
+}
+
+//Add hyve to the sodapopper's meter
+if ((keyState|pressedKeys) &amp; $40 or (keyState|pressedKeys) &amp; $20 or (pressedKeys &amp; $80)) &amp;&amp; !taunting &amp;&amp; !omnomnomnom &amp;&amp; !stunned {
+    if weapon_index == WEAPON_SODAPOPPER {
+        if !currentWeapon.hyve {
+            ammo[109] += 0.5;
+        }
+    } else if weapon_index == WEAPON_SAXTONHALE {
+        if raged &amp;&amp; !cloak &amp;&amp; currentWeapon.ammoCount &gt;= 0.5 {
+            currentWeapon.ammoCount -= 0.5;
+        } else raged = false;
+    }
+}
+
+//divide friction as normal if going way too fast, or controlling motion, based on normal max speed
+if(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1) * 2) or
+   ((keyState|pressedKeys) &amp; $60 and !(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1)))) )
+    hspeed /= baseFriction;
+else //otherwise divide by the moveStatus's friction
+    hspeed /= frictionFactor;
+
+
+if(pressedKeys &amp; $04) {
+    setChatBubble(player, 45);
+}
+    
+pressedKeys = 0;
+releasedKeys = 0;
+
+
+    
+// flame bubble
+if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
+    setChatBubble(player, 49);
+}
+
+if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying intel and shooting will get stuck with this number much higher
+    hspeed=0;
+    animationImage=0;
+}    
+    
+if(place_free(x,y+1)) {
+    if !floating vspeed += 0.6;    
+    if(vspeed&gt;10) {
+        vspeed=10;
+    }
+    animationImage = 1;
+} else {
+    if(place_free(x,y)) {
+        doublejumpUsed = 0;
+    }
+}
+
+if intel { 
+    if random(1)&gt;0.90 &amp;&amp; speed&gt;2 {
+        var sheet;
+        sheet = instance_create(x,y-11+random(9),LooseSheet);
+        sheet.hspeed = hspeed;
+    }
+    if cloak==true {
+        cloak=false;
+        cloakAplha=1;
+    }
+}
+
+//randomizer contest winners are too cool to be humiliated.
+if (player.humiliated &amp;&amp; !player.RandomizerWinner) or stunned
+{
+    if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
+        animationImage = 0;
+    else if place_free(x,y+1)
+        animationImage = 2;
+    if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
+        animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
+}
+else
+    animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+
+
+// drop intel if ubered or round is over
+if(intel) &amp;&amp; (radioactive || critting || megaHealed || ubered || global.mapchanging) {
+    event_user(5);
+}
+
+//gotta regenerate some nuts
+if nutsNBolts &lt; 100 {
+    if loaded1 == WEAPON_WRENCH or loaded2 == WEAPON_WRENCH
+    or loaded1 == WEAPON_EUREKAEFFECT or loaded2 == WEAPON_EUREKAEFFECT nutsNBolts += 0.1*0.5;
+    else nutsNBolts += 0.1;
+}
+else if nutsNBolts &gt; 100 nutsNBolts = 100; 
+
+//ubered max out ammo and extinguish flames
+if ubered or critting {
+    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    {
+        burnIntensity = 0;
+        burnDuration = 0;
+        burnedBy = -1;
+    }
+    if instance_exists(currentWeapon) {
+        with(currentWeapon) {
+            if(variable_local_exists("maxAmmo")) {
+                ammoCount = maxAmmo;
+            }
+            alarm[5] = -1;
+        }
+    }
+}
+
+//give max ammo for players on the winning team
+var arenaRoundEnd;
+arenaRoundEnd = true;
+if instance_exists(ArenaHUD) { 
+    if(ArenaHUD.endCount!=0) 
+        arenaRoundEnd=true;
+    else arenaRoundEnd=false;
+}
+
+if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
+    if instance_exists(currentWeapon) {
+        with(currentWeapon){
+            if(variable_local_exists("maxAmmo")) {
+                ammoCount = maxAmmo;
+            }
+            alarm[5] = -1;
+        }
+    }
+}
+
+//drop cloak and unscope if on losing team or stalemate
+if (player.humiliated)
+{
+    if (zoomed)
+        toggleZoom(id);
+    if (!stabbing)
+        cloak = false;
+}
+
+// Determine if the character is capturing a CP, and which
+var zone;
+zone = collision_point(x,y,CaptureZone,0,0);
+
+if(zone&gt;=0 &amp;&amp; !cloak) {
+    cappingPoint = zone.cp;
+} else {
+    cappingPoint = noone;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

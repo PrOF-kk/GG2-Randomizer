@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        if other.radioactive {
+            var text;
+            text=instance_create(x,y,Text);
+            text=sprite_index = MissS
+            instance_destroy();
+            exit;
+        }
+        playsound(x,y,MeleeHitSnd);
+        if weapon == WEAPON_WRECKER &amp;&amp; other.burnDuration &gt; 0 hitDamage*= CRIT_FACTOR;
+        if !other.invincible other.hp -= hitDamage*(1+other.pissed*0.35)*crit;
+        //if weapon == WEAPON_WRENCH &amp;&amp; other.hp &lt;= 0 &amp;&amp; instance_exists(owner) owner.nutsNBolts = min(100,owner.nutsNBolts+25);
+
+        with(other) {motion_add(other.owner.aimDirection,3);}
+
+        if(!object_is_ancestor(other.object_index, Pyro) &amp;&amp; !other.invincible &amp;&amp; weapon = WEAPON_AXE) {
+            with(other) {
+                if (burnDuration &lt; maxDuration) {
+                    burnDuration += 30*6; 
+                    burnDuration = min(burnDuration, maxDuration);
+                }
+                if (burnIntensity &lt; maxIntensity) {
+                    burnIntensity += other.burnIncrease * 3;
+                    burnIntensity = min(burnIntensity, maxIntensity);
+                }
+                burnedBy = other.ownerPlayer;
+                afterburnSource = WEAPON_AXE;
+                alarm[0] = decayDelay;
+            }
+        }
+        
+        if (weapon == WEAPON_HAXXY &amp;&amp; crit &gt; 1){ 
+            if global.isHost{
+                doEventBallstun(other.player,0);
+                sendEventBallStun(other.player,0);
+            }
+        } else if weapon == WEAPON_FISTS or weapon == WEAPON_SAXTONHALE {
+            if other.hp &lt;= 0 with(other) {motion_add(other.owner.aimDirection,25);};
+        } else if weapon == WEAPON_SHIV {
+            other.bleeding = true;
+            other.alarm[8] = 120;
+        } else if weapon == WEAPON_OVERDOSE { //ubersaw
+            if (owner.loaded1 &gt;= WEAPON_MEDIGUN &amp;&amp; owner.loaded1 &lt;= WEAPON_POTION) or (owner.loaded2 &gt;= WEAPON_MEDIGUN &amp;&amp; owner.loaded2 &lt;= WEAPON_POTION){
+                with(owner) {
+                    ammo[WEAPON_MEDIGUN] = min(250,ammo[WEAPON_MEDIGUN]+50);
+                    ammo[WEAPON_KRITSKRIEG] = min(250,ammo[WEAPON_KRITSKRIEG]+50);
+                    ammo[WEAPON_OVERHEALER] = min(250,ammo[WEAPON_OVERHEALER]+50);
+                    ammo[WEAPON_QUICKFIX] = min(250,ammo[WEAPON_QUICKFIX]+50);
+                    ammo[WEAPON_POTION] = min(250,ammo[WEAPON_POTION]+50);
+                    if ammo[WEAPON_MEDIGUN] == 250 or 
+                    ammo[WEAPON_KRITSKRIEG] == 250 or 
+                    ammo[WEAPON_OVERHEALER] == 250 or 
+                    ammo[WEAPON_QUICKFIX] == 250 or 
+                    ammo[WEAPON_POTION] == 250 ammo[100] = true;
+                }
+            }
+        }
+
+        other.timeUnscathed = 0;
+        if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
+        {
+            other.secondToLastDamageDealer = other.lastDamageDealer;
+            other.alarm[4] = other.alarm[3]
+        }
+        other.alarm[3] = ASSIST_TIME;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageCrit = crit;
+        other.lastDamageSource = weapon;
+
+        var blood;
+        if(global.gibLevel &gt; 0)
+        {
+            repeat(10)
+            {
+                blood = instance_create(x,y,Blood);
+                blood.direction = direction-180;
+            }
+        }
+        instance_destroy();
+    }
+    else {
+        alarm[0] = 1;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

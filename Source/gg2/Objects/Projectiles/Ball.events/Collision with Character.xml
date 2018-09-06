@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(/*other.id != ownerPlayer.object and*/other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0 &amp;&amp; used==0 &amp;&amp; speed &gt;= 0.2) {
+    if other.radioactive {
+        var text;
+        text  = instance_create(x,y,Text);
+        text.sprite_index = MissS;
+        instance_destroy();
+        exit;
+    }
+    if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
+        other.secondToLastDamageDealer = other.lastDamageDealer;
+        other.alarm[4] = other.alarm[3]
+    }
+    other.alarm[3] = ASSIST_TIME;
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    other.lastDamageCrit = crit;
+    if global.isHost &amp;&amp; alarm[2] &lt; 30*15 - 15 {
+        var time;
+        time = 30*15-alarm[2]
+        doEventBallstun(other.player,time);
+        sendEventBallStun(other.player,time);
+    }
+    
+    if !other.invincible other.hp -= damage*(1+other.pissed*0.35)*crit;
+    
+    with(other) {
+        motion_add(other.direction, other.speed*0.03);
+        cloakAlpha = min(cloakAlpha + 0.1, 1);    
+    }
+    instance_destroy();
+} else if other.team == team &amp;&amp; other.currentWeapon.object_index == Sandman {
+    if other.currentWeapon.ammoCount &lt; 1 {
+        other.currentWeapon.ammoCount =1;
+        other.currentWeapon.alarm[5]=-1;
+        other.ammo[107] = -1;
+        playsound(x,y,PickupSnd);
+        instance_destroy(); 
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

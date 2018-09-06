@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    isRefilling = false;
+    alarm[5] = reloadBuffer;
+    if(readyToShoot &amp;&amp; !owner.cloak) {
+        playsound(x,y,randomizerSnd);
+        var shot, repeatTimes;
+        if refireTime &lt; 1 and refireTime &gt; 0 {
+            repeatTimes = 1/refireTime;
+        } else repeatTimes = 1;
+        repeat(repeatTimes){
+            switch(ammoCount) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection),Shot);
+                    shot.direction=owner.aimDirection+(random(14)-7);
+                    shot.speed=12+random(1);
+                    break;
+                case 4:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Ball);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=15;
+                    shot.vspeed-=2.5;
+                    break;
+                case 5:
+                    shot = instance_create(x,y + yoffset + 1,MadMilk);
+                    shot.direction=owner.aimDirection+ random(7)-4;
+                    shot.speed=13;
+                    break;
+                case 6:
+                case 7:
+                    shot = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
+                    shot.direction=owner.aimDirection
+                    shot.speed=13;
+                    break;
+                case 8:
+                    shot = instance_create(x,y + yoffset + 1,JarOPiss);
+                    shot.direction=owner.aimDirection+ random(7)-4;
+                    shot.speed=13;
+                    break;
+                case 9:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Grenade);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=15;
+                    shot.vspeed-=2.5;
+                    shot.explosionDamage=40;
+                    break;
+                case 10:
+                case 11:
+                    shot = instance_create(x,y + yoffset + 1,Needle);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=7+random(3);
+                    break;
+                case 12:
+                case 13:
+                    shot = instance_create(x,y + yoffset + 1,CrossbowArrow);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=20+random(3);
+                    break;
+                case 14:
+                case 15:
+                    shot = instance_create(x,y,LaserShot);
+                    shot.direction=owner.aimDirection+(random(3)-1);
+                    shot.speed=22;
+                    break;
+                case 16:
+                case 17:
+                    shot = instance_create(x,y + yoffset + 1,Shot);
+                    shot.direction=owner.aimDirection+ random(2)-1;
+                    shot.speed=21;
+                    break;
+                case 18:
+                    with(Sandvich) {
+                        if ownerPlayer == other.ownerPlayer instance_destroy();
+                    } 
+                    shot = instance_create(x,y + yoffset + 1,Sandvich);
+                    shot.direction=owner.aimDirection+ random(7)-4;
+                    shot.speed=5;
+                    break;
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection),Flame);
+                    shot.direction=owner.aimDirection+(random(10)-5);
+                    shot.speed=5+random(5);
+                    break;
+                case 23:
+                case 24:
+                    shot = instance_create(x,y + yoffset + 1,SentryArrow);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=20+random(3);
+                    break;
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                    shot = instance_create(x,y + yoffset + 1,Bubble);
+                    shot.direction = owner.aimDirection;
+                    shot.speed = 10;
+                    break;
+                case 29:
+                case 30:
+                    shot = instance_create(x,y + yoffset + 1,BladeB);
+                    shot.direction = owner.aimDirection;
+                    shot.speed = 12;
+                    shot.hitDamage = 17;
+                    break;
+                case 31:
+                case 32:
+                    shot = instance_create(x,y + yoffset + 1,Flare);
+                    shot.direction = owner.aimDirection;
+                    shot.speed = 15;
+                    break;
+                case 33:
+                    with(NapalmGrenade) {
+                        if ownerPlayer == other.ownerPlayer instance_destroy();
+                    } 
+                    shot = instance_create(x,y + yoffset + 1,NapalmGrenade);
+                    shot.direction=owner.aimDirection+ random(7)-4;
+                    shot.speed=10;
+                    break;
+                case 34:
+                case 35:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), SplashPotion);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=15;
+                    shot.vspeed-=2.5;
+                    shot.explosionDamage=10;
+                    break;
+                case 36:
+                    shot = instance_create(x,y + yoffset + 1,Medkit);
+                    shot.direction=owner.aimDirection+ random(7)-4;
+                    shot.speed=5;
+                    break;
+                default:
+                    shot = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Smiley);
+                    shot.direction=owner.aimDirection;
+                    shot.speed=15;
+                    shot.vspeed-=2.5;
+                    break;
+            }
+            if instance_exists(shot) {
+                shot.owner=owner;
+                shot.crit=crit;
+                shot.ownerPlayer=ownerPlayer;
+                shot.team=owner.team;
+                shot.weapon=floor(random(131));
+                with(shot) {
+                    hspeed+=owner.hspeed;
+                    alarm[0]=30;
+                }
+            }
+            justShot=true;
+            readyToShoot=false;
+            if alarm[5] &lt;= 0 alarm[5]=7;
+            //ammoCount = floor(random(25));
+            ammoCount += round(round(owner.aimDirection)/40)+1+round(owner.speed);
+            if ammoCount &gt; 40 ammoCount = 0;
+        }
+        if refireTime &lt; 1 and refireTime &gt; 0 {
+            alarm[0]=1;
+        } else alarm[0]=refireTime;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

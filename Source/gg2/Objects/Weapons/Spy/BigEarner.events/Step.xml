@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if smashing {
+    image_speed=0.3;
+    if crit &gt; 1 {
+        if image_index &gt;= 11{
+            image_speed=0;
+            image_index=8;
+            stabbing = false;
+        } 
+    } else if image_index &gt;= 4*owner.team+3 {
+        image_speed=0;
+        image_index=4*owner.team;
+        stabbing = false;
+    }    
+} else {
+    if crit &lt;= 1  image_index=4*owner.team;
+    else image_index = 8;
+}
+
+if owner.cloak damage=10;
+else damage = min(35,damage+0.5);
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

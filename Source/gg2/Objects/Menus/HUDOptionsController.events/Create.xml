@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 170;
+    spacing = 30;
+    width = 300; 
+    items = 5;
+    valueoffset = 300;
+    editing = -1;
+    
+    item[0] = "Timer Position";
+    item[1] = "Kill Log Position";
+    item[2] = "KOTH Timer Orientation";
+    item[3] = "Alternate weapon switch key";
+    item[4] = "Back";
+    
+      
+    if(global.timerPos) {
+        value[0] = "Left";
+    } else {
+        value[0] = "Center";
+    }
+    
+    if(global.killLogPos) {
+        value[1] = "Just Below Timers";
+    } else {
+        value[1] = "Default";
+    }
+    
+    if(global.kothHudPos) {
+        value[2] = "Stacked";
+    } else {
+        value[2] = "Default";
+    }
+    
+    val[3] = global.weaponswitch;
+    editText[3] = "Please press a key";
+    i = 3;
+    if val[i] == vk_alt value[i] = "Alt";
+    else if val[i] == vk_control value[i] = "Control";
+    else if val[i] == vk_down value[i] = "Down";
+    else if val[i] == vk_up value[i] = "Up";
+    else if val[i] == vk_left value[i] = "Left";
+    else if val[i] == vk_right value[i] = "Right";
+    else if val[i] == vk_enter value[i] = "Enter";
+    else if val[i] == vk_tab value[i] = "Tab";
+    else if val[i] == vk_space value[i] = "Space Bar";
+    else if val[i] == vk_shift value[i] = "Shift";
+    else if val[i] == MOUSE_LEFT value[i] = "Left Mouse Button";
+    else if val[i] == MOUSE_RIGHT value[i] = "Right Mouse Button";
+    else value[i] = chr(val[i]);
+    
+    value[4] = "";
+
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

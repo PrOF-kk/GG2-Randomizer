@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team) &amp;&amp; sentrytarget == -1 &amp;&amp; target == -1 {
+    other.hp -= hitDamage*crit*other.bonus;
+    sentrytarget=other.id;
+//new stuff
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    other.lastDamageCrit = crit;
+//end new stuff
+    //instance_destroy();
+}/*else if other.sapped &gt;0 {
+    if global.isHost {
+        other.sapped-=0.1*crit;
+        if other.sapped &lt;=0 {
+            instance_destroy();
+            write_ubyte(global.eventBuffer, SAP_TOGGLE);
+            write_ubyte(global.eventBuffer, ds_list_find_index(global.players,other.ownerPlayer));
+            with(other){
+                //image_index=11;
+                //image_speed=0;
+                sapped=0;
+            }
+        }
+    }
+    sentrytarget = other.id; 
+}*/
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

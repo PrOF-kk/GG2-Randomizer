@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Gibbage" type="GROUP"/>
+  <resource name="Player" type="RESOURCE"/>
+  <resource name="Weapon" type="RESOURCE"/>
+  <resource name="Character" type="RESOURCE"/>
+  <resource name="PlayerControl" type="RESOURCE"/>
+  <resource name="SpeechBubbleO" type="RESOURCE"/>
+  <resource name="Explosion" type="RESOURCE"/>
+  <resource name="SmallExplosion" type="RESOURCE"/>
+  <resource name="Impact" type="RESOURCE"/>
+  <resource name="LooseSheet" type="RESOURCE"/>
+  <resource name="DeadGuy" type="RESOURCE"/>
+  <resource name="DeadMedic" type="RESOURCE"/>
+  <resource name="MangledGuy" type="RESOURCE"/>
+  <resource name="EEFectGlow" type="RESOURCE"/>
+  <resource name="NoticeO" type="RESOURCE"/>
+  <resource name="Spectator" type="RESOURCE"/>
+  <resource name="JoiningPlayer" type="RESOURCE"/>
+  <resource name="Balancer" type="RESOURCE"/>
+  <resource name="RadioBlur" type="RESOURCE"/>
+  <resource name="Text" type="RESOURCE"/>
+  <resource name="Sparks" type="RESOURCE"/>
+  <resource name="HsMask" type="RESOURCE"/>
+</resources>

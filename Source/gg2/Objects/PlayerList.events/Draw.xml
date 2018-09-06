@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">draw_set_color(c_black);
+draw_set_alpha(0.8);
+draw_rectangle(xoffset, yoffset, xoffset+xsize, yoffset+ysize, false);
+draw_set_color(c_gray);
+if editing == 1 &amp;&amp; needTarget draw_rectangle_color(xoffset+110,yoffset + 30,xoffset+xsize-110,yoffset+(10*items)+40,c_black,c_black,c_black,c_black,false);
+else draw_rectangle_color(xoffset+110,yoffset + 30,xoffset+xsize-110,yoffset+(10*Items)+40,c_black,c_black,c_black,c_black,false);
+draw_set_color(c_white);
+x_1 = xoffset+ 110;
+y_1 = yoffset+ 30;
+x_2 = xoffset+xsize-110;
+y_2 = y_1;
+x_3 = x_1;
+if editing == 1 &amp;&amp; needTarget y_3 = yoffset+(10*items)+40;
+else y_3 = yoffset+(10*Items)+40;
+x_4 = x_2;
+y_4 = y_3;
+//top + bottom
+draw_line_color(x_1,y_1,x_2,y_2,c_ltgray,c_ltgray);
+draw_line_color(x_3,y_3,x_4,y_4,c_gray,c_gray);
+//left + right
+draw_line_color(x_1,y_1,x_3,y_3,c_ltgray,c_ltgray);
+draw_line_color(x_2,y_2,x_4,y_4,c_gray,c_gray);
+
+    
+draw_set_valign(fa_middle);
+draw_set_halign(fa_left);
+draw_set_alpha(1);
+if editing == 1 &amp;&amp; needTarget {
+    for(i=0; i&lt;items; i+=1) {
+        if(i == virtualitem) {
+            draw_set_color(c_orange);    
+        } else {
+            draw_set_color(c_white);    
+        }
+    draw_text(xoffset+xbegin,yoffset+ybegin+i*spacing,item[i]);
+    }
+} else {
+    for(i=0; i&lt;Items; i+=1) {
+        if(i == virtualitem) {
+            draw_set_color(c_orange);    
+        } else {
+            draw_set_color(c_white);    
+        }
+    draw_text(xoffset+xbegin,yoffset+ybegin+i*spacing,Item[i]);
+    }
+}
+
+if keyboard_check_pressed(vk_end)==true instance_destroy();
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

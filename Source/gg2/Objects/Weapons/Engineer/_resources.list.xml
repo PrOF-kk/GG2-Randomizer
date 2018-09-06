@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Shotgun" type="RESOURCE"/>
+  <resource name="Sheriff" type="RESOURCE"/>
+  <resource name="Pumson" type="RESOURCE"/>
+  <resource name="Widowmaker" type="RESOURCE"/>
+  <resource name="FrontierJustice" type="RESOURCE"/>
+  <resource name="Nailgun" type="RESOURCE"/>
+  <resource name="Wrangler" type="RESOURCE"/>
+  <resource name="Wrench" type="RESOURCE"/>
+  <resource name="Eeffect" type="RESOURCE"/>
+  <resource name="Stungun" type="RESOURCE"/>
+</resources>

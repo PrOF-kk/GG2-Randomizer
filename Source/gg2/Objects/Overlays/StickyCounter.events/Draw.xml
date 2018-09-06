@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if global.myself.team == TEAM_RED image_index=0;
+else image_index=1;
+
+var xoffset, yoffset, xsize, ysize;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    draw_set_alpha(1);
+    draw_set_color(c_black);
+    draw_set_valign(fa_center);
+    draw_set_halign(fa_left);
+    amount1='';
+    amount2 ='';
+    
+if (global.myself.object != -1 ) { 
+    if global.myself.object.loaded1 == WEAPON_MINEGUN or global.myself.object.loaded2 == WEAPON_MINEGUN {
+        if amount1 == '' {
+            amount1 = string(global.myself.object.ammo[103])+"/8";
+        } else amount2 = string(global.myself.object.ammo[103])+"/8";
+    } 
+    if global.myself.object.loaded1 == WEAPON_TIGERUPPERCUT or global.myself.object.loaded2 == WEAPON_TIGERUPPERCUT {
+        if amount1 == '' {
+            amount1 = string(global.myself.object.ammo[108])+"/5";
+        } else amount2 = string(global.myself.object.ammo[108])+"/5";
+    } 
+    if global.myself.object.loaded1 == WEAPON_SCOTTISHRESISTANCE or global.myself.object.loaded2 == WEAPON_SCOTTISHRESISTANCE {
+        if amount1 == '' {
+            amount1 = string(global.myself.object.ammo[101])+"/14";
+        } else amount2 = string(global.myself.object.ammo[101])+"/14";
+    } 
+    if global.myself.object.loaded1 == WEAPON_STICKYJUMPER or global.myself.object.loaded2 == WEAPON_STICKYJUMPER {
+        if amount1 == '' {
+            amount1 = string(global.myself.object.ammo[110])+"/8";
+        } else amount2 = string(global.myself.object.ammo[110])+"/8";
+    }  
+    if global.myself.object.loaded1 == WEAPON_STICKYSTICKER or global.myself.object.loaded2 == WEAPON_STICKYSTICKER {
+        if amount1 == '' {
+            amount1 = string(global.myself.object.ammo[115])+"/8";
+        } else amount2 = string(global.myself.object.ammo[115])+"/8";
+    }  
+    
+    if amount1 != '' {
+        draw_sprite_ext(sprite_index, image_index, xoffset+750-15, yoffset+ysize/1.15, 3, 3, 0, c_white, 1);
+        draw_text_transformed(xoffset+732-15,yoffset+ysize/1.145,amount1,1.5,1.5,0);
+        if amount2 != '' {
+            draw_sprite_ext(sprite_index, image_index, xoffset+750-15-70, yoffset+ysize/1.15, 3, 3, 0, c_white, 1);
+            draw_text_transformed(xoffset+732-15-70,yoffset+ysize/1.145,amount2,1.5,1.5,0);
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

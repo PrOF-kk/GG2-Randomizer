@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    explosionDamage = 30;
+    animationState = 1;
+    alarm[1] = 29;
+    stickied = false;
+    blastRadius = 60;
+    exploded = false;
+    bubbled = false;
+    reflector = noone;
+    alarm[2]=60;
+    hfric=0.5;
+    rotfric=0.7;
+    rotspeed=random(20)-10;
+    image_speed=0;
+    crit = 1;
+    used=0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

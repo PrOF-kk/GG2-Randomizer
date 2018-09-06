@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        if weapon == WEAPON_WRECKER  hitDamage*= CRIT_FACTOR;
+        other.hp -= hitDamage;
+        if weapon == WEAPON_ZAPPER other.hp -= 35;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        other.lastDamageCrit = crit;
+        playsound(x,y,MeleeHitMapSnd);
+        instance_destroy();
+    }
+    else
+        alarm[0] = 1;
+} else if weapon == WEAPON_WRENCH or weapon == WEAPON_EUREKAEFFECT {
+    if other.sapped &gt; 0 {
+        if global.isHost {
+            other.sapped-=2*crit;
+            if other.sapped &lt;= 0 {
+                other.sapped = 0;
+                write_ubyte(global.eventBuffer, SAP_TOGGLE);
+                write_ubyte(global.eventBuffer, ds_list_find_index(global.players,other.ownerPlayer));
+            }
+        }
+        playsound(x,y,MeleeHitMapSnd);
+    } else if other.level != 3 {
+        if other.built == 0 {
+            var amount;
+            other.buildspeed += 0.25;
+            playsound(x,y,MeleeHitMapSnd);
+        } else if other.hp &lt; other.maxHp {
+            var amount;
+            amount = min(other.maxHp-other.hp,15);
+            if owner.nutsNBolts &gt;= amount/1.5 {
+                other.hp += amount;
+                owner.nutsNBolts-=amount/1.5;
+            } else {
+                other.hp += owner.nutsNBolts*1.5;
+                owner.nutsNBolts=0;
+            }
+            playsound(x,y,MeleeHitMapSnd);
+        } else if other.upgraded &lt; 100 &amp;&amp; other.level &lt; 2{
+            var amount;
+            amount = min(100-other.upgraded,20);
+            if owner.nutsNBolts &gt;= amount {
+                owner.nutsNBolts-=amount;
+                other.upgraded += amount;
+            } else {
+                other.upgraded += owner.nutsNBolts;
+                owner.nutsNBolts=0;
+            }
+            playsound(x,y,MeleeHitMapSnd);
+        } else playsound(x,y,WrenchFailSnd);
+    } else playsound(x,y,WrenchFailSnd);
+    instance_destroy();
+} else if weapon == WEAPON_WRECKER &amp;&amp; other.sapped &gt; 0 {
+    if global.isHost {
+        other.sapped-=2*crit;
+        if other.sapped &lt;= 0 {
+            other.sapped = 0;
+            write_ubyte(global.eventBuffer, SAP_TOGGLE);
+            write_ubyte(global.eventBuffer, ds_list_find_index(global.players,other.ownerPlayer));
+        }
+    }
+    playsound(x,y,MeleeHitMapSnd);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(readyToShoot &amp;&amp; ammoCount &gt;0 &amp;&amp; !owner.cloak) {
+    ammoCount-=1;
+    playsound(x,y,FlaregunSnd);
+    shot=true;
+    justShot=true;        
+    readyToShoot = false;
+    alarm[0] = refireTime;
+    
+    var hit;
+    var x1,y1,xm,ym, len;
+    var hitline;
+    len=500;
+    x1=x;
+    y1=y;
+    x2=x+lengthdir_x(len,owner.aimDirection);
+    y2=y+lengthdir_y(len,owner.aimDirection);
+    
+    while(len&gt;1) {
+        xm=(x1+x2)/2;
+        ym=(y1+y2)/2;
+        
+        hitline = false;
+        with(owner) {
+            if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) {
+                hitline = true;
+                if instance_nearest(x1,y1,Generator).team == team hitline = false;
+            }
+            if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,IntelGate,true,true)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) {
+                if ControlPointSetupGate.solid == true hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,BulletWall,true,true)&gt;=0) {
+                hitline = true;
+            }
+        }
+        
+        if(hitline) {
+            x2=xm;
+            y2=ym;
+        } else {
+            x1=xm;
+            y1=ym;
+        }
+        len/=2;
+    } 
+        instance_create(x2,y2,Explosion);
+    playsound(x2,y2,ExplosionSnd);
+    
+    with (Character) {
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius and !(team == other.ownerPlayer.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
+        {
+            var rdir, vectorfactor;
+            rdir = point_direction(other.x2,other.y2,x,y);
+            vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
+            motion_add(rdir, min(15, other.knockback-other.knockback*(point_distance(x,y,other.x2,other.y2)/other.blastRadius)) * vectorfactor);
+            if(other.ownerPlayer.team != team or id==other.ownerPlayer.object) &amp;&amp; !ubered and hp &gt; 0 &amp;&amp; !radioactive
+            {
+                bonus = MINICRIT_FACTOR;
+                if burnDuration &gt; 0 bonus = CRIT_FACTOR;
+                if(!object_is_ancestor(object_index, Pyro) &amp;&amp; !invincible) {
+                    if (burnDuration &lt; maxDuration) {
+                        burnDuration += other.durationIncrease; 
+                        burnDuration = min(burnDuration, maxDuration);
+                    }
+                    if (burnIntensity &lt; maxIntensity) {
+                        burnIntensity += other.burnIncrease;
+                        burnIntensity = min(burnIntensity, maxIntensity);
+                    }
+                    burnedBy = other.ownerPlayer;
+                    afterburnSource = WEAPON_DETONATOR;
+                    alarm[0] = decayDelay;
+                }
+                if !invincible hp -= other.explosionDamage*sqr((1-(point_distance(x,y,other.x2,other.y2)/other.blastRadius)))*(1+pissed*0.35)*bonus;
+                if player == other.ownerPlayer hp-= 10*sqr((1-(point_distance(x,y,other.x2,other.y2)/other.blastRadius)))*(1+pissed*0.35);
+                timeUnscathed = 0;
+                if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
+                {
+                    lastDamageSource = FINISHED_OFF_GIB;
+                }
+                else 
+                {
+                    if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer)
+                    {
+                        secondToLastDamageDealer = lastDamageDealer;
+                        alarm[4] = alarm[3]
+                    }
+                    if (other.ownerPlayer != id or (other.reflector != noone and other.ownerPlayer == id))
+                        alarm[3] = ASSIST_TIME;
+                    lastDamageDealer = other.ownerPlayer;
+                    lastDamageSource = other.weapon;
+                    lastDamageCrit = other.crit;
+                    if (id==other.ownerPlayer.object and other.reflector != noone)
+                    {
+                        lastDamageDealer = other.reflector;
+                        lastDamageSource = WEAPON_REFLECTED_FLARE;
+                    }
+                }
+                if(global.gibLevel &gt; 0)
+                {
+                    repeat(3)
+                    {
+                        var blood;
+                        blood = instance_create(other.x2,other.y2,Blood);
+                        blood.direction = point_direction(other.x2,other.y2,x,y)-180;
+                    }
+                }
+                if (id==other.ownerPlayer.object)
+                {
+                    moveStatus = 1;
+                    vspeed*=0.8;
+                }
+                else if (other.ownerPlayer.team == player.team)
+                {
+                    moveStatus = 2;
+                    vspeed*=0.8;
+                }
+                else
+                {
+                    moveStatus = 4;
+                    vspeed*=0.8
+                }
+            } else if radioactive {
+                var text;
+                text=instance_create(x,y,Text);
+                text=sprite_index = MissS;
+            }
+            cloakAlpha = min(cloakAlpha + 0.2, 1);
+        }
+    }
+
+    
+    with (Sentry){
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius) &amp;&amp; (team != other.ownerPlayer.team) { 
+        hp -= other.explosionDamage*sqr((1-(point_distance(x,y,other.x2,other.y2)/other.blastRadius)))*other.crit;
+        lastDamageDealer = other.ownerPlayer;
+        lastDamageSource = other.weapon;
+        lastDamageCrit = other.crit;
+        }   
+    }    
+     
+     with (Generator){
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius) &amp;&amp; (team != other.ownerPlayer.team) { 
+            alarm[0] = regenerationBuffer;
+            isShieldRegenerating = false;
+            //allow overkill to be applied directly to the target
+            var hitDamage;
+            hitDamage = other.explosionDamage*sqr((1-(point_distance(x,y,other.x2,other.y2)/other.blastRadius)))*other.crit;
+            if (hitDamage &gt; shieldHp) {
+                hp -= hitDamage - shieldHp;
+                hp -= shieldHp * shieldResistance;
+                shieldHp = 0;
+            } else {
+                hp -= hitDamage * shieldResistance;
+                shieldHp -= hitDamage;
+            }
+        }   
+    }
+    
+    with (DeadGuy) {
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius){
+            motion_add(point_direction(other.x2,other.y2,x,y),10-10*(point_distance(x,y,other.x2,other.y2)/other.blastRadius));
+        }
+    }
+    
+    with (Gib) {
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius){
+            motion_add(point_direction(other.x2,other.y2,x,y),15-15*(point_distance(x,y,other.x2,other.y2)/other.blastRadius));
+            rotspeed=random(151)-75;
+        }
+    }
+    
+    with(LooseSheet) {
+        if (point_distance(x,y,other.x2,other.y2) &lt; other.blastRadius){
+            motion_add(point_direction(other.x2,other.y2,x,y),10-10*(point_distance(x,y,other.x2,other.y2)/other.blastRadius));
+        }
+    }  
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

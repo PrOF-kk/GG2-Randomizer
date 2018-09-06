@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">image_speed = 0;
+vspeed = .001;
+maxHp = 100;
+hp = 25;
+weapons[0]=SentryTurret;
+weapons[1]=SentryTurret2;
+weapons[2]=SentryTurret3;
+weapons[3]=MiniSentryTurret;
+weapons[4]=ArrowTurret;
+
+sprite[0] = SentryRed;
+sprite[1] = Sentry2RedS
+sprite[2] = Sentry3RedS;
+sprite[3] = MiniSentryRed;
+sprite[4] = SentryRed;
+sprite[5] = DispenserRedS;
+
+sprite[6] = SentryBlue;
+sprite[7] = Sentry2Blue
+sprite[8] = Sentry3Blue;
+sprite[9] = MiniSentryBlue;
+sprite[10] = SentryBlue;
+sprite[11] = DispenserBlueS;
+
+rotateSprite[0] = TurretRotateS;
+rotateSprite[1] = TurretRotate2;
+rotateSprite[2] = TurretRotate3S;
+rotateSprite[3] = MiniTurretRotateS;
+rotateSprite[4] = TurretRotateS;
+
+sappedSprite[0] = SappedSentryS;
+sappedSprite[1] = SappedSentry2S;
+sappedSprite[2] = SappedSentry3S;
+sappedSprite[3] = SappedSentryS;
+sappedSprite[4] = SappedSentryS;
+sappedSprite[5] = SappedDispenser;
+
+currentWeapon=-1;
+built=0;
+level = 0;
+kills=0;
+ubered=0;
+image_speed = 0;
+landed=0;
+humiliated = 0;
+upgraded=0;
+building=0;
+spareHp=100;
+rocket=0;
+pickedUp = 0;
+buildspeed=1;
+
+kills = 0;
+sapindex=0;
+hphealed=0;
+       
+lastDamageDealer = -1;
+lastDamageSource = -1;
+secondToLastDamageDealer = -1;
+lastDamageCrit = 1;
+startDirection = 1;
+
+idleTimer = true;
+
+pissed = 0;
+bonus=1;
+sapped = 0;
+radioactive = false;
+invincible = false;
+//Fix the Stucky Charm
+critting = false;
+megaHealed = false;
+ubered = false;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutHatRedS" type="RESOURCE"/>
+  <resource name="PyroHatRedS" type="RESOURCE"/>
+  <resource name="HeavyHatRedS" type="RESOURCE"/>
+  <resource name="MedicHatRedS" type="RESOURCE"/>
+  <resource name="EngineerHatRedS" type="RESOURCE"/>
+  <resource name="SoldierHatRedS" type="RESOURCE"/>
+  <resource name="SpyRedHatS" type="RESOURCE"/>
+  <resource name="DemomanHatRedS" type="RESOURCE"/>
+  <resource name="SniperHatRedS" type="RESOURCE"/>
+  <resource name="EngineerHatBlueS" type="RESOURCE"/>
+  <resource name="HeavyHatBlueS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Scattergun" type="RESOURCE"/>
+  <resource name="Lasergun" type="RESOURCE"/>
+  <resource name="Rundown" type="RESOURCE"/>
+  <resource name="Pistol" type="RESOURCE"/>
+  <resource name="BonkHand" type="RESOURCE"/>
+  <resource name="ForceANature" type="RESOURCE"/>
+  <resource name="SodaPopper" type="RESOURCE"/>
+  <resource name="Sandman" type="RESOURCE"/>
+  <resource name="Atomizer" type="RESOURCE"/>
+  <resource name="ScoutBuff" type="RESOURCE"/>
+  <resource name="MadmilkHand" type="RESOURCE"/>
+  <resource name="MadMilk" type="RESOURCE"/>
+</resources>

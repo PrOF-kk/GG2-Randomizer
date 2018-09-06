@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if !charge and !radioactive and !stomping speed = min(speed, 15);
+timeUnscathed = min(timeUnscathed+1, 10*30);
+
+//Give minicrits to all players near a buffbanner soldier.
+if buffbanner {
+    with(Character){
+        if distance_to_point(other.x,other.y) &lt; 128 &amp;&amp; team == other.team {
+            currentWeapon.crit=1.35;
+            alarm[9] = 2;
+        }
+    }
+}
+
+//speed the player up if he has the overdose
+//should always work since the player can't have 2 mediguns AND the overdose.
+if hasOverdose == 1 {
+    if ammo[WEAPON_MEDIGUN] != -1 {
+        runPower = runBkp + runBkp*(ammo[WEAPON_MEDIGUN]/20000);
+    }
+    if ammo[WEAPON_KRITSKRIEG] != -1 {
+        runPower = runBkp + runBkp*(ammo[WEAPON_KRITSKRIEG]/20000);
+    }
+    if ammo[WEAPON_QUICKFIX] != -1 {
+        runPower = runBkp + runBkp*(ammo[WEAPON_QUICKFIX]/20000);
+    }
+    if ammo[WEAPON_OVERHEALER] != -1 {
+        runPower = runBkp + runBkp*(ammo[WEAPON_OVERHEALER]/20000);
+    }
+    if ammo[WEAPON_POTION] != -1 {
+        runPower = runBkp + runBkp*(ammo[WEAPON_POTION]/20000);
+    }
+}
+
+//extra speed while using the quickfix or shovel. 
+//should also work always since you can hold only 1 weapon at a time.
+if weapon_index == WEAPON_QUICKFIX {
+    if currentWeapon.healTarget != noone &amp;&amp; instance_exists(currentWeapon.healTarget) {
+        if currentWeapon.healTarget.object != -1 &amp;&amp; instance_exists(currentWeapon.healTarget.object) {
+            if runBkp &lt; currentWeapon.healTarget.object.runBkp speedboost = currentWeapon.healTarget.object.runBkp-runBkp;
+        } else speedboost = 0;
+    } else speedboost = 0;
+} else speedboost = 0;
+
+if frozen speedboost -= runBkp*0.2;
+
+if weapon_index == WEAPON_EQUALIZER speedboost += (maxHp+40)/(hp+40)*0.1;
+
+if loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN speedboost += min(currentKills,5)*0.05*runBkp
+
+if ammo[107] &gt;= 0 &amp;&amp; weapon_index != WEAPON_SANDMAN {
+    ammo[107] -= 1;
+    if ammo[107] &lt;= -1 ammo[WEAPON_SANDMAN] = 1;
+}
+if ammo[113] &gt;= 0 &amp;&amp; weapon_index != WEAPON_MADMILK {
+    ammo[113] -= 1;
+    if ammo[113] &lt;= -1 ammo[WEAPON_MADMILK] = 1;
+}
+if ammo[114] &gt;= 0 &amp;&amp; weapon_index != WEAPON_NAPALM {
+    ammo[114] -= 1;
+    if ammo[114] &lt;= -1 ammo[WEAPON_NAPALM] = 1;
+}
+/*REJECTED!
+if ammo[106] &gt;= 0 &amp;&amp; weapon_index != 13 { //buffbanner
+    ammo[106] -= 1;
+    if ammo[106] &lt;= -1 ammo[13] = 1;
+}*/
+if ammo[102] &gt;= 0 &amp;&amp; weapon_index != WEAPON_BONK {
+    ammo[102] -= 1;
+    if ammo[102] &lt;= -1 ammo[WEAPON_BONK] = 1;
+}
+if ammo[104] &gt;= 0 &amp;&amp; weapon_index != WEAPON_JARATE {
+    ammo[104] -= 1;
+    if ammo[104] &lt;= -1 ammo[WEAPON_JARATE] = 1;
+}
+if ammo[112] &lt; 15*30 { //spycicle
+    ammo[112] += 1;
+}
+// The fists and the sandvich hand use the same timer. Meh, to lazy to change.
+if ammo[105] &gt;= 0 &amp;&amp; weapon_index != WEAPON_FISTS &amp;&amp; weapon_index != WEAPON_SANDVICH {
+    ammo[105] -= 1;
+    if ammo[105] &lt;= -1 {
+        ammo[WEAPON_FISTS] = 1;
+        ammo[WEAPON_SANDVICH] = 1;
+    }
+}
+if ammo[111] &gt;= 0 &amp;&amp; weapon_index != WEAPON_CHOCOLATE { 
+    ammo[111] -= 1;
+    if ammo[111] &lt;= -1 {
+        ammo[WEAPON_CHOCOLATE] = 1;
+    }
+}
+
+if global.particles != PARTICLES_OFF {
+    if invincible &amp;&amp; team == global.myself.team{
+        if !variable_local_exists("HealparticleType") {
+            HealparticleType = part_type_create();
+            part_type_sprite(HealparticleType,HealS,true,false,true);
+            part_type_alpha2(HealparticleType,0.8,0.3);
+            part_type_life(HealparticleType,8,15);
+            part_type_scale(HealparticleType,1.2,1.2);
+            if player.team == TEAM_RED part_type_color1(HealparticleType,c_red);
+            else part_type_color1(HealparticleType,c_blue);
+            part_type_speed(HealparticleType,0.3,1,0,1);
+            part_type_direction(HealparticleType,80,100,0,0);
+        }
+        if !variable_global_exists("HealparticleSystem"){
+            global.HealparticleSystem = part_system_create();
+            part_system_depth(global.HealparticleSystem, 10);
+        }
+        if(random(7) &lt; 5)
+        {
+            part_particles_create(global.HealparticleSystem,x-5*image_xscale-random(10),y-5-random(10),HealparticleType,1);
+        }
+    }
+    
+    if player.RandomizerWinner &amp;&amp; !cloak &amp;&amp; !invisible {
+        if !variable_local_exists("hatParticleType")
+        {
+            hatParticleType = part_type_create();
+            part_type_sprite(hatParticleType,HatFlamesS,true,false,true);
+            part_type_alpha2(hatParticleType,1,0.3);
+            part_type_life(hatParticleType,10,20);
+            part_type_scale(hatParticleType,0.7,0.7);
+            part_type_speed(hatParticleType,0.5,1.3,0,1);
+            part_type_direction(hatParticleType,85,95,0,1);
+        }
+        
+        if !variable_global_exists("hatSystem")
+        {
+            global.hatParticleSystem = part_system_create();
+            part_system_depth(global.hatParticleSystem, 10);
+        }
+        if(random(9) &lt; 5+speed/10)
+        {
+            part_particles_create(global.hatParticleSystem,x,y-15-random(5),hatParticleType,1);
+        }
+    }
+}
+
+//stuff for the randomizer contest winners.
+if player.RandomizerWinner and global.mapchanging {
+    hp = 255;
+    maxHp = 255;
+}
+
+if fireproof {
+    burnDuration = 0; 
+    burnIntensity = 0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

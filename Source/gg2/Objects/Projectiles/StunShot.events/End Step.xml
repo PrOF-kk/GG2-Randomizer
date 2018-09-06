@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if distance_to_object(owner) &gt; 240 instance_destroy();
+image_angle=direction;
+
+if target != -1 &amp;&amp; instance_exists(target){
+    with(target){
+        //speed=0;
+        if floor(random(4)) &lt; 1{
+            instance_create(x+random(20)-10,y+random(20)-10,Sparks);
+        }
+    }   
+    x=target.x;
+    y=target.y;
+    if owner.currentWeapon.ammoCount &lt;=0 instance_destroy(); 
+    else owner.currentWeapon.ammoCount -= 1;
+} else if sentrytarget != -1 &amp;&amp; instance_exists(sentrytarget){
+    if sentrytarget.team != team {
+        sentrytarget.alarm[0]=1;
+        sentrytarget.hp -= 0.2;
+        x=sentrytarget.x;
+        y=sentrytarget.y;
+        if owner.currentWeapon.ammoCount &lt;=0 instance_destroy(); 
+        else owner.currentWeapon.ammoCount -= 1;
+    } else if sentrytarget.sapped &gt; 0 {
+        sentrytarget.sapped-=0.25;
+        if sentrytarget.sapped &lt;= 0 {
+            with(sentrytarget){
+                //image_index=11;
+                //image_speed=0;
+                sapped=0;
+            }
+            instance_destroy();
+        }
+        x=sentrytarget.x;
+        y=sentrytarget.y;
+        if owner.currentWeapon.ammoCount &lt;=0 instance_destroy(); 
+        else owner.currentWeapon.ammoCount -= 1;
+    } else instance_destroy();
+} else vspeed+=0.15;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

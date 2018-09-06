@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (!invisible &amp;&amp; cloakAlpha == 1) {
+        taunting=true;
+        if player == global.myself &amp;&amp; weapon_index == WEAPON_PHLOG write_ubyte(global.serverSocket,PHLOG_ACTIVE);
+        var i;
+        i=0;
+        switch(player.class) {
+        case CLASS_MEDIC:
+            if weapon_index == WEAPON_KRITSKRIEG i=2;
+            else if weapon_index == WEAPON_QUICKFIX i=1;
+            else if weapon_index == WEAPON_OVERDOSE {
+                if vspeed == 0 &amp;&amp; hspeed == 0 &amp;&amp; !place_free(x,y+1) &amp;&amp; place_free(x,y) {
+                    i=3;
+                    tauntkill = killframe+team*tauntlength[i];
+                    tauntsauce = MEDIC_TAUNTKILL;
+                    xscale = image_xscale;
+                } else taunting = false;
+            }
+            break;
+        case CLASS_SCOUT:
+            if weapon_index == WEAPON_FAN i=4;
+            else if weapon_index == WEAPON_RUNDOWN i=6;
+            else if weapon_index == WEAPON_SODAPOPPER i=5;
+            else if weapon_index == WEAPON_PISTOL i=1;
+            else if weapon_index == WEAPON_BONK i=3;
+            else if weapon_index == WEAPON_SANDMAN i=2;
+            else if weapon_index == WEAPON_ATOMIZER {
+                if vspeed == 0 &amp;&amp; hspeed == 0 &amp;&amp; !place_free(x,y+1) &amp;&amp; place_free(x,y) {
+                    i=7;
+                    tauntkill = killframe+team*tauntlength[i];
+                    tauntsauce = SCOUT_TAUNTKILL;
+                    xscale = image_xscale;
+                } else taunting = false;
+            }
+            break;
+        case CLASS_SOLDIER:
+            if weapon_index == WEAPON_COWMANGLER i=1;
+            break;
+        case CLASS_DEMOMAN:
+            if weapon_index == WEAPON_TIGERUPPERCUT i=4;
+            else if weapon_index == WEAPON_SCOTTISHRESISTANCE i=3;
+            else if weapon_index == WEAPON_STICKYJUMPER i=2;
+            else if weapon_index == WEAPON_GRENADELAUNCHER i=1;
+            else if weapon_index == WEAPON_GRENADE {
+                if vspeed == 0 &amp;&amp; hspeed == 0 &amp;&amp; !place_free(x,y+1) &amp;&amp; place_free(x,y) {
+                    i=5;
+                    tauntkill = killframe+team*tauntlength[i];
+                    tauntsauce = DEMOMAN_TAUNTKILL;
+                    xscale = image_xscale;
+                } else taunting = false;
+            }
+            break;
+        case CLASS_HEAVY:
+            if weapon_index == WEAPON_NATACHA i=2;
+            else if weapon_index == WEAPON_BRASSBEAST i=1;
+            break;
+        case CLASS_PYRO:
+            if weapon_index == WEAPON_TRANSMUTATOR i=1;
+            else if weapon_index == WEAPON_PHLOG i=2;
+            break;
+        case CLASS_ENGINEER:
+            if weapon_index == WEAPON_EUREKAEFFECT i=1;
+            break;
+        case CLASS_SNIPER:
+            if weapon_index == WEAPON_SYDNEYSLEEPER i=1;
+            else if weapon_index == WEAPON_SMG i=2;
+            else if weapon_index == WEAPON_BAZAARBARGAIN i=4;
+            else if weapon_index == WEAPON_MACHINA i=5;
+            else if weapon_index == WEAPON_HUNTSMAN {
+                if vspeed == 0 &amp;&amp; hspeed == 0 &amp;&amp; !place_free(x,y+1) &amp;&amp; place_free(x,y) {
+                    i=3;
+                    tauntkill = killframe+team*tauntlength[i];
+                    tauntsauce = SNIPER_TAUNTKILL;
+                    xscale=image_xscale;
+                } else taunting = false;
+            }
+            break;
+    }
+    if taunting {
+        tauntSprite = tauntsprite[i];
+        if (team==TEAM_RED) {
+            tauntindex=0;
+            tauntend=tauntlength[i]-1;
+        }
+        else if (team==TEAM_BLUE) {
+            tauntindex=tauntlength[i];
+            tauntend=tauntlength[i]*2-1;
+        }
+        image_speed=tauntspeed;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

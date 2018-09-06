@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{ 
+        shot = instance_create(x,y,MeleeMask);
+        shot.direction=owner.aimDirection;
+        shot.speed=owner.speed;
+        shot.owner=owner;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        shot.hitDamage = damage;
+        shot.weapon=WEAPON_KNIFE;
+        if random(100) &lt; 15 &amp;&amp; crit &lt; 1.5 shot.crit = 1.35;
+        else shot.crit = crit;
+}
+</argument>
+      </arguments>
+    </action>
+    <action id="301" library="1">
+      <!--action name: Set_Alarm-->
+      <kind>NORMAL</kind>
+      <allowRelative>true</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_set_alarm</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="EXPRESSION">10</argument>
+        <argument kind="MENU">2</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

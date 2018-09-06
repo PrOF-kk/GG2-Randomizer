@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if shot {
+    len = point_distance(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),x2,y2);
+    draw_sprite_ext(PhlogBeamS,floor(index),x+lengthdir_x(28,owner.aimDirection), y+lengthdir_y(28,owner.aimDirection)+3,len/140,len/140,owner.aimDirection,c_white,0.8)
+    if(global.particles == PARTICLES_NORMAL) {
+        smoke=random(len)
+        effect_create_below(ef_smokeup,x+lengthdir_x(25+smoke,owner.aimDirection),y+lengthdir_y(25+smoke,owner.aimDirection)-8,0,c_gray);    
+    }
+    shot = false;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

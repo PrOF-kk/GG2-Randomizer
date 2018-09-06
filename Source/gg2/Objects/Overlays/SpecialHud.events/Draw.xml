@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if global.myself.object = -1 exit;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    ysize = view_hview[0];
+    if global.myself.team == TEAM_BLUE uberoffset=1;
+    else uberoffset=0;
+    
+    draw_set_valign(fa_center);
+    draw_set_halign(fa_center);
+    draw_set_alpha(1);
+    message1 = -1;
+    message2 = -1;
+    title1 = '';
+    title2 = '';
+if (global.myself.object.loaded1 == WEAPON_SANDMAN or global.myself.object.loaded2 == WEAPON_SANDMAN) {
+    if (global.myself.object.ammo[107] &gt; 0 or (global.myself.object.weapon_index == WEAPON_SANDMAN &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_SANDMAN message1 = global.myself.object.currentWeapon.alarm[5]/3;
+            else message1 = global.myself.object.ammo[107]/3;
+            title1 = 'BALL';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_SANDMAN message2 = global.myself.object.currentWeapon.alarm[5]/3;
+             else message2 = global.myself.object.ammo[107]/3;
+             title2 = 'BALL';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_NAPALM or global.myself.object.loaded2 == WEAPON_NAPALM) {
+    if (global.myself.object.ammo[114] &gt; 0 or (global.myself.object.weapon_index == WEAPON_NAPALM &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_NAPALM message1 = global.myself.object.currentWeapon.alarm[5]/2;
+            else message1 = global.myself.object.ammo[114]/2;
+            title1 = 'NAPALM';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_NAPALM message2 = global.myself.object.currentWeapon.alarm[5]/2;
+             else message2 = global.myself.object.ammo[114]/2;
+             title2 = 'NAPALM';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_PHLOG or global.myself.object.loaded2 == WEAPON_PHLOG) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_PHLOG {
+            if global.myself.object.currentWeapon.critting &gt; 0 message1 = global.myself.object.currentWeapon.critting/3;
+            else message1 = global.myself.object.phlogDmg/3;
+       } else if global.myself.object.phlogCrit &gt; 0 message1 = global.myself.object.phlogCrit/3; 
+       else message1 = global.myself.object.phlogDmg/3;
+        title1 = 'MMMPH';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_PHLOG {
+            if global.myself.object.currentWeapon.critting &gt; 0 message2 = global.myself.object.currentWeapon.critting/3;
+            else message2 = global.myself.object.phlogDmg/3;
+       } else if global.myself.object.phlogCrit &gt; 0 message2 = global.myself.object.phlogCrit/3;
+       else message2 = global.myself.object.phlogDmg/3;
+       title2 = 'MMMPH';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_SODAPOPPER or global.myself.object.loaded2 == WEAPON_SODAPOPPER) {
+    if message1 == -1 {
+        message1 = global.myself.object.ammo[109]/2.1;
+        title1 = 'HYPE';
+    } else {
+         message2 = global.myself.object.ammo[109]/2.1;
+         title2 = 'HYPE';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_SPYCICLE or global.myself.object.loaded2 == WEAPON_SPYCICLE) {
+    if message1 == -1 {
+        message1 = global.myself.object.ammo[112]/4.5;
+        title1 = 'ICICLE';
+    } else {
+         message2 = global.myself.object.ammo[112]/4.5;
+         title2 = 'ICICLE';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_BUFFBANNER or global.myself.object.loaded2 == WEAPON_BUFFBANNER) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_BUFFBANNER message1 = global.myself.object.currentWeapon.ammoCount/4*100;
+        else message1 = global.myself.object.ammo[WEAPON_BUFFBANNER]/4*100;
+        title1 = 'RAGE';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_BUFFBANNER message2 = global.myself.object.currentWeapon.ammoCount/4*100;
+         else message2 = global.myself.object.ammo[WEAPON_BUFFBANNER]/4*100;
+         title2 = 'RAGE';
+    }
+}
+
+if (global.myself.object.loaded1 == WEAPON_JARATE or global.myself.object.loaded2 == WEAPON_JARATE) { 
+    if (global.myself.object.ammo[104] &gt; 0 or (global.myself.object.weapon_index == WEAPON_JARATE &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_JARATE message1 = global.myself.object.currentWeapon.alarm[5]/3;
+            else message1 = global.myself.object.ammo[104]/3;
+            title1 = 'JARATE';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_JARATE message2 = global.myself.object.currentWeapon.alarm[5]/3;
+             else message2 = global.myself.object.ammo[104]/3;
+             title2 = 'JARATE';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_MADMILK or global.myself.object.loaded2 == WEAPON_MADMILK) { 
+    if (global.myself.object.ammo[113] &gt; 0 or (global.myself.object.weapon_index == WEAPON_MADMILK &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_MADMILK message1 = global.myself.object.currentWeapon.alarm[5]/3;
+            else message1 = global.myself.object.ammo[113]/3;
+            title1 = 'MILK';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_MADMILK message2 = global.myself.object.currentWeapon.alarm[5]/3;
+             else message2 = global.myself.object.ammo[113]/3;
+             title2 = 'MILK';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_SANDVICH or global.myself.object.loaded2 == WEAPON_SANDVICH)   
+or (global.myself.object.loaded1 == WEAPON_FISTS or global.myself.object.loaded2 == WEAPON_FISTS) { 
+    //should work i think...
+    if (global.myself.object.ammo[105] &gt; 0 or (global.myself.object.weapon_index == WEAPON_SANDVICH &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_SANDVICH message1 = global.myself.object.currentWeapon.alarm[5]/3;
+            else message1 = global.myself.object.ammo[105]/3;
+            title1 = 'SANDVICH';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_SANDVICH message2 = global.myself.object.currentWeapon.alarm[5]/3;
+             else message2 = global.myself.object.ammo[105]/3;
+             title2 = 'SANDVICH';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_CHOCOLATE or global.myself.object.loaded2 == WEAPON_CHOCOLATE) {
+    if (global.myself.object.ammo[111] &gt; 0 or (global.myself.object.weapon_index == WEAPON_CHOCOLATE &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_CHOCOLATE message1 = global.myself.object.currentWeapon.alarm[5]/3;
+            else message1 = global.myself.object.ammo[111]/3;
+            title1 = 'SANDVICH';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_CHOCOLATE message2 = global.myself.object.currentWeapon.alarm[5]/3;
+             else message2 = global.myself.object.ammo[111]/3;
+             title2 = 'SANDVICH';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_BONK or global.myself.object.loaded2 == WEAPON_BONK) {
+    if (global.myself.object.ammo[102] &gt; 0 or (global.myself.object.weapon_index == WEAPON_BONK &amp;&amp; global.myself.object.currentWeapon.ammoCount == 0)) {
+        if message1 == -1 {
+            if global.myself.object.weapon_index == WEAPON_BONK message1 = global.myself.object.currentWeapon.alarm[5]/5;
+            else message1 = global.myself.object.ammo[102]/5;
+            title1 = 'BONK';
+        } else {
+            if global.myself.object.weapon_index == WEAPON_BONK message2 = global.myself.object.currentWeapon.alarm[5]/5;
+             else message2 = global.myself.object.ammo[102]/5;
+             title2 = 'BONK';
+        }
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_MEDIGUN or global.myself.object.loaded2 == WEAPON_MEDIGUN) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_MEDIGUN message1 = global.myself.object.currentWeapon.uberCharge*100/2000;
+        else message1 = global.myself.object.ammo[WEAPON_MEDIGUN]*800/2000;
+        title1 = 'SUPERBURST';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_MEDIGUN message2 = global.myself.object.currentWeapon.uberCharge*100/2000;
+         else message2 = global.myself.object.ammo[WEAPON_MEDIGUN]*800/2000;
+         title2 = 'SUPERBURST';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_KRITSKRIEG or global.myself.object.loaded2 == WEAPON_KRITSKRIEG) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_KRITSKRIEG message1 = global.myself.object.currentWeapon.uberCharge*100/2000;
+        else message1 = global.myself.object.ammo[WEAPON_KRITSKRIEG]*800/2000;
+        title1 = 'SUPERBURST';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_KRITSKRIEG message2 = global.myself.object.currentWeapon.uberCharge*100/2000;
+         else message2 = global.myself.object.ammo[WEAPON_KRITSKRIEG]*800/2000;
+         title2 = 'SUPERBURST';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_QUICKFIX or global.myself.object.loaded2 == WEAPON_QUICKFIX) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_QUICKFIX message1 = global.myself.object.currentWeapon.uberCharge*100/2000;
+        else message1 = global.myself.object.ammo[WEAPON_QUICKFIX]*800/2000;
+        title1 = 'SUPERBURST';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_QUICKFIX message2 = global.myself.object.currentWeapon.uberCharge*100/2000;
+         else message2 = global.myself.object.ammo[WEAPON_QUICKFIX]*800/2000;
+         title2 = 'SUPERBURST';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_OVERHEALER or global.myself.object.loaded2 == WEAPON_OVERHEALER) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_OVERHEALER message1 = global.myself.object.currentWeapon.uberCharge*100/2000;
+        else message1 = global.myself.object.ammo[WEAPON_OVERHEALER]*800/2000;
+        title1 = 'SUPERBURST';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_OVERHEALER message2 = global.myself.object.currentWeapon.uberCharge*100/2000;
+         else message2 = global.myself.object.ammo[WEAPON_OVERHEALER]*800/2000;
+         title2 = 'SUPERBURST';
+    }
+}
+if (global.myself.object.loaded1 == WEAPON_POTION or global.myself.object.loaded2 == WEAPON_POTION) {
+    if message1 == -1 {
+        if global.myself.object.weapon_index == WEAPON_POTION message1 = global.myself.object.currentWeapon.uberCharge*100/2000;
+        else message1 = global.myself.object.ammo[WEAPON_POTION]*800/2000;
+        title1 = 'SUPERBURST';
+    } else {
+        if global.myself.object.weapon_index == WEAPON_POTION message2 = global.myself.object.currentWeapon.uberCharge*100/2000;
+         else message2 = global.myself.object.ammo[WEAPON_POTION]*800/2000;
+         title2 = 'SUPERBURST';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_STUNGUN {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_GRENADE {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.time*1.12;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.time*1.12;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.hasBoots {
+    if message1 == -1 {
+        message1 = global.myself.object.bootfuel/1.5;
+        title1 = 'FUEL';
+    } else {
+        message2 = global.myself.object.bootfuel/1.5;
+        title2 = 'FUEL';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_BAZAARBARGAIN {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.bonus*10;
+        title1 = 'BONUS';
+    } else {
+        message2 = global.myself.object.currentWeapon.bonus*10;
+        title2 = 'BONUS';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_EYELANDER {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_POMSON {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount*25;
+        title1 = 'POMSON';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount*25;
+        title2 = 'POMSON';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_HUNTSMAN {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.bonus;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.bonus;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_COWMANGLER {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_SAXTONHALE {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount;
+        title1 = 'CHARGE';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount;
+        title2 = 'CHARGE';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_WRANGLER {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammoCount;
+        title1 = 'SENTRY';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammoCount;
+        title2 = 'SENTRY';
+    }
+}
+if global.myself.object.weapon_index == WEAPON_POTION {
+    if message1 == -1 {
+        message1 = global.myself.object.currentWeapon.ammo*33.33;
+        title1 = 'POTIONS';
+    } else {
+        message2 = global.myself.object.currentWeapon.ammo*33.33;
+        title2 = 'POTIONS';
+    }
+}
+    
+    //draw_sprite_ext(TemplateS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+    if message1 != -1 {
+        draw_healthbar(xoffset+665, yoffset+500, xoffset+785, yoffset+532,message1,c_black,c_white,c_white,0,true,true);
+        draw_sprite_ext(UberHudS,uberoffset,xoffset+720,yoffset+515,2,2,0,c_white,1);
+        draw_text_color(xoffset+730,yoffset+510,title1,c_white,c_white,c_white,c_white,1);
+        if message2 != -1 {
+            draw_healthbar(xoffset+665-140, yoffset+500, xoffset+785-140, yoffset+532,message2,c_black,c_white,c_white,0,true,true);
+           draw_sprite_ext(UberHudS,uberoffset,xoffset+720-140,yoffset+515,2,2,0,c_white,1);
+            draw_text_color(xoffset+730-140,yoffset+510,title2,c_white,c_white,c_white,c_white,1);
+        }
+    }
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

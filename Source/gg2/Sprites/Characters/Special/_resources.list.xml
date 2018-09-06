@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="OmnomnomnomS" type="RESOURCE"/>
+  <resource name="NatachaNomS" type="RESOURCE"/>
+  <resource name="BrassBeastNomS" type="RESOURCE"/>
+  <resource name="ChocolateNomS" type="RESOURCE"/>
+  <resource name="NatachaCNomS" type="RESOURCE"/>
+  <resource name="BrassBeastCNomS" type="RESOURCE"/>
+</resources>

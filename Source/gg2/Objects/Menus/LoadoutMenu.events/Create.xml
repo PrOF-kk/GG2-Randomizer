@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    name = 'Mouse over weapons to see their#description. Left click them to#add the corresponding weapon #to your loadout.'
+    description[0] = '';
+    description[1] = '';
+    description[2] = '';
+    done = false;
+    newclass=-1;
+    currentclass=-1;
+    mousedclass=-1
+    xoffset2=88;
+    offset=0;
+    team=0;
+    class = '';
+    rotation=1;
+    firstX=-1;
+    if room == loadout xoffset = view_xview[0];
+    else xoffset = view_xview[0]+100;
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    //instance_create(16,416,Back);
+    instance_create(0,0,Back);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

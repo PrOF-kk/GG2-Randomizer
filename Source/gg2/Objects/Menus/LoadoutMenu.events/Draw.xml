@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if room == loadout xoffset = view_xview[0];
+else xoffset = view_xview[0]+100;
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+if room != loadout {
+    draw_sprite_ext(INGAMELOADOUTBG,0,xoffset-100,yoffset,80,2.5,0,c_white,0.8); 
+}
+draw_sprite_ext(LoadoutSelectS, 0, 112+xoffset, 16+yoffset, 1, 1, 0, c_white, 1);
+if newclass != -1 draw_sprite_ext(ClassSelectSpritesS,newclass,drawx+xoffset+xoffset2,16+yoffset,1,1,0,c_white, 1);
+    
+draw_sprite(DescriptionBoardS,0,160+xoffset,352+yoffset);
+draw_set_color(c_white);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_text_transformed(20+xoffset,96+yoffset,class,3,3,0);
+
+
+draw_set_color(c_white);
+draw_text(175+xoffset,390+yoffset,name);    //name
+draw_text(175+xoffset,390+yoffset+13,description[0]);  //info
+draw_set_color(make_color_rgb(36,118,36));
+draw_text(175+xoffset,390+yoffset+string_height(description[0])+13,description[1]);  //good
+draw_set_color(make_color_rgb(221,34,34));
+draw_text(175+xoffset,390+yoffset+string_height(description[0])+string_height(description[1])+13,description[2]);  //bad
+
+draw_set_halign(fa_center)
+draw_set_color(c_white);
+draw_text(300+xoffset,144+yoffset,'Currently equipped:');
+
+if mousedclass=-1 draw_sprite_ext(LoadoutS,9,300+xoffset,250+yoffset,4*rotation,4,0,c_white,1);
+else  draw_sprite_ext(LoadoutS,mousedclass,300+offset*rotation*4+xoffset,250+yoffset,4*rotation,4,0,c_white,1);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

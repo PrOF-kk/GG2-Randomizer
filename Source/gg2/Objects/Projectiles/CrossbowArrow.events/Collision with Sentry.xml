@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team) &amp;&amp; attached == -1 {
+    other.hp -= hitDamage*crit// *other.bonus*+burning*8;//
+//new stuff
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    other.lastDamageCrit = crit;
+//end new stuff
+    instance_destroy();
+    }
+    
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

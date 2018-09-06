@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="AccesoryS" type="RESOURCE"/>
+  <resource name="RedClumpS" type="RESOURCE"/>
+  <resource name="BlueClumpS" type="RESOURCE"/>
+  <resource name="HandS" type="RESOURCE"/>
+  <resource name="HeadS" type="RESOURCE"/>
+  <resource name="BurnedHeadS" type="RESOURCE"/>
+  <resource name="GibS" type="RESOURCE"/>
+  <resource name="FeetS" type="RESOURCE"/>
+  <resource name="BloodS" type="RESOURCE"/>
+  <resource name="BloodDropS" type="RESOURCE"/>
+  <resource name="DustS" type="RESOURCE"/>
+  <resource name="PissS" type="RESOURCE"/>
+  <resource name="MikS" type="RESOURCE"/>
+  <resource name="ToolboxS" type="RESOURCE"/>
+  <resource name="SmileyS" type="RESOURCE"/>
+</resources>

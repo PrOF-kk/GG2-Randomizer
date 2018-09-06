@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; ammoCount &gt; 0) {
+        with(NapalmGrenade) {
+            if ownerPlayer == other.ownerPlayer instance_destroy();
+        }
+        ammoCount -= 1;  
+        shot = instance_create(x,y + yoffset + 1,NapalmGrenade);
+        shot.direction=owner.aimDirection+ random(7)-4;
+        shot.speed=10;
+        shot.owner=owner;
+        shot.crit=crit;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        with(shot)
+            hspeed+=owner.hspeed;
+        justShot=true;
+        readyToShoot=false;
+        alarm[5] = reloadBuffer + reloadTime;
+        alarm[0] = refireTime;
+        owner.ammo[114] = -1;
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">virtualitem = -1;
+xbegin = 120;
+ybegin = 40;
+spacing = 10;
+width = 300; 
+valueoffset = 200;
+editing = -1;
+needTarget = false;
+items = 0;
+Items = ds_map_size(global.commandDict)+1;
+for(i=0;i&lt;Items;i+=1) {
+    if i==0 Item[0] = ds_map_find_first(global.commandDict);
+    else Item[i] = ds_map_find_next(global.commandDict,Item[i-1]);
+}
+Item[Items-1] = "exit";
+message = "";
+target = "";
+showPlayers=false;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutHatTauntS" type="RESOURCE"/>
+  <resource name="PyroHatTauntS" type="RESOURCE"/>
+  <resource name="SoldierHatTauntS" type="RESOURCE"/>
+  <resource name="HeavyHatTauntS" type="RESOURCE"/>
+  <resource name="DemoHatTauntS" type="RESOURCE"/>
+  <resource name="MedicHatTauntS" type="RESOURCE"/>
+  <resource name="EngiHatTauntS" type="RESOURCE"/>
+  <resource name="SpyHatTauntS" type="RESOURCE"/>
+  <resource name="SniperHatTauntS" type="RESOURCE"/>
+</resources>

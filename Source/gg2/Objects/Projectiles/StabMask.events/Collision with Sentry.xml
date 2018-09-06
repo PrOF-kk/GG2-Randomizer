@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team) &amp;&amp; !hitautogun
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        win += 1;
+        hitautogun = true;
+        other.hp -= 40;
+        if weapon == WEAPON_ZAPPER other.hp -= 80;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        if win &gt; 1 or weapon == WEAPON_BIGEARNER_BACKSTAB or weapon == WEAPON_ZAPPER instance_destroy();
+    }
+    else
+        alarm[0] = 1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (readyToStab &amp;&amp; !owner.cloak &amp;&amp; ammoCount&gt;=1) {
+    var oid, newx, newy;
+    playsound(x,y,BallSnd);
+    ammoCount -= 1;
+
+    oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Ball);
+    
+    oid.direction=owner.aimDirection;
+    oid.speed=15;
+    oid.vspeed-=2.5
+    oid.crit=crit;
+    oid.owner=owner;
+    oid.ownerPlayer=ownerPlayer;
+    oid.team=owner.team;
+    oid.weapon=WEAPON_BALL;
+    justShot=true;
+    readyToShoot = false;
+    //alarm[0] = refireTime;
+    readyToStab = false;
+    alarm[2]=20;
+    alarm[5] = reloadBuffer + reloadTime;
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

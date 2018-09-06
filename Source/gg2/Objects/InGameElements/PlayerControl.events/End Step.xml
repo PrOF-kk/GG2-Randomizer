@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.myself.object == -1) exit;
+
+if (global.myself.object.weapon_index == WEAPON_RIFLE or global.myself.object.weapon_index == WEAPON_SNIPEANATURE or 
+    global.myself.object.weapon_index == WEAPON_MACHINA or global.myself.object.weapon_index == WEAPON_BAZAARBARGAIN or
+    WEAPON_SYDNEYSLEEPER) &amp;&amp; global.myself.object.zoomed == 1 {
+    var relxmouse, relymouse;
+    relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
+    relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
+        
+    view_xview[0] = global.myself.object.x+relxmouse-view_wview[0];
+    view_yview[0] = global.myself.object.y+relymouse-view_hview[0];
+} else {
+    view_xview[0] = global.myself.object.x-view_wview[0]/2;
+    view_yview[0] = global.myself.object.y-view_hview[0]/2;
+}
+    
+//AFK Check
+afktimer-=1;
+if(afktimer&lt;=0) &amp;&amp; global.myself.object.afk == false{
+    global.myself.object.afk = true;
+    if !instance_exists(TeamSelectController) instance_create(0,0,TeamSelectController);
+    with(TeamSelectController) afk=true;
+}
+   
+
+// Sentry HUD
+if (global.myself.sentry != -1) &amp;&amp; !instance_exists(SentryHealthHud) instance_create(0,0,SentryHealthHud);
+// Metal HUD
+if ((global.myself.object.loaded1 &gt;= WEAPON_SHOTGUN &amp;&amp; global.myself.object.loaded1 &lt;= WEAPON_EUREKAEFFECT) or (global.myself.object.loaded2 &gt;= WEAPON_SHOTGUN &amp;&amp; global.myself.object.loaded2 &lt;= WEAPON_EUREKAEFFECT)) &amp;&amp; !instance_exists(NutsNBoltsHud) instance_create(0,0,NutsNBoltsHud);
+//revenge crit hud
+if (global.myself.loaded1 == WEAPON_FRONTIERJUSTICE or global.myself.loaded2 == WEAPON_FRONTIERJUSTICE) &amp;&amp; !instance_exists(RevengeCritHud) instance_create(0,0,RevengeCritHud);
+
+// Sticky HUD. Because real men let computers count for them.
+else if ((global.myself.object.loaded1 &gt;= WEAPON_MINEGUN &amp;&amp; global.myself.object.loaded1 &lt;= WEAPON_STICKYSTICKER) or (global.myself.object.loaded2 &gt;= WEAPON_MINEGUN &amp;&amp; global.myself.object.loaded2 &lt;= WEAPON_STICKYSTICKER)) &amp;&amp; !instance_exists(StickyCounter) instance_create(0,0,StickyCounter);
+  
+if global.myself.object.weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; global.myself.object.weapon_index &lt;= WEAPON_OVERHEALER {
+    //Healing Hud
+    if !instance_exists(HealingHud) &amp;&amp; global.showHealing = 1 instance_create(0,0,HealingHud);
+    //Medic Radar
+    if global.medicRadar == 1 &amp;&amp; !instance_exists(MedicRadar) instance_create(0,0,MedicRadar);
+}
+        
+// Health HUD
+if  !instance_exists(HealthHud) instance_create(0,0,HealthHud);
+
+// Healed HUD
+if !instance_exists(HealedHud) &amp;&amp; global.showHealer = 1 instance_create(0,0,HealedHud);
+
+//this hud does most of the special displays (cooldown &amp; charge timers)
+if !instance_exists(SpecialHud) instance_create(0,0,SpecialHud);
+
+//stab speed hud
+if global.myself.object.stabspeed &gt; 0 &amp;&amp; !instance_exists(StabSpeedHud) instance_create(0,0,StabSpeedHud);
+
+//rundown hud
+if (global.myself.object.loaded1 == WEAPON_RUNDOWN or global.myself.loaded2 == WEAPON_RUNDOWN) &amp;&amp; !instance_exists(RundownHud) instance_create(0,0,RundownHud);
+
+//etranger hud
+if (global.myself.object.loaded1 == WEAPON_ETRANGER or global.myself.loaded2 == WEAPON_ETRANGER) &amp;&amp; !instance_exists(DeadringerHud) instance_create(0,0,DeadringerHud);   
+
+if global.saxtonhale != noone &amp;&amp; !instance_exists(SaxtonHaleRadar) instance_create(0,0,SaxtonHaleRadar); 
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

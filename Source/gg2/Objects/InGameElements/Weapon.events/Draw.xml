@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">xviewoffset = view_xview[0];
+yviewoffset = view_yview[0];
+xviewsize = view_wview[0];
+yviewsize = view_hview[0];
+    
+if distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800 exit;
+
+    var offset;
+    if(justShot == true) {
+        offset=2;
+        justShot = false;
+    } else {
+        offset=0;
+    }
+switch(object_index) {
+    case NapalmHand :
+    case Spycicle :
+    case GrenadeHand : 
+    case ChainStab :
+    case MadmilkHand :
+    case BonkHand :
+    case JarateHand :
+    case SandvichHand :
+    case ChocolateHand :
+    case Paintrain :
+    case BuffBanner :
+    case SaxtonFist :
+    case Shiv :
+    case Volcanofragment :
+    case Haxxy :
+    case Sandman :
+    case Eyelander :
+    case Wrench :
+    case Eeffect :
+    case Knife :
+    case BigEarner :
+    case Atomizer :
+    case Kukri :
+    case Shovel :
+    case Fists :
+    case Axe: 
+    case KGOB:
+    case Zapper:
+    case Ubersaw:
+        if owner.carrySentry &gt; 0 exit; 
+        image_angle = 0;
+        var alpha;
+        alpha = owner.cloakAlpha;
+        if owner.cloak &amp;&amp; owner.team == global.myself.team alpha=0.5;    
+        if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt;= 0.5 &amp;&amp; !owner.omnomnomnom &amp;&amp; !owner.stunned &amp;&amp; !owner.buffing {
+            if !(owner.player.humiliated &amp;&amp; !owner.player.RandomizerWinner) {
+                draw_sprite_ext(sprite_index,image_index,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,0,c_white,owner.cloakAlpha);
+                if crit &gt; 1{
+                    if owner.team == TEAM_RED ubercolour = c_orange;
+                    else if owner.team == TEAM_BLUE ubercolour = c_aqua;
+                    draw_sprite_ext(sprite_index,floor(image_index),round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,0,ubercolour,0.7);
+                    draw_sprite_ext(Spark2S,spark,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,90*image_xscale,ubercolour,0.3);
+                }
+                 else if owner.ubered == 1 {
+                    if owner.team == TEAM_RED ubercolour = c_red;
+                    else if owner.team == TEAM_BLUE ubercolour = c_blue;
+                    draw_sprite_ext(sprite_index,floor(image_index),round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,0,ubercolour,0.7);
+                }
+            }
+        }
+        break;
+        
+    case SentryTurret:
+    case SentryTurret2:
+    case SentryTurret3:
+    case MiniSentryTurret:
+    case ArrowTurret: 
+        if ownerPlayer.sentry != -1 {
+            if ownerPlayer.sentry.image_index &gt;7 &amp;&amp; ownerPlayer.sentry.sapped &lt;= 0 {
+                if rotating == false {
+                    draw_sprite_ext(sprite_index,ownerPlayer.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
+                } else if rotating == true {
+                    draw_sprite_ext(ownerPlayer.sentry.rotateSprite[ownerPlayer.sentry.level],round(rotateindex),x,y,image_xscale,image_yscale,0,c_white,1);
+                }
+            }
+        } 
+        break;
+        
+    default:  
+        if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt; 0.5 &amp;&amp; !owner.omnomnomnom &amp;&amp; !owner.stunned &amp;&amp; !owner.buffing {
+            if !(owner.player.humiliated &amp;&amp; !owner.player.RandomizerWinner) {
+                draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,owner.cloakAlpha);
+                if crit &gt; 1{
+                    if owner.team == TEAM_RED ubercolour = c_orange;
+                    else if owner.team == TEAM_BLUE ubercolour = c_aqua;
+                    draw_sprite_ext(sprite_index,4+offset/2,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
+                    draw_sprite_ext(Spark2S,spark,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.3);
+                } if owner.ubered == 1 {
+                    if owner.team == TEAM_RED ubercolour = c_red;
+                    else if owner.team == TEAM_BLUE ubercolour = c_blue;
+                    draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
+                }
+            }
+        }          
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

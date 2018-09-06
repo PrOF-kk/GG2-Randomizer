@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if !variable_local_exists('old_pos') {
+    a = 0
+    while a &lt; 12 {
+        old_pos[a,0] = x;
+        old_pos[a,1] = y;  
+        a += 1;
+    }
+}
+a = 12-1
+while a &gt; 0 {
+    old_pos[a,0] = old_pos[a-1,0]
+    old_pos[a,1] = old_pos[a-1,1]        
+    a -= 1
+}       
+old_pos[0,0] = x
+old_pos[0,1] = y   
+    a = 0
+    while a &lt; 12-1 {
+    draw_sprite_ext(owner.sprite_index,floor(owner.animationImage),old_pos[a,0],old_pos[a,1],owner.image_xscale,1,0,c_white,0.8/((a+2)/2));
+    a += 1;
+}   
+    
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

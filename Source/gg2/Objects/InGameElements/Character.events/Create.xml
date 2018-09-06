@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+
+    for(i=0;i&lt;=WEAPON_COUNT;i+=1) {ammo[i] = -1;}
+    //fixed the buffbanner!
+    ammo[WEAPON_BUFFBANNER]=0;
+    weapon_index=0;
+    // Default properties of Characters (those where defaults make sense)
+    canDoublejump = 0;
+    canTriplejump = 0;
+    canCloak = 0;
+    canBuild = 0;
+    jumpStrength = 8;
+    capStrength = 1;
+    
+    loaded1 = 0;
+    loaded2 = 0;
+    
+    overheal = 0;
+    isSaxtonHale = false;
+    raged=false;
+    canSwitch = true;
+    
+    //stuff from alt weapons
+    pissed=0;
+    milked = 0;
+    bleeding = 0;
+    buffing=false;
+    buffbanner=false;
+    critting=0;
+    critzed = 0;
+    invisibeam = false;
+    megaHealed=false;
+    stunned=0;
+    radioactive=false;
+    bonus=1;
+    charge=false;
+    speedboost=0;
+    cooldown=0;
+    revengeCrits = 0;
+    sapCrits = 0;
+    active = false;
+    regenRate = 2;
+    invincible = false;
+    stabspeed = 0;
+    highJump = 0;
+    old_pos[0,0]=-1
+    fireproof = 0;
+    currentKills = 0;
+    drCharge=0;
+    frozen = 0;
+    phlogDmg = 0;
+    phlogCrit = 0;
+    glowindex = 0;
+
+    //passive effects
+    hasDangershield = false;
+    hasOverdose = false;
+    stomping = false;
+    hasOverdose = false;
+    hasRazorback = false;
+    hasBootlegger = false;
+    hasBoots = false;
+    bootfuel = 150;
+    floating = false;
+    
+    //for picking up sentries
+    sentryhp=0;
+    sentryupgraded=0;
+    sentrylevel=0;
+    carrySentry=0;
+    
+    //Things I also prefer saved
+    ammo[100] = false;  //uberReady
+    ammo[101] = 0;      //lobbed (scottish resistance)
+    ammo[102] = -1;     //Bonk timer
+    ammo[103] = 0;      //lobbed (minegun)
+    ammo[104] = -1;     //Jarate timer
+    ammo[105] = -1;     //Sandvich timer
+    ammo[106] = 0;      //bazaar bargain bonus
+    ammo[107] = -1;     //Ball timer
+    ammo[108] = 0;      //Lobbed (tiger uppercut)   
+    ammo[109] = 0;      //hyve amount
+    ammo[110] = 0;      //lobbed (stickyjumper)
+    ammo[111] = -1;     //chocolate timer
+    ammo[112] = 15*30;  //spycicle timer
+    ammo[113] = -1;     //Milk timer
+    ammo[114] = -1;     //napalm grenade timer
+    ammo[115] = 0;      //lobbed (sticky sticker)
+    // 
+    flamecount = 0;
+    invisible = false;
+    intel = false;
+    taunting = false;
+    doublejumpUsed = 0;
+    triplejumpUsed = 0;
+    ubered = 0;
+    stabbing = 0;
+    onCabinet = 0;
+    timeUnscathed = 0;
+    
+    //afterburn stuff
+    burnIntensity = 0;
+    maxIntensity = 10; //maximum afterburn intensity in DPS
+    burnDuration = 0;
+    maxDuration = 300; //maximum afterburn length
+    decayDelay = 30; //time between burning and intensity lowering
+    decayDuration = 225; //time between intensity lowering and zeroing out
+    durationDecay = 1; //amount that duration lowers per step
+    intensityDecay = burnIntensity / decayDuration;
+    burnedBy = -1;
+    afterburnSource = -1;
+    numFlames = 4 ; //purely cosmetic - the number of flames that someone has with max burnIntensity
+    for(i = 0; i &lt; numFlames; i += 1)
+    {
+        flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
+        flameArray_y[i] = random_range(-(bbox_top-bbox_bottom)/2, (bbox_top-bbox_bottom)/2);
+    }
+    alarm[5] = 1; //this alarm re-randomizes the flame positions
+    
+    // controls
+    keyState = 0;
+    lastKeyState = 0;
+    pressedKeys = 0;
+    releasedKeys = 0;
+    aimDirection = 0;
+    netAimDirection = 0;
+
+    image_speed = 0;
+    tauntspeed = 3;
+    tauntkill = 9001;
+    tauntsauce = SCOUT_TAUNTKILL;
+    
+    animationOffset = CHARACTER_ANIMATION_NORMAL;
+    animationImage = 0;
+    humiliationOffset = irandom(10)*3; //support for 10 different animations is more than enough
+    
+    //kill assist/finish off addition
+    lastDamageDealer = -1;
+    lastDamageSource = -1;
+    secondToLastDamageDealer = -1;
+    lastDamageCrit=1;
+    
+    bubble = instance_create(0,0,SpeechBubbleO);
+    bubble.owner = id;
+
+    afk=false;
+    
+    // Cloak for Spies
+    cloak = false;
+    cloakAlpha = 1;
+
+    //healer
+    healer = -1;
+        
+    //canGrabIntel- used for droppan intel
+    canGrabIntel = true;
+    alarm[1] = 0;
+    
+    //CP
+    cappingPoint = noone;
+
+    //sandvich
+    omnomnomnom = false;
+    choconom= false;
+    
+    //sniper zoom
+    zoomed = 0;
+    
+    //nuts n bolts for contructor
+    nutsNBolts = 100;
+    maxNutsNBolts = 100;
+    
+    //jugglin'
+    //1 for rocket jump
+    //2 for rocket juggle
+    //3 for getting air blasted
+    //4 for friendly juggles!
+    moveStatus = 0;
+    
+    baseControl=0.85;
+    baseFriction = 1.15;
+    controlFactor = baseControl;
+    frictionFactor = baseFriction;
+    
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="5">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.isHost &amp;&amp; !global.mapchanging &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1 &amp;&amp; class != CLASS_NULL) {
+    var group, spawnpointID, numSpawnPoints;
+    group = selectSpawnGroup(team);
+    if (group==-1) {
+        show_message("This map does not contain valid spawn points");
+        game_end();
+    }
+    if(team == TEAM_RED) {
+        numSpawnPoints = ds_list_size(global.spawnPointsRed[0,group]);
+    } else {
+        numSpawnPoints = ds_list_size(global.spawnPointsBlue[0,group]);
+    }
+    spawnpointID = floor(random(numSpawnPoints));
+    
+    if ((instance_exists(ArenaHUD) &amp;&amp; global.randomizer == 2) or global.randomizer == 1) {
+        if alarm[0] &lt; 0 {
+            randomLoadout(id);
+            ServerChangeClientClass(id);
+        }
+        ServerLoadoutSync(ds_list_find_index(global.players, id),loaded1,loaded2,global.eventBuffer,1);
+        
+        if id == global.myself {
+            if instance_exists(NoticeO) with NoticeO instance_destroy();
+            instance_create(0,0,NoticeO);
+            with NoticeO {
+                notice = NOTICE_MISC;
+                text = "Randomizer loadout: (1) "+global.name[other.loaded1]+" + (2) "+global.name[other.loaded2]+".";
+            }
+        }
+    } else if global.medieval {
+        DoMedieval(id);
+        ServerLoadoutSync(ds_list_find_index(global.players, id),loaded1,0,global.eventBuffer,0);
+    }
+        
+    sendEventSpawn(id, spawnpointID, group);
+    doEventSpawn(id, spawnpointID, group);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        if other.radioactive {
+            var text;
+            text=instance_create(x,y,Text);
+            text=sprite_index = MissS
+            instance_destroy();
+            exit;
+        }
+        playsound(x,y,TauntkillSnd);
+        other.hp -= 300;
+
+        if weapon == SCOUT_TAUNTKILL
+            with(other) {motion_add(135-((image_xscale+1)*45),30);}
+        else if weapon == SNIPER_TAUNTKILL or weapon == MEDIC_TAUNTKILL
+            with(other) {motion_add(0,-3*image_xscale);}
+            
+        if weapon == MEDIC_TAUNTKILL {
+            with(owner) {
+                ammo[WEAPON_MEDIGUN] = 250;
+                ammo[WEAPON_KRITSKRIEG] = 250;
+                ammo[WEAPON_OVERHEALER] = 250;
+                ammo[WEAPON_QUICKFIX] = 250;
+                ammo[WEAPON_POTION] = 250;
+                ammo[100] = true;
+            }
+        }
+            
+        other.timeUnscathed = 0;
+        if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
+        {
+            other.secondToLastDamageDealer = other.lastDamageDealer;
+            other.alarm[4] = other.alarm[3]
+        }
+        other.alarm[3] = ASSIST_TIME;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageCrit = crit;
+        other.lastDamageSource = weapon;
+
+        var blood;
+        if(global.gibLevel &gt; 0)
+        {
+            repeat(10)
+            {
+                blood = instance_create(x,y,Blood);
+                blood.direction = direction-180;
+            }
+        }
+        instance_destroy();
+    }
+    else {
+        alarm[0] = 1;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

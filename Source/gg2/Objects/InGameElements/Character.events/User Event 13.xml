@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
+    keyState = read_ubyte(global.deserializeBuffer);
+    aimDirection = read_ushort(global.deserializeBuffer)*360/65536;
+    
+    var temp, newIntel;
+    if(global.updateType == QUICK_UPDATE) or (global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,9,global.deserializeBuffer);
+        x = read_ushort(global.deserializeBuffer)/5;
+        y = read_ushort(global.deserializeBuffer)/5;
+        hspeed = read_byte(global.deserializeBuffer)/5;
+        vspeed = read_byte(global.deserializeBuffer)/5;
+        xprevious = x;
+        yprevious = y;
+        
+        hp = read_ubyte(global.deserializeBuffer);
+        if isSaxtonHale hp*=16;
+        if hp &gt; maxHp {
+            overheal = hp-maxHp;
+            hp = maxHp;
+        }
+        currentWeapon.ammoCount = read_ubyte(global.deserializeBuffer);
+        
+        temp = read_ubyte(global.deserializeBuffer);
+        cloak = (temp &amp; $01 != 0);
+        newIntel = (temp &amp; $02 != 0);
+        moveStatus = (temp &gt;&gt; 2) &amp; $07;
+        var tauntstatus;
+        tauntstatus = (temp &amp; $80 != 0);
+        if !taunting &amp;&amp; tauntstatus event_user(2);
+        else if taunting &amp;&amp; !tauntstatus taunting = false;
+        // Drop the intel if intel changes from true to false, destroy the intel when if changes from false to true
+        // This is more of a workaround to keep 2.1.2 compatible with 2.1.1, it should be solved later by
+        // fully syncing intel drop.
+        if(newIntel and !intel) {
+            if(team == TEAM_RED) {
+                with(IntelligenceBlue) {
+                    instance_destroy();
+                }
+            } else if(team == TEAM_BLUE) {
+                with(IntelligenceRed) {
+                    instance_destroy();
+                }
+            }
+        } else if(!newIntel &amp;&amp; intel) {
+            event_user(5);
+        }
+        intel = newIntel;
+    }
+    
+if(global.updateType == FULL_UPDATE){
+        receiveCompleteMessage(global.serverSocket,10,global.deserializeBuffer);
+        animationOffset = read_ubyte(global.deserializeBuffer);
+        weapon_index = read_ubyte(global.deserializeBuffer);
+        weaponSwitch(weapon_index);
+        carrySentry = read_ubyte(global.deserializeBuffer);
+        if carrySentry {
+            if player.team == TEAM_RED sprite_index = Engineer2RedS;
+            else sprite_index = Engineer2BlueS;
+            runPower=runBkp*3/4;
+            jumpStrength=8*3/4;
+        }
+        loaded1 = read_ubyte(global.deserializeBuffer);
+        loaded2 = read_ubyte(global.deserializeBuffer);
+        player.loaded1 = loaded1;
+        player.loaded2 = loaded2;
+        givePassiveEffect(id);
+        temp = read_ubyte(global.deserializeBuffer);
+        pissed = (temp &amp; $01 != 0);
+        milked = (temp &amp; $02 != 0);
+        if (temp &amp; $04 != 0) currentWeapon.crit = 1.5;
+        hasRazorback = (temp &amp; $08 != 0);
+        isSaxtonHale = (temp &amp; $10 != 0);
+        
+        if isSaxtonHale {
+            sprite_index = SaxtonHaleS;
+            maxHp = 4000;
+            spriteBkp = sprite_index;
+            global.saxtonhale=id;
+        }
+        alarm[1]=read_short(global.deserializeBuffer); 
+        if alarm[1] != 0 canGrabIntel = false;
+        /*with(currentWeapon) {
+            event_user(13);
+        }*/
+        currentWeapon.readyToShoot = read_ubyte(global.deserializeBuffer);
+        currentWeapon.alarm[0] = read_ubyte(global.deserializeBuffer);
+        
+        if (loaded1 == WEAPON_MINEGUN or loaded2 == WEAPON_MINEGUN) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            var mines, i;
+            mines = read_ubyte(global.deserializeBuffer);
+            if weapon_index == WEAPON_MINEGUN currentWeapon.lobbed = mines;
+            else ammo[103] = mines;
+            with(Mine) {
+                if(ownerPlayer == other.ownerPlayer &amp;&amp; gun == WEAPON_MINEGUN) {
+                    instance_destroy();
+                }
+            }
+            for(i=0; i&lt;mines; i+=1) {
+                mine = instance_create(0,0,Mine);
+                mine.owner = id;
+                mine.ownerPlayer = player;
+                mine.team = player.team;
+                mine.weapon = WEAPON_MINEGUN;
+                with(mine) {
+                    event_user(13);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_TIGERUPPERCUT or loaded2 == WEAPON_TIGERUPPERCUT) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            var mines, i;
+            mines = read_ubyte(global.deserializeBuffer);
+            if weapon_index == WEAPON_TIGERUPPERCUT currentWeapon.lobbed = mines;
+            else ammo[108] = mines;
+            with(TUMine) {
+                if(ownerPlayer == other.ownerPlayer &amp;&amp; gun == WEAPON_TIGERUPPERCUT) {
+                    instance_destroy();
+                }
+            }
+            for(i=0; i&lt;mines; i+=1) {
+                mine = instance_create(0,0,TUMine);
+                mine.owner = id;
+                mine.ownerPlayer = player;
+                mine.team = player.team;
+                mine.weapon = WEAPON_TIGERUPPERCUT;
+                with(mine) {
+                    event_user(13);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_SCOTTISHRESISTANCE or loaded2 == WEAPON_SCOTTISHRESISTANCE) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            var mines, i;
+            mines = read_ubyte(global.deserializeBuffer);
+            if weapon_index == WEAPON_SCOTTISHRESISTANCE currentWeapon.lobbed = mines;
+            else ammo[101] = mines;
+            with(Mine) {
+                if(ownerPlayer == other.player &amp;&amp; gun == WEAPON_SCOTTISHRESISTANCE) {
+                    instance_destroy();
+                }
+            }
+            for(i=0; i&lt;mines; i+=1) {
+                mine = instance_create(0,0,Mine);
+                mine.owner = id;
+                mine.ownerPlayer = player;
+                mine.team = player.team;
+                mine.weapon = WEAPON_SCOTTISHRESISTANCE;
+                with(mine) {
+                    event_user(13);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_STICKYJUMPER or loaded2 == WEAPON_STICKYJUMPER) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            var mines, i;
+            mines = read_ubyte(global.deserializeBuffer);
+            if weapon_index == WEAPON_STICKYJUMPER currentWeapon.lobbed = mines;
+            else ammo[110] = mines;
+            with(JumperMine) {
+                if(ownerPlayer == other.player &amp;&amp; gun == WEAPON_STICKYJUMPER) {
+                    instance_destroy();
+                }
+            }
+            for(i=0; i&lt;mines; i+=1) {
+                mine = instance_create(0,0,JumperMine);
+                mine.owner = id;
+                mine.ownerPlayer = player;
+                mine.team = player.team;
+                mine.weapon = WEAPON_STICKYJUMPER;
+                with(mine) {
+                    event_user(13);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_STICKYSTICKER or loaded2 == WEAPON_STICKYSTICKER) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            var mines, i;
+            mines = read_ubyte(global.deserializeBuffer);
+            if weapon_index == WEAPON_STICKYSTICKER currentWeapon.lobbed = mines;
+            ammo[115] = mines;
+            with(StickyMine) {
+                if(ownerPlayer == other.player &amp;&amp; gun == WEAPON_STICKYSTICKER) {
+                    instance_destroy();
+                }
+            }
+            for(i=0; i&lt;mines; i+=1) {
+                mine = instance_create(0,0,StickyMine);
+                mine.owner = id;
+                mine.ownerPlayer = player;
+                mine.team = player.team;
+                mine.weapon = WEAPON_STICKYSTICKER;
+                with(mine) {
+                    event_user(13);
+                }
+            }
+        }
+        //rundown
+        if (loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            currentKills=read_ubyte(global.deserializeBuffer)
+        }
+        //sodapopper
+        if (loaded1 == WEAPON_SODAPOPPER or loaded2 == WEAPON_SODAPOPPER) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[109]=read_ubyte(global.deserializeBuffer)
+        }
+        //bonk 
+        if (loaded1 == WEAPON_BONK or loaded2 == WEAPON_BONK) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[102]=read_ubyte(global.deserializeBuffer) 
+        }
+        //sandman
+        if (loaded1 == WEAPON_SANDMAN or loaded2 == WEAPON_SANDMAN) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[107]=read_ubyte(global.deserializeBuffer) 
+        }
+        //mad milk
+        if (loaded1 == WEAPON_MADMILK or loaded2 == WEAPON_MADMILK) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[113]=read_ubyte(global.deserializeBuffer)
+        }
+        //spycicle
+        if (loaded1 == WEAPON_SPYCICLE or loaded2 == WEAPON_SPYCICLE) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[112]=read_ubyte(global.deserializeBuffer)*2
+        }
+        //chocolate
+        if (loaded1 == WEAPON_CHOCOLATE or loaded2 == WEAPON_CHOCOLATE) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[111]=read_ubyte(global.deserializeBuffer)
+        }
+        //sandvich 
+        if (loaded1 == WEAPON_SANDVICH or loaded2 == WEAPON_SANDVICH) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[105]=read_ubyte(global.deserializeBuffer)
+        }
+        //jarate 
+        if (loaded1 == WEAPON_JARATE or loaded2 == WEAPON_JARATE) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[104]=read_ubyte(global.deserializeBuffer)
+        }
+        //buffbanner 
+        /*if (loaded1 == WEAPON_BUFFBANNER or loaded2 == WEAPON_BUFFBANNER) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            ammo[106]=read_ubyte(global.deserializeBuffer) 
+        }*/
+        //l'Etranger 
+        if (loaded1 == WEAPON_ETRANGER or loaded2 == WEAPON_ETRANGER) {
+            receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+            drCharge=read_ubyte(global.deserializeBuffer)*2; 
+        }
+    }
+    event_user(1);
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

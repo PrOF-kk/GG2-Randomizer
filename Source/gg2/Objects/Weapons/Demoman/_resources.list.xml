@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Minegun" type="RESOURCE"/>
+  <resource name="Stickysticker" type="RESOURCE"/>
+  <resource name="StickyJumper" type="RESOURCE"/>
+  <resource name="GrenadeLauncher" type="RESOURCE"/>
+  <resource name="DoubleTrouble" type="RESOURCE"/>
+  <resource name="ScottishResitance" type="RESOURCE"/>
+  <resource name="Eyelander" type="RESOURCE"/>
+  <resource name="Paintrain" type="RESOURCE"/>
+  <resource name="GrenadeHand" type="RESOURCE"/>
+  <resource name="TigerUppercut" type="RESOURCE"/>
+</resources>

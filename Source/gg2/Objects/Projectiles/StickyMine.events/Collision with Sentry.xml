@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if attached == -1 &amp;&amp; stickied = 0 &amp;&amp; other.team != team {
+    attached = other.id;
+    stickied = true;
+    xoffset=x-other.x;
+    yoffset=y-other.y;
+    scale=other.image_xscale;
+    speed = 0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

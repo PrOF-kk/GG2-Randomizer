@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Rifle" type="RESOURCE"/>
+  <resource name="SnipeANature" type="RESOURCE"/>
+  <resource name="BazaarBargain" type="RESOURCE"/>
+  <resource name="Machina" type="RESOURCE"/>
+  <resource name="HuntsMan" type="RESOURCE"/>
+  <resource name="SydneySleeper" type="RESOURCE"/>
+  <resource name="JarOPiss" type="RESOURCE"/>
+  <resource name="Smg" type="RESOURCE"/>
+  <resource name="JarateHand" type="RESOURCE"/>
+  <resource name="Kukri" type="RESOURCE"/>
+  <resource name="Shiv" type="RESOURCE"/>
+</resources>

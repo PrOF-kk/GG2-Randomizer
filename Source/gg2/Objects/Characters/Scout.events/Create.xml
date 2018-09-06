@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    capStrength = 2;
+    canDoublejump = 1;
+    runPower = 1.4;
+    maxHp = 100;
+    tauntsprite[0] = ScoutTauntS;
+    tauntsprite[1] = ScoutTaunt2S;
+    tauntsprite[2] = ScoutTaunt3S;
+    tauntsprite[3] = ScoutTaunt4S;
+    tauntsprite[4] = ScoutTaunt5S;
+    tauntsprite[5] = ScoutTaunt6S;
+    tauntsprite[6] = ScoutTaunt7S;
+    tauntsprite[7] = ScoutTKill;
+    
+    tauntlength[1] = sprite_get_number(tauntsprite[1])/2;
+    tauntlength[2] = sprite_get_number(tauntsprite[2])/2;
+    tauntlength[3] = sprite_get_number(tauntsprite[3])/2;
+    tauntlength[4] = sprite_get_number(tauntsprite[4])/2;
+    tauntlength[5] = sprite_get_number(tauntsprite[5])/2;
+    tauntlength[6] = sprite_get_number(tauntsprite[6])/2;
+    tauntlength[7] = sprite_get_number(tauntsprite[7])/2;
+    
+    //tauntkill killing frame
+    killframe = 19;
+    
+    haxxyStatue = ScoutHaxxyStatueS;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

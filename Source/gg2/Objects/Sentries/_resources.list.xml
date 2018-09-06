@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Sentry" type="RESOURCE"/>
+  <resource name="SentryTurret" type="RESOURCE"/>
+  <resource name="ArrowTurret" type="RESOURCE"/>
+  <resource name="SentryTurret2" type="RESOURCE"/>
+  <resource name="SentryTurret3" type="RESOURCE"/>
+  <resource name="MiniSentryTurret" type="RESOURCE"/>
+  <resource name="SentryGibs" type="RESOURCE"/>
+</resources>

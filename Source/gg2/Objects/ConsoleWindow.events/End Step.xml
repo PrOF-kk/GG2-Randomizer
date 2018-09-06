@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">x = view_xview[0]+7;
+y = view_yview[0]+340;
+if(instance_exists(LoadoutMenu) || instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
+    exit;
+if keyboard_check_pressed(ord('T')) {
+    if !open hidden = !hidden;
+    idle = false;
+    alarm[0]=120;
+} else if !open {
+    if keyboard_check_pressed(ord('Y')) {
+        team = false;
+        open = true;
+        hidden = false;
+        keyboard_string="";
+    } else if keyboard_check_pressed(ord('U')) &amp;&amp; global.myself.team != TEAM_SPECTATOR {
+        team = true;
+        open = true;
+        hidden = false;
+        keyboard_string="";
+    }
+} else if !hidden &amp;&amp; keyboard_check_pressed(vk_enter) {
+    if keyboard_string != "" {
+        if string_copy(keyboard_string,1,1) == "/" ProcessCommand(string_copy(keyboard_string,2,string_length(keyboard_string)-1));
+        else SendChat(keyboard_string,team);
+        keyboard_string="";
+    }
+    open = false;
+    team = false;
+    offset = 0;
+    idle = false;
+    alarm[0]=120;
+}
+
+if open {
+    image_index = 1;
+    if (keyboard_check_pressed(vk_up) or mouse_wheel_up()) &amp;&amp; ds_list_size(global.chatLog) &gt; 9 offset = min(ds_list_size(global.chatLog)-9,offset+1);
+    else if keyboard_check_pressed(vk_down) or mouse_wheel_down() offset = max(0,offset-1);
+    
+    if keyboard_check_direct(vk_control) { 
+        if keyboard_check_pressed(ord('V')) keyboard_string += clipboard_get_text();
+        if keyboard_check_pressed(ord('S')) {
+            var currentDate, timestamp, uniqueSuffix, uniqueSuffixNr, textfile;
+            currentDate = date_current_datetime();
+            timestamp = string(date_get_year(currentDate)) + "-";
+            if (date_get_month(currentDate) &lt; 10) { timestamp = timestamp + "0"; }
+            timestamp += string(date_get_month(currentDate)) + "-";
+            if (date_get_day(currentDate) &lt; 10) { timestamp = timestamp + "0"; }
+            timestamp += string(date_get_day(currentDate)) + " ";
+            if (date_get_hour(currentDate) &lt; 10) { timestamp = timestamp + "0"; }
+            timestamp += string(date_get_hour(currentDate)) + "-";
+            if (date_get_minute(currentDate) &lt; 10) { timestamp = timestamp + "0"; }
+            timestamp += string(date_get_minute(currentDate)) + "-";
+            if (date_get_second(currentDate) &lt; 10) { timestamp = timestamp + "0"; }
+            timestamp += string(date_get_second(currentDate));
+            
+            uniqueSuffix = "";
+            uniqueSuffixNr = 2;
+            while (file_exists("log_" + timestamp + uniqueSuffix + ".txt")) {
+                uniqueSuffix = " ("+string(uniqueSuffixNr)+")";
+                uniqueSuffixNr += 1;
+            }
+            textfile = file_text_open_write("log_" + timestamp + uniqueSuffix + ".txt");
+            for(i = 0;i &lt;= ds_list_size(global.chatLog);i+=1) {
+                file_text_write_string(textfile,ds_list_find_value(global.chatLog,i));
+                file_text_writeln(textfile);
+            }
+            file_text_close(textfile);
+        }
+    }
+} else image_index = 0;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

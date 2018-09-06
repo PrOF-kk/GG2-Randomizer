@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot &amp;&amp; !owner.cloak) {
+        owner.runPower = 0.6;
+        owner.jumpStrength = 6;
+        charging = true;
+        alarm[1] = 2;
+        if bonus &lt; 100 bonus+=1.2;
+        else if overheat &lt; (30*4) overheat+=1;
+        else {
+            bonus = 0;
+            readyToShoot=false;
+            alarm[0]=refireTime;
+            overheat = 0;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

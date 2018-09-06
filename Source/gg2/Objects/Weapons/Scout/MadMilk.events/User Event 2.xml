@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(exploded == true) {
+    exit;
+} else {
+    exploded = true;
+}
+//instance_create(x,y,Explosion);
+playsound(x,y,JarateSnd);
+
+with (Character) {
+    if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle))){
+        if(other.team != team) &amp;&amp; !ubered and hp &gt; 0 &amp;&amp; !radioactive {
+                milked=1;
+                alarm[8]=250-distance_to_object(other);
+                cloak=false; 
+                if instance_exists(other.ownerPlayer) {
+                    other.ownerPlayer.object.hp = min(other.ownerPlayer.object.maxHp, other.ownerPlayer.object.hp+20);
+                }       
+        }
+        if radioactive {
+            var text;
+            text=instance_create(x,y,Text);
+            text.sprite_index=MissS;
+        }
+        lastDamageDealer = other.ownerPlayer;
+        lastDamageSource = -1;
+        lastDamageCrit = other.crit;
+        cloakAlpha = min(cloakAlpha + 0.2, 1);
+    } if (distance_to_object(other) &lt; other.blastRadius and team == other.team){
+        if(other.team == team) &amp;&amp; !ubered and hp &gt; 0 {
+            burnDuration = 0;
+                
+        }
+    }
+}
+
+
+
+
+repeat(15*global.gibLevel){
+    var blood;
+    blood = instance_create(x+random(20)-10,y+random(20)-10,Milk);
+    blood.direction = random(360);
+    blood.speed=random(5);
+}
+
+instance_destroy();
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

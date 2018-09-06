@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">switch(mousedclass){
+    case 0:
+        class = 'RUNNER';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=0;
+        load1.loaded=real(string_copy(string(global.scoutLoadout),2,2));
+        load1.description[1,0]='i: causes knockback';
+        load1.description[1,1]='+1 more bullet'
+        load1.description[1,2]='-66% ammo loaded#-20 max hp';
+        load1.description[2,0]='i: Increased jump -and runpower#for every kill';
+        load1.description[2,2]='-33% ammo loaded#slow speed &amp;no double#jump while holding the intel#-1 capspeed on CP'
+        load1.description[3,0]='i: running &amp; jumping fills hype#Hype causes minicrits';
+        load1.description[3,2]='-50% ammo loaded'
+        load1.description[4,0]='i: hitscan laserbeams'
+        load1.description[4,1]='+ crits against sentries'
+        load1.description[4,2]='-33% ammo loaded'
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=5;
+        load2.loaded=real(string_copy(string(global.scoutLoadout),4,2));
+        load2.description[1,0]='i: invincible while active#i:cannot shoot nor pick #up the intel while active';
+        load2.description[2,0]='i: fires a ball on m2#i: stun depends on distance';
+        load2.description[3,0]='i: receive 20hp for every enemy#soaked.#i: puts out fire#i: reveals spies';
+        load2.description[4,0]='i: enables triple jumping';
+        load2.description[4,2]='-10 max hp';
+        offset=0;
+        break;
+    case 1:
+        class = 'FIREBUG';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=80;
+        load1.loaded=real(string_copy(string(global.pyroLoadout),2,2));
+        load1.description[1,1]='+10% extra flame damage';
+        load1.description[1,2]='+30 extra airblast cost';
+        load1.description[2,0]='i: converts most projectiles in#hp#i: sucks players';
+        load1.description[2,2]='-66% afterburn increase';
+        load1.description[3,0]='i: airblast damages enemies';
+        load1.description[3,1]='slows frozen enemies';
+        load1.description[3,2]='-50% afterburn damage';
+        load1.description[3,2]="airblast doesn't reflect";
+        load1.description[4,0]='i: fills mmmph meter for all#firedamage done';
+        load1.description[4,2]='-no airblast#-10% damage';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=85;
+        load2.loaded=real(string_copy(string(global.pyroLoadout),4,2));
+        load2.description[1,0]='i: causes afterburn on hit#i: minicrits to burning targets';
+        load2.description[2,0]='i: causes afterburn on hit#i: m2 detonates the flare';
+        load2.description[3,2]="-80% dmg vs sentries"
+        load2.description[4,0]='i: deals critical damage to#burning targets and sentries';
+        offset=10;
+        break;
+    case 2:
+        class = 'ROCKETMAN';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=10;
+        load1.loaded=real(string_copy(string(global.soldierLoadout),2,2));
+        load1.description[0,0]='';
+        load1.description[1,0]='';
+        load1.description[1,1]='+33% rocket speed#+25% damage for airshots';
+        load1.description[1,2]='-33% blast radius';
+        load1.description[2,0]='i: critted shots light enemies #on fire#charges on m2';
+        load1.description[2,2]='-80% damage vs sentries#-10% damage';
+        load1.description[3,0]='';
+        load1.description[3,1]='+15 hp on direct hit';
+        load1.description[3,2]='-1 rocket loaded';
+        load1.description[4,0]='i: drops rockets down with m2';
+        load1.description[4,2]='-can only have 1 rocket out';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=15;
+        load2.loaded=real(string_copy(string(global.soldierLoadout),4,2));
+        load2.description[0,0]='';
+        load2.description[1,0]='i: charges nearby allies while #used#i: Charges by killing';
+        load2.description[2,0]='i: may hit target multiple times';
+        load2.description[2,1]='projectiles penetrate enemies';
+        load2.description[2,2]='-80% damage vs sentries';
+        load2.description[3,0]='i: More damage and runpower#when low on health';
+        load2.description[4,0]='i: minicrits for airshots';
+        load2.description[4,1]='instant fire power';
+        load2.description[4,2]="-33% ammo loaded#-can't switch weapons before#reloading";
+        offset=2;
+        break;
+    case 3:
+        class = 'OVERWEIGHT';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=60;
+        load1.loaded=real(string_copy(string(global.heavyLoadout),2,2));
+        load1.description[0,0]='';
+        load1.description[1,0]='';
+        load1.description[1,1]='+100% less bullet spread#+100% faster while shooting';
+        load1.description[1,2]='-50% slower firing speed';
+        load1.description[2,1]='+slows down players on hit';
+        load1.description[2,2]='-25% damage';
+        load1.description[3,1]='+12% damage';
+        load1.description[3,2]="can't move while shooting";
+        load1.description[4,1]='+66% ammo per kill';
+        load1.description[4,2]='-50% ammo';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=65;
+        load2.loaded=real(string_copy(string(global.heavyLoadout),4,2));
+        load2.description[0,0]='';
+        load2.description[1,0]='i: Heals 50 hp, can be dropped #with m2';
+        load2.description[2,1]="+10 healer's ubercharge on kill";
+        load2.description[2,2]='-15% clip size';
+        load2.description[3,0]='i: Heals 40 hp#i: can cause overheal';
+        load2.description[3,2]="Can't be dropped";
+        load2.description[4,0]='i: receive crits after a kill';
+        offset=8;
+        break;
+    case 4:
+        class = 'DETONATOR';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=30;
+        load1.loaded=real(string_copy(string(global.demomanLoadout),2,2));
+        load1.description[0,0]='';
+        load1.description[1,0]='';
+        load1.description[1,1]='faster refire &amp; reload speeds#stickied mines become invisible#Bonusdamage on airshotted #targets';
+        load1.description[1,2]='-66% stickied damage#-can place 5 stickies';
+        load1.description[2,0]='i: can detonate stickies #separately';
+        load1.description[2,1]='can place 14 stickies';
+        load1.description[3,0]='i: stickies do no damage';
+        load1.description[3,1]='+50% ammo';
+        load1.description[3,2]='-20 max hp';
+        load1.description[4,0]='i: stickies stick to people';
+        load1.description[4,1]='+10% damage';
+        load1.description[4,2]="-can't detonate stickies#-scatter on collision#with the ground#-only damage targets";
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=35;
+        load2.loaded=real(string_copy(string(global.demomanLoadout),4,2));
+        load2.description[0,0]='';
+        load2.description[1,0]="";
+        load2.description[1,1]="fires 2 grenades at a time";
+        load2.description[1,2]="-50% ammo loaded";
+        load2.description[2,0]='i: charges on m2, does#minicrits while charging';
+        load2.description[3,0]='i: double capspeed on CP#i: +30 max hp on ctf#i: bypasses the generator shield';
+        load2.description[4,0]='Hold m1 to delay throwing';
+        load2.description[4,1]='+10% blastradius#+50% damage';
+        offset=-4;
+        break;
+    case 5:
+        class = 'HEALER';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=40;
+        load1.loaded=real(string_copy(string(global.medicLoadout),2,2));
+        load1.description[0,0]='';
+        load1.description[1,0]='';
+        load1.description[1,1]='+2 hp on hit';
+        load1.description[1,2]='-40% hp regenration speed';
+        load1.description[2,0]='i: heal all teammates on death#with 75% or more ubercharge';
+        load1.description[2,2]='-20 max hp'
+        load1.description[3,0]="i: heals allies on hit";
+        load1.description[3,1]="long range shots";
+        load1.description[3,2]="-doesn't penetrate allies";
+        load1.description[4,0]='i: tauntkill can also heal#allies';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=45;
+        load2.loaded=real(string_copy(string(global.medicLoadout),4,2));
+        load2.description[0,0]='';
+        load2.description[1,0]='';
+        load2.description[1,1]='+25% uber build up speed#causes crit damage when ubering';
+        load2.description[1,2]='no invincibility while ubering';
+        load2.description[2,0]=""
+        load2.description[2,1]="+40% heal rate#3x healing speed while ubering";
+        load2.description[2,2]="-doesn't refill ammo#no invincibility while ubering";
+        load2.description[3,0]="";
+        load2.description[3,1]="Overheals teammates";
+        load2.description[3,2]="-25% uber build up speed";
+        load2.description[4,0]="i: can't switch weapons before reloading#i: potions heal self during#uber#i: crits during uber";
+        offset=3;
+        break;
+    case 6:
+        class = 'CONSTRUCTOR';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=50;
+        load1.loaded=real(string_copy(string(global.engineerLoadout),2,2));
+        load1.description[0,0]='';
+        load1.description[1,0]='';
+        load1.description[1,1]='+causes crit damage when autogun #is destroyed';
+        load1.description[1,2]='-50% ammo loaded';
+        load1.description[2,0]='';
+        load1.description[2,1]='+40% damage';
+        load1.description[2,2]='-50% ammo loaded#all buildings are destroyed#on death';
+        load1.description[3,0]='i: takes 7% uber from medics#i: spies flash completely#visible.';
+        load1.description[3,1]="+penetrates enemies";
+        load1.description[3,2]='-lower clip size#-less damage'
+        load1.description[4,1]="+receive nuts'n bolts for damage#done";
+        load1.description[4,2]="-uses nuts'n bolts";
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=55;
+        load2.loaded=real(string_copy(string(global.engineerLoadout),4,2));
+        load2.description[0,0]='i: can destroy sappers#i: can build dispensers.';
+        load2.description[1,0]='i: stuns the target';
+        load2.description[2,0]='i: build upgradable sentries#i: can pickup and place sentries#i: can repair sentries';
+        load2.description[3,0]='i: builds and controls#minisentries.#Can fire 100 shots per sentry.';
+        load2.description[4,0]='i: build upgradable sentries#i: can repair sentries';
+        load2.description[4,1]='Taunt to teleport to your sentry';
+        offset=3;
+        break;
+    case 7:
+        class = 'INFILTRATOR';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=70;
+        load1.loaded=real(string_copy(string(global.spyLoadout),2,2));
+        load1.description[0,0]='i: m1 saps sentries while#cloaked';
+        load1.description[1,0]="";
+        load1.description[1,1]="on kill: +2 seconds ubercloak";
+        load1.description[1,2]='-20% damage'
+        load1.description[2,0]='';
+        load1.description[2,1]='first shot 20% damage';
+        load1.description[2,2]='-no passive invisibility#-each shot is weaker than the#one before';
+        load1.description[3,0]='';
+        load1.description[3,1]='+40% damage on headshot';
+        load1.description[3,2]='-40% damage on bodyshot#-10% refire speed';
+        load1.description[4,1]='+drops health packets on kill';
+        load1.description[4,2]='-slower movement speed#-10% damage';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=75;
+        load2.loaded=real(string_copy(string(global.spyLoadout),4,2));
+        load2.description[0,0]='#i: damage ramp-up while uncloaked#i: 200 damage while#cloaked';
+        load2.description[1,0]="";
+        load2.description[1,1]="On kill: kills enemy patient(s)";
+        load2.description[1,2]="-15hp on failstab";
+        load2.description[2,0]='';
+        load2.description[2,1]='+on succesful backstab:#next backstab is 100% faster'
+        load2.description[2,2]='-20% maxHP#-No multistab';
+        load2.description[3,0]="i: Turns people into icicles.";
+        load2.description[3,1]="Puts out fires#";
+        load2.description[3,2]="Can't be used for 15#seconds after melting";
+        load2.description[4,1]='+25% backstabbing speed#+backstab stuns#+300% dmg vs sentries';
+        load2.description[4,2]='-66% damage#-No multistab';
+        offset=4;
+        break;
+    case 8:
+        class = 'RIFLEMAN';
+        load1=instance_create(40,192,LoadoutSwitcher);
+        load1.value=20;
+        load1.loaded=real(string_copy(string(global.sniperLoadout),2,2));
+        load1.description[1,0]='i: faster charge time for#headshots';
+        load1.description[1,1]='Bonus damage for full charged#headshots';
+        load1.description[1,2]='-40% unscoped damage';
+        load1.description[2,1]='faster reload';
+        load1.description[2,2]='no scoping';
+        load1.description[3,1]='penetrates 1 player when#charged';
+        load1.description[3,2]="15% longer charge time#Can't shoot while unscoped";
+        load1.description[4,0]='i: Built-in jarate';
+        load1.description[4,2]='-Lower damage';
+        load2=instance_create(464,192,LoadoutSwitcher);
+        load2.value=25;
+        load2.loaded=real(string_copy(string(global.sniperLoadout),4,2));
+        load2.description[0,0]='';
+        load2.description[1,0]='i: soaks enemies and puts out #fire#soaked enemies receive crit #damage#i: reveals spies';
+        load2.description[2,0]="";
+        load2.description[2,1]="+20 maxHp";
+        load2.description[3,0]="i: causes bleed for 3 seconds.#i: blocks 1 backstab attempt.";
+        load2.description[3,2]="-33% dmg";
+        load2.description[4,0]='Allows flying by doubletapping#jump';
+        offset=10;
+        break;
+}
+currentclass=mousedclass;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="HealingCabinet">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (!global.mapchanging &amp;&amp; !isSaxtonHale) {
+    if hp &lt; maxHp || nutsNBolts &lt; 100 {
+        playsound(x,y,CbntHealSnd);
+        hp = maxHp;
+        nutsNBolts = maxNutsNBolts;
+    }
+    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    {
+        burnIntensity = 0;
+        burnDuration = 0;
+        burnedBy = -1;
+        afterburnSource = -1;
+    }
+
+    ammo[102] = -1;     //Bonk timer
+    ammo[104] = -1;     //Jarate timer
+    ammo[105] = -1;     //Sandvich timer
+    ammo[106] = 0;     //Buffbanner timer
+    ammo[107] = -1;     //Ball timer
+    ammo[111] = -1;     //chocolate timer
+    //ammo[114] = -1;     //napalm timer
+    if weapon_index == WEAPON_POTION {
+        currentWeapon.ammo=3;
+        canSwitch = true;
+    } else if weapon_index == WEAPON_NAPALM exit;
+    
+    //ammo stuffs
+    if instance_exists(currentWeapon) {
+        if weapon_index = WEAPON_RESERVESHOOTER canSwitch = currentWeapon.couldSwitch;
+        if(currentWeapon.ammoCount &lt; currentWeapon.maxAmmo) {
+            switch(currentWeapon.object_index) {
+            case Needlegun:
+            case Blutsauger:
+            case Overdose:
+            case Tomislav:
+            case Natacha:
+            case Transmutator:
+            case Backburner:
+            case Minigun:
+            case Flamethrower:
+            case Pistol:
+            case Nailgun:
+                if (currentWeapon.ammoCount / currentWeapon.maxAmmo &lt; 5/6)
+                    playsound(x,y,PickupSnd);
+                break;
+            default:
+                if !(weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; weapon_index &lt;= WEAPON_POTION) &amp;&amp; weapon_index != WEAPON_BUFFBANNER &amp;&amp; weapon_index != WEAPON_WRANGLER playsound(x,y,PickupSnd);
+                break;
+            }
+        }
+            if !(loaded1 &gt;= WEAPON_MEDIGUN &amp;&amp; loaded1 &lt;= WEAPON_POTION) &amp;&amp; loaded1 != WEAPON_BUFFBANNER &amp;&amp; loaded1 != WEAPON_WRANGLER  ammo[loaded1] = -1;
+            if !(loaded2 &gt;= WEAPON_MEDIGUN &amp;&amp; loaded2 &lt;= WEAPON_POTION) &amp;&amp; loaded2 != WEAPON_BUFFBANNER &amp;&amp; loaded2 != WEAPON_WRANGLER  ammo[loaded2] = -1;
+            if !(weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; weapon_index &lt;= WEAPON_POTION) &amp;&amp; weapon_index != WEAPON_BUFFBANNER &amp;&amp; weapon_index != WEAPON_WRANGLER  {
+                currentWeapon.ammoCount = currentWeapon.maxAmmo;
+                currentWeapon.alarm[5] = -1;
+            }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

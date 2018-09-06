@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    // This code is run after the child's create event
+    // so it can use values set there.
+    runBkp = runPower;
+    
+    mask = instance_create(x,y,HsMask);
+    mask.owner = id;
+    
+    loaded1 = player.loaded1;
+    loaded2 = player.loaded2;
+    weapon_index = loaded1;
+    
+    if isSaxtonHale {
+        sprite_index = SaxtonHaleS;
+        humiliationPoses = SaxtonhaleHS;
+        loaded1 = WEAPON_SAXTONHALE;
+        loaded2 = WEAPON_SAXTONHALE;
+        player.loaded1 = player.class*10
+        player.loaded2 = player.class*10+5
+        weapon_index = loaded1;
+        maxHp = 4000;
+        hp = 4000;
+        //ammo[99] = -1;
+        global.saxtonhale = id;
+        if instance_exists(ArenaHUD) ArenaHUD.allowswap=false;
+        canSwitch=false;
+    }
+    spriteBkp = sprite_index;
+    
+    currentWeapon = instance_create(x,y,global.weapons[weapon_index]);
+    currentWeapon.owner=id;
+    currentWeapon.ownerPlayer=player;     
+    if critting &gt; 1 currentWeapon.crit=critting;
+    ammo[weapon_index] = currentWeapon.maxAmmo;
+    
+    hp = maxHp;
+    tauntlength[0] = sprite_get_number(tauntsprite[0])/2;
+    
+    givePassiveEffect(id);
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="QRlauncherS" type="RESOURCE"/>
+  <resource name="BladeS" type="RESOURCE"/>
+  <resource name="MachinegunS" type="RESOURCE"/>
+  <resource name="Scout" type="GROUP"/>
+  <resource name="Soldier" type="GROUP"/>
+  <resource name="Sniper" type="GROUP"/>
+  <resource name="Demoman" type="GROUP"/>
+  <resource name="Medic" type="GROUP"/>
+  <resource name="Engineer" type="GROUP"/>
+  <resource name="Spy" type="GROUP"/>
+  <resource name="Heavy" type="GROUP"/>
+  <resource name="Pyro" type="GROUP"/>
+  <resource name="HudSprite" type="RESOURCE"/>
+  <resource name="JetpackS" type="RESOURCE"/>
+  <resource name="HaxxyS" type="RESOURCE"/>
+  <resource name="SaxtonFistS" type="RESOURCE"/>
+  <resource name="RandomoozerS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+draw_set_alpha(1);
+barcolor=make_color_rgb(217,217,183);
+draw_set_color(barcolor);
+
+if global.myself.object != -1 {
+    if instance_exists(global.myself.object.currentWeapon) {
+        switch(global.myself.object.currentWeapon.object_index) {
+            case Wrench : 
+            case Eeffect :
+            case Sandman :
+            case Kukri :
+            case Eyelander :
+            case Knife :
+            case BigEarner :
+            case Spycicle :
+            case Axe :
+            case Haxxy :
+            case Fists :
+            case ChocolateHand :
+            case Volcanofragment :
+            case Rifle :
+            case HuntsMan :
+            case SydneySleeper :
+            case BonkHand :
+            case BuffBanner :
+            case JarateHand : 
+            case Medigun :
+            case Invisibeam :
+            case Kritzieg :
+            case QuickFix :
+            case Widowmaker :
+            case Stungun :
+            case SandvichHand :
+            case Wrangler :
+            case MadmilkHand :
+            case Shiv :
+            case Shovel :
+            case Machina :
+            case Nailgun :
+            case SaxtonFist :
+            case Overhealer :
+            case Paintrain :
+            case Pumson :
+            case ChainStab :
+            case BazaarBargain :
+            case Jetpack :
+            case Randomoozer :
+            case Randomoozer :
+            case CowMangler :
+            case NapalmHand :
+            case Brewinggun :
+            case KGOB :
+            case Zapper : 
+            case Atomizer :
+            case Ubersaw :
+                exit;
+                break;      
+            
+            case Rocketlauncher:
+            case BlackBox:
+            case DirectHit:
+                if global.myself.team == TEAM_BLUE toffset = 5;
+                else toffset = 0;
+                reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+                if global.myself.object.currentWeapon.object_index == DirectHit draw_sprite_ext(DirectHitClipS,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                else if global.myself.object.currentWeapon.object_index == BlackBox draw_sprite_ext(BlackBoxClipS,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                else draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+                break;
+            
+            case Minigun :
+            case Tomislav :
+            case Natacha :
+            case BrassBeast :
+            case Flamethrower :
+            case Backburner :
+            case Frostbite :
+            case Machinegun :
+            case Phlog :
+            case Transmutator :
+                if global.myself.team == TEAM_BLUE toffset = 1;
+                else toffset = 0;
+                draw_sprite_ext(TemplateS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                draw_sprite_ext(HudSprite,global.myself.object.weapon_index,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                if (global.myself.object.currentWeapon.ammoCount &lt;= 1/4 * global.myself.object.currentWeapon.maxAmmo) { barcolor = make_color_rgb(255,0,0); }
+                draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount/2,c_black,barcolor,barcolor,0,true,false);
+                break;
+            
+            case Blade:
+            case IronMaiden:
+                if global.myself.team == TEAM_BLUE toffset = 1;
+                else toffset = 0;
+                draw_sprite_ext(TemplateS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                draw_sprite_ext(HudSprite,global.myself.object.weapon_index,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                if (global.myself.object.currentWeapon.ammoCount &lt;= 1/4 * global.myself.object.currentWeapon.maxAmmo) { barcolor = make_color_rgb(255,0,0); }
+                draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount*1.111,c_black,barcolor,barcolor,0,true,false);
+                break;
+            
+            case Brewinggun:
+                if global.myself.team == TEAM_BLUE toffset = 1;
+                else toffset = 0;
+                draw_sprite_ext(TemplateS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                draw_sprite_ext(HudSprite,global.myself.object.weapon_index,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+                draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammo);
+                draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+            
+            default:
+                if global.myself.team == TEAM_BLUE toffset = 1;
+                else toffset = 0;
+                draw_sprite_ext(TemplateS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                draw_sprite_ext(HudSprite,global.myself.object.weapon_index,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+                reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+                draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
+                draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Medigun" type="RESOURCE"/>
+  <resource name="Overhealer" type="RESOURCE"/>
+  <resource name="Invisibeam" type="RESOURCE"/>
+  <resource name="Kritzieg" type="RESOURCE"/>
+  <resource name="QuickFix" type="RESOURCE"/>
+  <resource name="Needlegun" type="RESOURCE"/>
+  <resource name="TerminalBreath" type="RESOURCE"/>
+  <resource name="Crossbow" type="RESOURCE"/>
+  <resource name="Overdose" type="RESOURCE"/>
+  <resource name="Blutsauger" type="RESOURCE"/>
+  <resource name="Brewinggun" type="RESOURCE"/>
+  <resource name="Ubersaw" type="RESOURCE"/>
+  <resource name="MedicBuff" type="RESOURCE"/>
+</resources>

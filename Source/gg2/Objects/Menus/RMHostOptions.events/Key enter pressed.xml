@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="13">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var weapon;
+if editing != -1 { 
+    //if the user enters a non-integer, convert it
+    if editing == 0 {
+        global.dmCaplimit = floor(global.dmCaplimit);
+        ini_open("gg2.ini");
+        ini_write_real("Server", "deathmatch kill limit", global.dmCaplimit);
+        ini_close();
+    } else if editing == 6 {
+        weapon = getWeapon(keyboard_string);
+        if weapon != -1 replace1 = weapon;
+        else weapon = replace1;
+        value[6] = global.name[weapon];
+        value[7] = global.name[global.replace[weapon]];
+        replace2 = replace1;
+    } else if editing == 7 {
+        weapon = getWeapon(keyboard_string);
+        if weapon != -1 value[7] = global.name[weapon];
+        else value[7] = global.name[replace2];   
+    }
+    editing = -1;
+} else weapon = replace1;
+
+if selection == 7 &amp;&amp; weapon != -1 {
+    global.replace[replace1] = weapon;
+    ini_open("weaponBanlist.ini");
+    ini_write_real("weapon",value[6],weapon);
+    ini_close();
+}
+selection = -1;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

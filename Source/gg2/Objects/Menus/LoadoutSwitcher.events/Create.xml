@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">image_speed=0;
+image_alpha=0;
+image_xscale=2;
+image_yscale=2;
+
+if room == loadout xoffset = view_xview[0];
+else xoffset = view_xview[0]+100;
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+selection = 0;
+
+description[0,0] = '';
+description[0,1] = '';
+description[0,2] = '';
+
+description[1,0] = '';
+description[1,1] = '';
+description[1,2] = '';
+
+description[2,0] = '';
+description[2,1] = '';
+description[2,2] = '';
+
+description[3,0] = '';
+description[3,1] = '';
+description[3,2] = '';
+
+description[4,0] = '';
+description[4,1] = '';
+description[4,2] = '';
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

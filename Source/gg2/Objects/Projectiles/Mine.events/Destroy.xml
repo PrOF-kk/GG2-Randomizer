@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if owner != -1 {
+    if gun == WEAPON_MINEGUN owner.ammo[103]-=1;
+    else  owner.ammo[101]-=1;
+    
+    if owner.weapon_index == WEAPON_MINEGUN &amp;&amp; gun == WEAPON_MINEGUN owner.currentWeapon.lobbed -= 1;
+    else if owner.weapon_index == WEAPON_SCOTTISHRESISTANCE &amp;&amp; gun == WEAPON_SCOTTISHRESISTANCE owner.currentWeapon.lobbed -= 1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

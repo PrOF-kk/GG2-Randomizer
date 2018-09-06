@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if (readyToBlast &amp;&amp; ammoCount &gt;= 50) {
+        playsound(x,y,CompressionBlastSnd);
+        poof = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),AirBlastO);
+        if image_xscale == 1 {
+            poof.image_xscale = 1;
+            poof.image_angle = owner.aimDirection;
+        }
+        else {
+            poof.image_xscale = -1;
+            poof.image_angle = owner.aimDirection+180;
+        }
+        poof.owner=owner;
+        with(poof) {
+            motion_add(owner.direction, owner.speed);
+        }            
+        
+        with(Character) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    if(team != other.owner.team) {
+                        motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
+                        vspeed -= 2;
+                        moveStatus = 3;
+                        hp -= 15*(1-dist/other.blastDistance);
+                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3];
+                        }
+                        alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.ownerPlayer;
+                        lastDamageSource = WEAPON_FROSTBITE;
+                    } 
+                    else if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+                    {
+                        burnIntensity = 0;
+                        burnDuration = 0;
+                        burnedBy = -1;
+                        afterburnSource = -1;
+                    }
+            }
+        }
+        
+        with(LooseSheet) {
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+            if collision_circle(x,y,25,other.poof,false,true) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+            }
+        }
+        
+        with(Gib) {
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+            if collision_circle(x,y,25,other.poof,false,true) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+            }
+        }
+        
+        readyToBlast=false;
+        readyToShoot=false;
+        alarm[5]=reloadBuffer*1.5;
+        isRefilling = false;
+        alarm[1]=blastReloadTime;
+        alarm[0]=blastNoFlameTime;
+        ammoCount -= 50;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

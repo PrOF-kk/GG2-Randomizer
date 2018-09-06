@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MedigunS" type="RESOURCE"/>
+  <resource name="BrewinggunS" type="RESOURCE"/>
+  <resource name="OverhealerS" type="RESOURCE"/>
+  <resource name="QuickFixS" type="RESOURCE"/>
+  <resource name="KritziegS" type="RESOURCE"/>
+  <resource name="NeedlegunS" type="RESOURCE"/>
+  <resource name="TerminalBreathS" type="RESOURCE"/>
+  <resource name="OverdoseS" type="RESOURCE"/>
+  <resource name="BlutsaugerS" type="RESOURCE"/>
+  <resource name="CrossbowS" type="RESOURCE"/>
+  <resource name="UbersawS" type="RESOURCE"/>
+</resources>

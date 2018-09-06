@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if !variable_local_exists('ammoCheck') {
+    ammoCheck = 1;
+    uberReady = owner.ammo[100];
+    uberCharge = ammoCount*8;
+}
+
+if !uberReady &amp;&amp; uberCharge &gt;= 2000 &amp;&amp; global.isHost {
+    sendEventUberReady(ownerPlayer);
+    doEventUberReady(ownerPlayer);
+}
+
+if(ubering) {
+    owner.megaHealed = 1;
+    owner.alarm[7]=3;
+    if crit &lt; CRIT_FACTOR crit = CRIT_FACTOR;
+    uberCharge -= 10;
+    if(uberCharge&lt;=0) {
+        uberCharge = 0;
+        ubering = false;
+        crit = 1;
+    }
+}
+
+if hphealed &gt;= HP_PER_POINT {
+    ownerPlayer.stats[POINTS] += 1;
+    ownerPlayer.roundStats[POINTS] += 1;
+    hphealed -= HP_PER_POINT;
+}
+
+ammoCount = uberCharge/8;
+owner.ammo[100] = uberReady;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="22">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var temp;
+    write_ubyte(global.serializeBuffer, keyState);
+    write_ushort(global.serializeBuffer, netAimDirection);
+
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        write_ushort(global.serializeBuffer, x*5);
+        write_ushort(global.serializeBuffer, y*5);
+        write_byte(global.serializeBuffer, hspeed*5);
+        write_byte(global.serializeBuffer, vspeed*5);
+        if isSaxtonHale write_ubyte(global.serializeBuffer, ceil(hp/16));
+        else write_ubyte(global.serializeBuffer, ceil(hp+overheal));
+        write_ubyte(global.serializeBuffer, currentWeapon.ammoCount);
+        
+        temp = 0;
+        if(cloak) temp |= $01;
+        if(intel) temp |= $02;
+        //allocate the next three bits of the byte for movestatus sync
+        temp |= (moveStatus &amp; $07) &lt;&lt; 2;
+        if(taunting) temp |=$80;
+        write_ubyte(global.serializeBuffer, temp);               
+    }
+   
+
+    if(global.updateType == FULL_UPDATE){
+        write_ubyte(global.serializeBuffer, animationOffset);
+        write_ubyte(global.serializeBuffer, weapon_index);
+        write_ubyte(global.serializeBuffer, carrySentry); 
+        write_ubyte(global.serializeBuffer, loaded1);
+        write_ubyte(global.serializeBuffer, loaded2);
+        temp = 0;
+        if(pissed) temp |= $01;
+        if(milked) temp |= $02;
+        if(currentWeapon.crit &gt;1) temp |= $04;
+        if(hasRazorback) temp |= $08;   //if the razorback has already been destroyed.
+        if(isSaxtonHale) temp |=$10;    //SAXTON HAAAAAAAAAAAAAAAAAAALE
+        write_ubyte(global.serializeBuffer, temp);
+        write_short(global.serializeBuffer, alarm[1]);
+        /* disabling because it's unreliable when you have a different weapon out
+        with(currentWeapon) {
+            event_user(12);
+        }
+        I do still need the readyToShoot &amp; reload variable though*/
+        write_ubyte(global.serializeBuffer, currentWeapon.readyToShoot);
+        write_ubyte(global.serializeBuffer, currentWeapon.alarm[0]); 
+        
+        //sync other things that might not happen when you have the wrong weapon out...
+        //ze stickies
+        if (loaded1 == WEAPON_MINEGUN or loaded2 == WEAPON_MINEGUN) {
+            if weapon_index == WEAPON_MINEGUN write_ubyte(global.serializeBuffer, currentWeapon.lobbed);
+            else write_ubyte(global.serializeBuffer, ammo[103]);
+            with(Mine) {
+                if(ownerPlayer == other.player) &amp;&amp; gun == WEAPON_MINEGUN {
+                    event_user(12);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_TIGERUPPERCUT or loaded2 == WEAPON_TIGERUPPERCUT) {
+            if weapon_index == WEAPON_TIGERUPPERCUT write_ubyte(global.serializeBuffer, currentWeapon.lobbed);
+            else write_ubyte(global.serializeBuffer, ammo[108]);
+            with(TUMine) {
+                if(ownerPlayer == other.player) {
+                    event_user(12);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_TIGERUPPERCUT or loaded2 == WEAPON_TIGERUPPERCUT) {
+            if weapon_index == WEAPON_TIGERUPPERCUT write_ubyte(global.serializeBuffer, currentWeapon.lobbed);
+            else write_ubyte(global.serializeBuffer, ammo[101]);
+            with(Mine) {
+                if(ownerPlayer == other.player) &amp;&amp; gun == WEAPON_SCOTTISHRESISTANCE {
+                    event_user(12);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_STICKYJUMPER or loaded2 == WEAPON_STICKYJUMPER) {
+            if weapon_index == WEAPON_STICKYJUMPER write_ubyte(global.serializeBuffer, currentWeapon.lobbed);
+            else write_ubyte(global.serializeBuffer, ammo[110]);
+            with(JumperMine) {
+                if(ownerPlayer == other.player) {
+                    event_user(12);
+                }
+            }
+        }
+        if (loaded1 == WEAPON_STICKYSTICKER or loaded2 == WEAPON_STICKYSTICKER) {
+            if weapon_index == WEAPON_STICKYSTICKER write_ubyte(global.serializeBuffer, currentWeapon.lobbed);
+            else write_ubyte(global.serializeBuffer, ammo[115]);
+            with(StickyMine) {
+                if(ownerPlayer == other.player) {
+                    event_user(12);
+                }
+            }
+        }
+        //rundown
+        if (loaded1 == WEAPON_RUNDOWN or loaded2 == WEAPON_RUNDOWN) write_ubyte(global.serializeBuffer, currentKills);
+        //sodapopper
+        if (loaded1 == WEAPON_SODAPOPPER or loaded2 == WEAPON_SODAPOPPER) write_ubyte(global.serializeBuffer, ammo[109]);
+        //bonk 
+        if (loaded1 == WEAPON_BONK or loaded2 == WEAPON_BONK) write_ubyte(global.serializeBuffer, ammo[102]); 
+        //sandman
+        if (loaded1 == WEAPON_SANDMAN or loaded2 == WEAPON_SANDMAN) write_ubyte(global.serializeBuffer, ammo[107]); 
+        //mad milk
+        if (loaded1 == WEAPON_MADMILK or loaded2 == WEAPON_MADMILK) write_ubyte(global.serializeBuffer, ammo[113]); 
+        //spycicle
+        if (loaded1 == WEAPON_SPYCICLE or loaded2 == WEAPON_SPYCICLE) write_ubyte(global.serializeBuffer, ammo[112]/2); 
+        //chocolate
+        if (loaded1 == WEAPON_CHOCOLATE or loaded2 == WEAPON_CHOCOLATE) write_ubyte(global.serializeBuffer, ammo[111]);
+        //sandvich 
+        if (loaded1 == WEAPON_SANDVICH or loaded2 == WEAPON_SANDVICH) write_ubyte(global.serializeBuffer, ammo[105]);
+        //jarate 
+        if (loaded1 == WEAPON_JARATE or loaded2 == WEAPON_JARATE) write_ubyte(global.serializeBuffer, ammo[104]);
+        //buffbanner 
+        //if (loaded1 == WEAPON_BUFFBANNER or loaded2 == WEAPON_BUFFBANNER) write_ubyte(global.serializeBuffer, ammo[106]); 
+        //l'Etranger 
+        if (loaded1 == WEAPON_ETRANGER or loaded2 == WEAPON_ETRANGER) write_ubyte(global.serializeBuffer, drCharge/2); 
+    }
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

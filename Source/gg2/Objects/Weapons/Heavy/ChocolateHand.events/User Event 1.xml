@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; ammoCount &gt; 0) {
+        //ammoCount -= 1;  
+
+        with(ownerPlayer.object) {
+            omnomnomnom=true;
+            choconom = true;
+            if player.team == TEAM_RED {
+                omnomnomnomindex=0;
+                omnomnomnomend=31;
+            } else if player.team==TEAM_BLUE {
+                omnomnomnomindex=32;
+                omnomnomnomend=63;
+            } 
+            xscale=image_xscale;
+        }             
+     
+        justShot=true;
+        readyToShoot=false;
+        alarm[5] = reloadBuffer + reloadTime;
+        alarm[0] = refireTime;
+        owner.ammo[111] = -1;
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

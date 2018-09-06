@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (!owner.cloak &amp;&amp; !owner.charge &amp;&amp; ammoCount &gt;=100) {
+    if !owner.charge {
+        blur=instance_create(x,y,RadioBlur);
+        blur.owner=owner;
+    }
+    owner.charge=true;
+    owner.alarm[10] = 100+50*owner.hasBootlegger;
+    owner.runPower=2;
+    crit=MINICRIT_FACTOR;
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="3">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var oid;
+ammoCount -= 1;
+
+oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Handgrenade);
+
+oid.direction=owner.aimDirection;
+oid.speed=17;
+oid.vspeed-=2.5
+oid.alarm[2] = 90-min(89,time);
+oid.crit=crit;
+oid.owner=owner;
+oid.ownerPlayer=ownerPlayer;
+oid.team=owner.team;
+oid.weapon=WEAPON_GRENADELAUNCHER;
+justShot=true;
+readyToShoot = false;
+alarm[0] = refireTime;
+alarm[5] = reloadBuffer + reloadTime;
+
+charge = 0;
+time = 0;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

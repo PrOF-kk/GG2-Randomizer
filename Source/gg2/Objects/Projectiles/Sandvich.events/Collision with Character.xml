@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if other.team=team &amp;&amp; other.hp&lt;other.maxHp &amp;&amp; other.player != ownerPlayer {
+    //other.hp += other.maxHp
+    other.burnIntensity = 0;
+    other.burnDuration = 0;
+    other.hp += 40;
+    if other.hp &gt; other.maxHp other.hp = other.maxHp;
+    instance_destroy()
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RedScoutMangleS" type="RESOURCE"/>
+  <resource name="RedPyroMangleS" type="RESOURCE"/>
+  <resource name="RedHeavyMangleS" type="RESOURCE"/>
+  <resource name="RedMedicMangleS" type="RESOURCE"/>
+  <resource name="RedEngineerMangleS" type="RESOURCE"/>
+  <resource name="RedSoldierMangleS" type="RESOURCE"/>
+  <resource name="RedSpyMangleS" type="RESOURCE"/>
+  <resource name="RedDemomanMangleS" type="RESOURCE"/>
+  <resource name="RedSniperMangleS" type="RESOURCE"/>
+  <resource name="BlueEngineerMangleS" type="RESOURCE"/>
+  <resource name="BlueHeavyMangleS" type="RESOURCE"/>
+  <resource name="BlueMedicMangleS" type="RESOURCE"/>
+  <resource name="BluePyroMangleS" type="RESOURCE"/>
+  <resource name="BlueScoutMangleS" type="RESOURCE"/>
+  <resource name="BlueSoldierMangleS" type="RESOURCE"/>
+  <resource name="BlueSpyMangleS" type="RESOURCE"/>
+  <resource name="BlueDemomanMangleS" type="RESOURCE"/>
+  <resource name="BlueSniperMangleS" type="RESOURCE"/>
+</resources>

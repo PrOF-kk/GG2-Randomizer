@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team) {
+    /* FALL OFF
+    if (distance_to_point(originx,originy)&lt;=(maxdist/2)){
+                hitDamage = ((0.25*baseDamage)*((0.5*maxdist - distance_to_point(originx,originy))/(0.5*maxdist)))+baseDamage;
+                }
+                else hitDamage = (((maxdist - distance_to_point(originx,originy))/(maxdist/2))*(0.75*baseDamage))+(0.25*baseDamage);
+                */
+    other.hp -= hitDamage*(1+other.pissed*0.35)*crit;
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    other.lastDamageCrit = crit;
+    instance_destroy();
+} else if other.sapped &gt; 0 {
+    if global.isHost { 
+        other.sapped -= 1*crit;
+        if other.sapped &lt;= 0 {
+            write_ubyte(global.eventBuffer, SAP_TOGGLE);
+            write_ubyte(global.eventBuffer, ds_list_find_index(global.players,other.ownerPlayer));
+            with(other){
+                //image_index=11;
+                //image_speed=0;
+                sapped=0;
+            }
+        }
+    }
+    instance_destroy();
+} else if other.level != 3 {
+    var hpGained;
+    hpGained = min(other.maxHp,other.hp+5);
+    if hpGained == 0 exit;
+    other.hp+=hpGained
+    instance_destroy();
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

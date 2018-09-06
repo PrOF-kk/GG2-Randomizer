@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if hyve {
+    if crit &lt; CRIT_FACTOR crit = MINICRIT_FACTOR;
+    owner.ammo[109] -= 1;
+    if owner.ammo[109] == 0 {
+        hyve = 0;
+        crit = 1;
+    }
+} else if owner.ammo[109] &gt;= 210 hyve = true;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

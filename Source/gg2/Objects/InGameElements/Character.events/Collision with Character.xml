@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">
+//GOOMBA STOMP
+if !stomping exit;
+if y &gt; other.y exit;
+if vspeed &lt; 4 exit;
+
+if(other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0) {
+    if other.radioactive {
+        var text;
+        text=instance_create(x,y,Text);
+        text=sprite_index = MissS
+        instance_destroy();
+        exit;
+    }
+    stomping = false;
+    playsound(x,y,CrackSnd)
+    vspeed = 0;
+    other.lastDamageDealer = player;
+    other.hp = -999;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

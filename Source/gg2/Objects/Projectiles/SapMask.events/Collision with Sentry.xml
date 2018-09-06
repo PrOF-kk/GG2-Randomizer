@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Sentry">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.team != team)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        if global.isHost {
+            other.sapped = 4;
+            write_ubyte(global.eventBuffer, SAP_TOGGLE);
+            write_ubyte(global.eventBuffer, ds_list_find_index(global.players,other.ownerPlayer));
+        }
+        if owner.weapon_index == 59 owner.sapCrits+=1;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        if other.ownerPlayer.object != -1 &amp;&amp; other.ownerPlayer == global.myself {
+            write_ubyte(global.serverSocket, CHAT_BUBBLE);
+            write_ubyte(global.serverSocket, 61);
+        }
+        instance_destroy();
+    }
+    else
+        alarm[0] = 1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

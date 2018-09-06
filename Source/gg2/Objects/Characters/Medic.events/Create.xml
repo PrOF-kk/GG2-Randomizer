@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    maxHp = 120;
+    runPower = 1.09;
+    tauntsprite[0] = MedicTauntS;
+    tauntsprite[1] = MedicTaunt2S;
+    tauntsprite[2] = MedicTaunt3S;
+    tauntsprite[3] = MedicTKill;
+    
+    tauntlength[1] = sprite_get_number(tauntsprite[1])/2;
+    tauntlength[2] = sprite_get_number(tauntsprite[2])/2;
+    tauntlength[3] = sprite_get_number(tauntsprite[3])/2;
+    haxxyStatue = MedicHaxxyStatueS;
+    
+    //tauntkill killing frame
+    killframe = 14;
+    
+    alarm[11] = 30;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

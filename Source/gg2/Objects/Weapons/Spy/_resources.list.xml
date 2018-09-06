@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Revolver" type="RESOURCE"/>
+  <resource name="Goldassistant" type="RESOURCE"/>
+  <resource name="Predator" type="RESOURCE"/>
+  <resource name="Diplomat" type="RESOURCE"/>
+  <resource name="DiamondBack" type="RESOURCE"/>
+  <resource name="Etranger" type="RESOURCE"/>
+  <resource name="Enforcer" type="RESOURCE"/>
+  <resource name="Knife" type="RESOURCE"/>
+  <resource name="Zapper" type="RESOURCE"/>
+  <resource name="ChainStab" type="RESOURCE"/>
+  <resource name="Spycicle" type="RESOURCE"/>
+  <resource name="BigEarner" type="RESOURCE"/>
+  <resource name="SapAnimation" type="RESOURCE"/>
+</resources>

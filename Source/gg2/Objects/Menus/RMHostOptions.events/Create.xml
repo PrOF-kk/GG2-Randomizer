@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">virtualitem = -1;
+xbegin = 40;
+ybegin = 150;
+spacing = 30;
+width = 300; 
+items = 10;
+valueoffset = 200;
+editing = -1;
+canClick = false;
+alarm[0] = 15;
+selection = -1;
+replace1 = 0;
+replace2 = 0;
+    
+item[0] = "Deathmatch kill limit: ";
+item[1] = "Randomizer mode: ";
+item[2] = "Medieval mode: ";
+item[3] = "Saxton Hale mode: ";
+item[4] = "Chat: ";
+item[5] = "";
+item[6] = "Replace: ";
+item[7] = "With: ";
+item[8] = "Reset weapon banlist";
+item[9] = "Back";
+ 
+value[0] = global.dmCaplimit;   
+    
+if(global.randomizer==1) {
+    value[1] = "Enabled";
+} else if global.randomizer == 2 {
+    value[1] = "Enabled (arena only)";
+} else value[1] = "Disabled";
+
+if global.medieval value[2] = "Enabled";
+else value[2] = "Disabled";
+
+if global.saxtonmode value[3] = "Enabled";
+else value[3] = "Disabled";
+
+if global.chat == 2 value[4] = "Enabled";
+else if global.chat == 1 value[4] = "Team chat";
+else value[4] = "Disabled";
+
+value[5] = "";
+value[6] = global.name[0];
+value[7] = global.name[global.replace[0]];
+value[8] = "";
+value[9] = "";
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

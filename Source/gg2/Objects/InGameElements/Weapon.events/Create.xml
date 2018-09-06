@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    xoffset += sprite_xoffset;
+    yoffset += sprite_yoffset;
+    readyToShoot = false;
+    justShot = false;
+    alarm[0] = refireTime;
+    
+    readyToStab=false;
+    crit=1;
+    ubering = false;
+    
+    uberCharge=0;
+    t=0;
+    speedboost=0;
+    lobbed = 0;
+    
+    spark = 0;
+    alarm[9]=2;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

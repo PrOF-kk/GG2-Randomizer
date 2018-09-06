@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(readyToShoot &amp;&amp; ammoCount &gt;0 &amp;&amp; !owner.cloak) {
+    ammoCount-=1;
+        playsound(x,y,FlaregunSnd);
+        var shot;
+        if !collision_line(x,y,x+lengthdir_x(15,owner.aimDirection),y+lengthdir_y(15,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(15,owner.aimDirection),y+lengthdir_y(15,owner.aimDirection),TeamGate) {
+            shot = instance_create(x+lengthdir_x(13,owner.aimDirection),y+lengthdir_y(13,owner.aimDirection),Flare);
+            shot.direction=owner.aimDirection;
+            shot.speed=15;
+            shot.crit=crit;
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            shot.weapon=WEAPON_FLAREGUN;
+        }
+    justShot = true;
+    readyToShoot = false;
+    alarm[0] = refireTime;
+    alarm[5] = reloadBuffer + reloadTime;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+    win += 1;
+    var deathNote;
+    deathNote = ds_list_create();
+    ds_list_add(deathNote,other.id);
+    if weapon == WEAPON_MEDICHAINBACKSTAB { //chainstab
+        if other.weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; other.weapon_index &lt;= WEAPON_OVERHEALER {   //I am healing someone
+            if other.currentWeapon.healTarget != noone {
+                ds_list_add(deathNote,other.currentWeapon.healTarget.object);
+            }
+        }
+        var target;
+        target = other.id;
+        with(Character) {   //Someone is healing me
+            if weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; weapon_index &lt;= WEAPON_OVERHEALER {
+                if currentWeapon.healTarget == target.player {
+                    ds_list_add(deathNote,id);
+                }
+            }
+        }
+        var dispenser;  //A dispenser is healing me and others
+        dispenser = -1;
+        with(Sentry) {
+            if point_distance(x,y,target.x,target.y) &lt; 100 &amp;&amp; collision_line(x,y,target.x,target.y,Obstacle,true,true) &lt;= 0 {
+                if level == 5 &amp;&amp; built == 1 &amp;&amp; !sapped &amp;&amp; team == target.player.team {
+                    dispenser = id;
+                }
+            }
+        }
+        if dispenser != -1 {
+            with(Character) {
+                if point_distance(x,y,dispenser.x,dispenser.y) &lt; 100 &amp;&amp; collision_line(x,y,dispenser.x,dispenser.y,Obstacle,true,true) &lt;= 0 {
+                    if ds_list_find_index(deathNote,id) &lt; 0 &amp;&amp; team == dispenser.team ds_list_add(deathNote,id);
+                }
+            }
+        }
+    }
+        for(i=0;ds_list_size(deathNote)&gt;i;i+=1) {
+            var target;
+            target = ds_list_find_value(deathNote,i)
+            if target.radioactive {
+                var text;
+                text=instance_create(x,y,Text);
+                text.sprite_index = MissS
+                instance_destroy();
+                exit;
+            }
+            if target.hasRazorback {
+                playsound(x,y,PistolSnd);
+                other.hasRazorback = false;
+                instance_destroy();
+                owner.cloak=false;
+                exit;
+            }
+            
+            if weapon == WEAPON_ZAPPER{ 
+                if global.isHost{
+                    doEventBallstun(other.player,255);
+                    sendEventBallStun(other.player,255);
+                }
+            } else {
+                if !target.omnomnomnom target.hp -= hitDamage;
+                else target.hp -= (hitDamage+50);
+            }
+
+            target.timeUnscathed = 0;
+            if (target.lastDamageDealer != ownerPlayer &amp;&amp; target.lastDamageDealer != target.player) {
+                target.secondToLastDamageDealer = target.lastDamageDealer;
+                target.alarm[4] = target.alarm[3]
+            }
+            target.alarm[3] = ASSIST_TIME;
+            target.lastDamageDealer = ownerPlayer;
+            target.lastDamageSource = weapon;
+            target.lastDamageCrit = CRIT_FACTOR;
+            var blood;
+            if(global.gibLevel &gt; 0) {
+                repeat(70) {
+                    blood = instance_create(target.x,target.y,Blood);
+                    blood.direction = direction-180;
+                }
+            }
+            if win &gt; 1 or weapon == WEAPON_BIGEARNER_BACKSTAB or weapon == WEAPON_ZAPPER instance_destroy();
+        }
+        ds_list_destroy(deathNote);
+    }
+    else
+        alarm[0] = 1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

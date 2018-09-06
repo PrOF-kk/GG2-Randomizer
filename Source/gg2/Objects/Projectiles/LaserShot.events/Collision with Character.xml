@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">
+        if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0) {
+        if other.radioactive {
+            var text;
+            text=instance_create(x,y,Text);
+            text.sprite_index = MissS
+            exit;
+        }
+            if weapon == WEAPON_POMSON {
+                if !used {
+                    used = true;
+                    with(other) {
+                        if (loaded1 &gt;= WEAPON_MEDIGUN &amp;&amp; loaded1 &lt;= WEAPON_POTION) or (loaded2 &gt;= WEAPON_MEDIGUN &amp;&amp; loaded2 &lt;= WEAPON_POTION){
+                            ammo[WEAPON_MEDIGUN] = max(0,ammo[WEAPON_MEDIGUN]-17.5);
+                            ammo[WEAPON_KRITSKRIEG] = max(0,ammo[WEAPON_KRITSKRIEG]-17.5);
+                            ammo[WEAPON_OVERHEALER] = max(0,ammo[WEAPON_OVERHEALER]-17.5);
+                            ammo[WEAPON_QUICKFIX] = max(0,ammo[WEAPON_QUICKFIX]-17.5);
+                            ammo[WEAPON_POTION] = max(0,ammo[WEAPON_POTION]-17.5);
+                            ammo[100] = 0;
+                        } else if cloak cloakAlpha = 1;
+                        else other.used = 0;
+                        if (weapon_index &gt;= WEAPON_MEDIGUN &amp;&amp; weapon_index &lt;= WEAPON_POTION) {
+                            //currentWeapon.ammoCount = max0,currentWeapon.ammoCount-140);
+                            currentWeapon.uberCharge =  max(0,currentWeapon.uberCharge-140);
+                            currentWeapon.uberReady = false;
+                        }
+                    }
+                }
+            }
+            if !other.invincible other.hp -= hitDamage*(1+other.pissed*0.35)*crit;
+            other.timeUnscathed = 0;
+            if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
+                other.secondToLastDamageDealer = other.lastDamageDealer;
+                other.alarm[4] = other.alarm[3]
+            }
+            other.alarm[3] = ASSIST_TIME;
+            other.lastDamageDealer = ownerPlayer;
+            other.lastDamageSource = weapon;
+            other.lastDamageCrit = crit;
+            var blood;
+            if(global.gibLevel &gt; 0){
+                blood = instance_create(x,y,Blood);
+                blood.direction = direction-180;
+                }
+            
+            with(other) {
+                motion_add(other.direction, other.speed*0.03);
+                cloakAlpha = min(cloakAlpha + 0.1, 1);    
+                }
+        }
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

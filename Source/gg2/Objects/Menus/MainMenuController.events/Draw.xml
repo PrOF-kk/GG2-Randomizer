@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var i, index; 
+    
+    draw_sprite(MenuBackgroundS,menuimage,300,300);
+    //draw_sprite(MenuBackgroundVersionS,0,300,300);
+    draw_set_color(c_white);
+    
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_left);
+    draw_set_alpha(1);
+    
+    for(i=0; i&lt;items; i+=1) {
+        if(i == virtualitem) {
+            draw_set_color(c_red); 
+            //index = 2*i+1;  
+        } else {
+            draw_set_color(c_white);
+            //index = 2*i    
+        }
+
+        draw_text(xbegin,ybegin+i*spacing,item[i]);
+        //draw_sprite(Buttons,index,xbegin,ybegin+i*spacing);
+    }
+    
+    var height, selected;
+    height = string_height("Updates:#"+global.mods);
+    selected = false;
+    if mouse_x &gt;= 360
+        if mouse_x &lt;= 580
+            if mouse_y &gt;= 25
+                if mouse_y &lt;= 25+height {
+                    selected = true;
+                    if mouse_check_button_pressed(mb_left) splash_show_web("http://www.ganggarrison.com/forums/index.php?topic=28842.0",0);
+                }
+    draw_set_alpha(0.6);
+    draw_set_color(c_black);
+    draw_rectangle(360,20,580,25+height,false);
+    draw_set_alpha(1);
+    draw_rectangle(360,20,580,25+height,true)
+    if selected draw_set_color(c_orange);
+    else draw_set_color(c_white);
+    draw_set_valign(fa_top);
+    draw_text(363,23,"Updates:#"+global.mods);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

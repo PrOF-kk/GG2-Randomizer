@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if direction &gt;= 95 &amp;&amp; direction &lt;=270{ 
+    image_xscale=-1;
+}else{ 
+    image_xscale = 1;
+} 
+
+if index &lt; 25 { 
+    index+=0.21;
+    with(Character) {
+        if point_distance(other.x,other.y,x,y) &lt; 64
+            if player.team == other.team &amp;&amp; hp &lt; maxHp &amp;&amp; id != other.owner hp = min(maxHp,hp+0.7);
+    }
+} else instance_destroy();
+
+image_index = floor(index+team*26)
+
+//alarm[0] = 43;
+x=owner.x;
+y=owner.y;
+loopsoundmaintain(x,y,ViolinS);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

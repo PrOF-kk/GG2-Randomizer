@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if global.particles != PARTICLES_OFF {
+    if team == TEAM_RED {
+        if crit &gt; 1 color=c_orange;
+        else color=c_red;
+    } else {
+        if crit &gt; 1 color=c_aqua;
+        else color=c_blue;
+    }
+    effect_create_below(ef_firework,x,y,0,color);
+}
+playsound(x,y,JarateSnd);
+ 
+var uber, maxUber, healTarget;
+maxUber = 0;
+           
+with (Character) {
+    if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (id != other.ownerPlayer or other.crit &gt;= 1.5) {
+        uber = 0;
+        if team == other.team {
+            uber = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius))*other.crit*calculateHealingFactor(timeUnscathed)*1.2;
+            hp = min(hp+uber,maxHp);
+        } else {
+            uber = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius))*other.crit*(1+pissed*0.35)*2;
+            if !invincible hp -= uber;
+            if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer) {
+                secondToLastDamageDealer = lastDamageDealer;
+                alarm[4] = alarm[3]
+            }
+            if (other.ownerPlayer != id or (other.reflector != noone and other.ownerPlayer == id))
+                alarm[3] = ASSIST_TIME;
+            lastDamageDealer = other.ownerPlayer;
+            lastDamageSource = other.weapon;
+            lastDamageCrit = other.crit;
+            
+            cloakAlpha = min(cloakAlpha + 0.2, 1);
+            /*if(global.gibLevel &gt; 0) {
+                repeat(3) {
+                    var blood;
+                    blood = instance_create(x,y,Blood);
+                    blood.direction = point_direction(other.x,other.y,x,y)-180;
+                }
+            }*/
+        }
+        if uber &gt;= maxUber {
+            maxUber = uber;
+            healTarget = id;
+        }
+    }
+}  
+
+if maxUber &gt; 0 {
+    ownerPlayer.stats[HEALING] += maxUber;
+    ownerPlayer.roundStats[HEALING] += maxUber;
+    var bonus, setup;
+    bonus = 22;
+    setup = false;
+    if instance_exists(ControlPointSetupGate) {
+        if (ControlPointSetupGate.solid)
+            setup = true;
+    }
+    
+    if(healTarget.hp &lt; healTarget.maxHp or setup) bonus += 11;
+    if(healTarget.hp &lt; healTarget.maxHp/2 or setup) bonus += 22;   
+    
+    if ownerPlayer.object != -1 {
+        if ownerPlayer.object.weapon_index == WEAPON_POTION {
+            ownerPlayer.object.currentWeapon.uberCharge = min(2000,ownerPlayer.object.currentWeapon.uberCharge+bonus);
+            ownerPlayer.object.currentWeapon.hphealed += maxUber;
+        } else {
+            ownerPlayer.object.ammo[WEAPON_POTION] = min(250,ownerPlayer.object.ammo[WEAPON_POTION]+bonus/8);
+        }
+    }   
+}
+
+
+instance_destroy();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

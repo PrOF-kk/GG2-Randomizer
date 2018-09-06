@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.myself.team == TEAM_BLUE) {
+    image_index = global.myself.class + 10;
+} else {
+    image_index = global.myself.class;
+}
+
+if(global.myself.object == -1) {
+    instance_destroy();
+    exit; 
+}
+
+drawHealth(45, 547, global.myself.object.hp, global.myself.object.maxHp,floor(global.myself.object.overheal));
+draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+525, 2, 2, 0, c_white, 1);
+if global.myself.object.overheal &gt; 0 
+    draw_sprite_ext(OverhealHudS,0,view_xview[0]+5+64, view_yview[0]+525+40,1.5+1.25*global.myself.object.overheal/(global.myself.object.maxHp*OVERHEAL_FACTOR),1.5+1.25*global.myself.object.overheal/(global.myself.object.maxHp*OVERHEAL_FACTOR),0,c_green,0.7);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

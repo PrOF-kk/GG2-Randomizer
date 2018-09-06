@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, index;
+
+xsize = sprite_width;
+ysize = sprite_height;
+
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+draw_set_font(fnt_console);
+
+if !hidden {
+    /*if open draw_sprite_ext(sprite_index,0+team*(global.myself.team+1),x,y,1,1,0,c_white,1);
+    else */draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_white,0.7);
+}
+
+//prevent too long strings, the server cuts them of anyways
+keyboard_string = string_copy(keyboard_string,1,90);
+//Semi fancy chat-splitting to prevent the message to be longer than the chatbox.
+if string_length(keyboard_string)-53 &gt; 0 index  = string_length(keyboard_string)-52;
+else index = 0;
+chatmessage = string_copy(keyboard_string,index,53);
+
+if team {
+    if global.myself.team == TEAM_RED draw_set_color(c_red);
+    else draw_set_color(make_color_rgb(0, 128, 255));
+} else draw_set_color(c_white);
+
+if open draw_text(x + 3, y+ysize-15, chatmessage);
+
+
+// The drawing of the text
+var message, pos, color, amount;
+if !hidden amount = min(ds_list_size(global.chatLog),10);
+else if !idle amount = 2;
+else amount = 0;
+for(i=0;i&lt;amount;i+=1) {
+    message = ds_list_find_value(global.chatLog, ds_list_size(global.chatLog)-amount+i-offset);
+    pos = string_pos('/:',message);
+    if pos &gt; 0 &amp;&amp; string_copy(message,pos+3,2) == ':/' {
+        color = getColorCode(string_copy(message, 1, 1));
+        draw_text_color(x+10, y+ysize-40-12*(amount-i),string_copy(message, 2, pos-2),color,color,color,color,1);
+        color = getColorCode(string_copy(message, pos+2, 1));
+        draw_text_color(x+10 + string_width(string_copy(message, 2, pos-2)), y+ysize-40-12*(amount-i),string_copy(message, pos+5, 53),color,color,color,color,1);
+    } else {
+        color = getColorCode(string_copy(message, 1, 1));
+        draw_text_color(x+10, y+ysize-40-12*(amount-i),string_copy(message, 2, string_length(message)),color,color,color,color,1);
+    }
+}
+
+draw_set_font(global.gg2Font);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
