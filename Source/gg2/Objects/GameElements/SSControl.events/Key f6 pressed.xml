@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="SCRIPT">takeScreenshot</argument>
+        <argument kind="SCRIPT"/>
         <argument kind="EXPRESSION">0</argument>
         <argument kind="EXPRESSION">0</argument>
         <argument kind="EXPRESSION">0</argument>
