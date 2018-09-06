@@ -16,4 +16,5 @@
   <resource name="Back" type="RESOURCE"/>
   <resource name="LoadoutMenu" type="RESOURCE"/>
   <resource name="LoadoutSwitcher" type="RESOURCE"/>
+  <resource name="MenuController" type="RESOURCE"/>
 </resources>

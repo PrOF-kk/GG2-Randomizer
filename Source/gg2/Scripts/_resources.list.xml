@@ -46,4 +46,5 @@
   <resource name="md5" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
   <resource name="randomizer" type="GROUP"/>
+  <resource name="Menus" type="GROUP"/>
 </resources>

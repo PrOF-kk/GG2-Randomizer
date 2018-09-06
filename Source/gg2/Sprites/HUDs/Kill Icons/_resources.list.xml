@@ -64,7 +64,7 @@
   <resource name="EnforcerKL" type="RESOURCE"/>
   <resource name="KunaiKL" type="RESOURCE"/>
   <resource name="BigEarnerKL" type="RESOURCE"/>
-  <resource name="BackburnerKL" type="RESOURCE"/>
+  <resource name="BackBurnerKL" type="RESOURCE"/>
   <resource name="WrenchKL" type="RESOURCE"/>
   <resource name="DetonatorKL" type="RESOURCE"/>
   <resource name="SSleeperKL" type="RESOURCE"/>
