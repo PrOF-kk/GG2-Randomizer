@@ -13,29 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    var i, index; 
-    
+        <argument kind="STRING">{    
     draw_sprite(MenuBackgroundS,menuimage,300,300);
     //draw_sprite(MenuBackgroundVersionS,0,300,300);
     draw_set_color(c_white);
-    
-    draw_set_valign(fa_middle);
-    draw_set_halign(fa_left);
-    draw_set_alpha(1);
-    
-    for(i=0; i&lt;items; i+=1) {
-        if(i == virtualitem) {
-            draw_set_color(c_red); 
-            //index = 2*i+1;  
-        } else {
-            draw_set_color(c_white);
-            //index = 2*i    
-        }
-
-        draw_text(xbegin,ybegin+i*spacing,item[i]);
-        //draw_sprite(Buttons,index,xbegin,ybegin+i*spacing);
-    }
     
     var height, selected;
     height = string_height("Updates:#"+global.mods);
@@ -59,6 +40,19 @@
 }
 </argument>
       </arguments>
+    </action>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
     </action>
   </actions>
 </event>

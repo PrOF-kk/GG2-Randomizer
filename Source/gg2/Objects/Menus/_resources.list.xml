@@ -9,12 +9,11 @@
   <resource name="ControlsController" type="RESOURCE"/>
   <resource name="SplashController" type="RESOURCE"/>
   <resource name="LobbyController" type="RESOURCE"/>
-  <resource name="MainMenuController" type="RESOURCE"/>
   <resource name="InGameMenuController" type="RESOURCE"/>
-  <resource name="CreditsController" type="RESOURCE"/>
   <resource name="DevMessageChecker" type="RESOURCE"/>
   <resource name="Back" type="RESOURCE"/>
   <resource name="LoadoutMenu" type="RESOURCE"/>
   <resource name="LoadoutSwitcher" type="RESOURCE"/>
   <resource name="MenuController" type="RESOURCE"/>
+  <resource name="Main Menu Elements" type="GROUP"/>
 </resources>
