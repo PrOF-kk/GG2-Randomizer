@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">ini_open("gg2.ini");
+global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
+global.caplimit = ini_read_real("Server", "CapLimit", 5);
+global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
+/*readClasslimitsFromIni();*/
+ini_close();
+
+//Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
+if (global.Server_RespawntimeSec == 0)
+    global.Server_Respawntime = 1;
+else
+    global.Server_Respawntime = global.Server_RespawntimeSec * 30;
+
+menu_create(48, 172, 500, 260, 32, 40, 112, 128);
+menumode = true;
+
+menu_background(512, 24, 8, 12, 4);
+bgtabs = true;
+
+menu_addedit_text2("Server Name:", "global.serverName", '
+    var newName;
+    newName = string_copy(argument0, 0, 25);
+    gg2_write_ini("Server", "ServerName", newName);
+    return newName;
+');
+
+/*
+menu_addedit_text2("Welcome message:", "global.welcomeMessage", '
+    var newMessage;
+    newMessage = string_copy(argument0, 0, 255);
+    gg2_write_ini("Server", "WelcomeMessage", newMessage);
+    return newMessage;
+');
+*/
+
+menu_addedit_text("Password:", "global.serverPassword", '
+    gg2_write_ini("Server", "Password", argument0);
+');
+menu_addedit_num("Hosting Port:", "global.hostingPort", '
+    gg2_write_ini("Settings", "HostingPort", argument0);
+', 65535);
+menu_addedit_num("Player Limit:", "global.playerLimit", '
+    gg2_write_ini("Settings", "PlayerLimit", argument0);
+', 48);
+menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
+    gg2_write_ini("Server", "Time Limit", argument0);
+');
+menu_addedit_num("Capture Limit:", "global.caplimit", '
+    gg2_write_ini("Server", "CapLimit", argument0);
+');
+/*
+menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", '
+    gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
+');
+menu_addedit_num("TDM Invulnerability (secs):", "global.tdmInvulnerabilitySeconds", '
+    gg2_write_ini("Server", "Team Deathmatch Invulnerability Seconds", argument0);
+');
+*/
+menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", '
+    gg2_write_ini("Server", "Respawn Time", argument0);
+');
+menu_addedit_boolean("Auto Balance:", "global.autobalance", '
+    gg2_write_ini("Server", "AutoBalance", argument0);
+');
+menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
+    gg2_write_ini("Settings", "UseLobby", argument0);
+');
+    
+    
+menu_addtablink("Main", '
+    instance_create(x,y,HostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Randomizer Mod Options", '
+    instance_create(x,y,RMHostOptions);
+    instance_destroy();
+');
+/*
+menu_addtablink("Advanced", '
+    instance_create(x,y,AdvHostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Classlimits", '
+    instance_create(x,y,ClasslimitsMenuController);
+    instance_destroy();
+');
+*/
+
+menu_addlink("Start Game", '
+    //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
+    if (global.Server_RespawntimeSec == 0)
+        global.Server_Respawntime = 1;
+    else
+        global.Server_Respawntime = global.Server_RespawntimeSec * 30;
+    
+    global.gameServer = instance_create(0,0,GameServer);
+');
+menu_addback("Back", '
+    instance_create(x,y,MainMenuController);
+    instance_destroy();
+');
+
+item[0] = "Server Name:";
+item[1] = "Password:";
+item[2] = "Hosting Port:";
+item[3] = "Player Limit:";
+item[4] = "Time Limit (mins):";
+item[5] = "Capture Limit:";
+item[6] = "Respawn Time (secs):";
+item[7] = "Auto Balance:";
+item[8] = "Announce to Lobby:";
+item[9] = "Randomizer Mod options";
+item[10] = "Start Game";
+item[11] = "Back";
+    
+value[0] = global.serverName;
+value[1] = global.serverPassword;
+value[2] = global.hostingPort;
+value[3] = global.playerLimit;
+value[4] = global.timeLimitMins;
+value[5] = global.caplimit;
+value[6] = global.Server_RespawntimeSec;
+    
+if(global.autobalance) {
+    value[7] = "On";
+} else {
+    value[7] = "Off";
+}
+    
+if(global.useLobbyServer) {
+    value[8] = "On";
+} else {
+    value[8] = "Off";
+}
+
+value[9] = "";
+value[10] = "";
+value[11] = "";
+
+if global.plugins == false {
+    global.plugins = true;
+    var pluginArray, plugin, first, PluginObject, i;
+    first = true;
+    pluginArray[0] = 1;
+    while (true) {
+        if (first == true){
+            plugin = file_find_first("RMplugins/*.gml",0);
+            first = false;
+        }else{
+            plugin = file_find_next();
+        }
+        if (plugin != "") {
+            pluginArray[0]+=1;
+            pluginArray[pluginArray[0]] = plugin;
+        } else break;
+    } 
+    
+    PluginObject = object_add();
+    global.seriousServer = false;
+    for(i=2;i &lt;= pluginArray[0];i+=1) {
+        global.seriousServer = false;
+        with (instance_create(0,0,PluginObject)) {
+            execute_file("RMplugins/"+string(pluginArray[i]),"RMplugins/");
+            instance_destroy();
+        }
+    }
+}
+
+//we only need to use the banlist when we're host so we only load the list then
+ini_open("weaponBanlist.ini");
+for(i=0;i&lt;=WEAPON_COUNT;i+=1) {
+    global.replace[i]=ini_read_real("weapon",global.name[i],i);
+}
+ini_close();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
