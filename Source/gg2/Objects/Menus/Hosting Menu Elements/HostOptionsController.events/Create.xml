@@ -86,7 +86,7 @@ menu_addtablink("Main", '
     instance_create(x,y,HostOptionsController);
     instance_destroy();
 ');
-menu_addtablink("Randomizer Mod Options", '
+menu_addtablink("Randomizer", '
     instance_create(x,y,RMHostOptions);
     instance_destroy();
 ');
@@ -115,64 +115,29 @@ menu_addback("Back", '
     instance_destroy();
 ');
 
-item[0] = "Server Name:";
-item[1] = "Password:";
-item[2] = "Hosting Port:";
-item[3] = "Player Limit:";
-item[4] = "Time Limit (mins):";
-item[5] = "Capture Limit:";
-item[6] = "Respawn Time (secs):";
-item[7] = "Auto Balance:";
-item[8] = "Announce to Lobby:";
-item[9] = "Randomizer Mod options";
-item[10] = "Start Game";
-item[11] = "Back";
-    
-value[0] = global.serverName;
-value[1] = global.serverPassword;
-value[2] = global.hostingPort;
-value[3] = global.playerLimit;
-value[4] = global.timeLimitMins;
-value[5] = global.caplimit;
-value[6] = global.Server_RespawntimeSec;
-    
-if(global.autobalance) {
-    value[7] = "On";
-} else {
-    value[7] = "Off";
-}
-    
-if(global.useLobbyServer) {
-    value[8] = "On";
-} else {
-    value[8] = "Off";
-}
-
-value[9] = "";
-value[10] = "";
-value[11] = "";
-
-if global.plugins == false {
+if (!global.plugins) {
     global.plugins = true;
     var pluginArray, plugin, first, PluginObject, i;
     first = true;
     pluginArray[0] = 1;
     while (true) {
-        if (first == true){
+        if (first) {
             plugin = file_find_first("RMplugins/*.gml",0);
             first = false;
-        }else{
+        }
+        else {
             plugin = file_find_next();
         }
         if (plugin != "") {
-            pluginArray[0]+=1;
+            pluginArray[0] += 1;
             pluginArray[pluginArray[0]] = plugin;
-        } else break;
+        }
+        else break;
     } 
     
     PluginObject = object_add();
     global.seriousServer = false;
-    for(i=2;i &lt;= pluginArray[0];i+=1) {
+    for(i = 2; i &lt;= pluginArray[0]; i += 1) {
         global.seriousServer = false;
         with (instance_create(0,0,PluginObject)) {
             execute_file("RMplugins/"+string(pluginArray[i]),"RMplugins/");
@@ -183,8 +148,8 @@ if global.plugins == false {
 
 //we only need to use the banlist when we're host so we only load the list then
 ini_open("weaponBanlist.ini");
-for(i=0;i&lt;=WEAPON_COUNT;i+=1) {
-    global.replace[i]=ini_read_real("weapon",global.name[i],i);
+for(i = 0; i &lt;= WEAPON_COUNT; i += 1) {
+    global.replace[i] = ini_read_real("weapon",global.name[i],i);
 }
 ini_close();
 </argument>
