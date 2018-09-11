@@ -16,26 +16,59 @@
         <argument kind="STRING">{
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
-    virtualitem = -1;
-    xbegin = 40;
-    ybegin = 300;
-    spacing = 30;
-    width = 200; 
-    items = 5;
-    canEsc = false;
-    alarm[0] = 15;
-    
-    item[0] = "Options";
-    item[1] = "Return to Game";
-    item[2] = "Loadout";
-    item[3] = "Disconnect";
-    item[4] = "Quit Game";
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
 
+    menu_create(40, 300, 200, 200, 32);
+    menu_background(212, 24, 8, 12, 4);
+    menu_setdimmed();
     
+    menu_addlink("Return to Game", '
+        instance_destroy();
+    ');
+    menu_addback("", '
+        instance_destroy();
+    ');
+    /*
+    if (global.isHost) {
+        menu_addlink("Kick players", '
+            if(!instance_exists(ScoreTableController)) instance_create(0,0,ScoreTableController);
+            ScoreTableController.showadmin = true;
+            instance_destroy();
+        ');
+    }
+    */
+    menu_addlink("Options", '
+        instance_destroy();
+        instance_create(0,0,OptionsController);
+    ');
+    menu_addlink("Loadout", '
+        instance_destroy();
+        instance_create(0,0,LoadoutMenu);
+    ');
+    menu_addlink("Disconnect", '
+        // Force dedicated mode to off so you can go to main menu instead of just restarting server
+        if (show_question("Do you really want to leave this match?")) {
+            /*
+            if (global.serverPluginsInUse)
+            {
+                pluginscleanup(true);
+            }
+            else
+            {
+            */
+                global.dedicatedMode = 0;
+                with(Client)
+                    instance_destroy();
+                    
+                with(GameServer)
+                    instance_destroy();
+            /*}*/
+        }
+    ');
+    menu_addlink("Quit Game", '
+        if (show_question("Do you really want to quit?")) {
+            game_end();
+        }
+    ');
 }
 </argument>
       </arguments>
