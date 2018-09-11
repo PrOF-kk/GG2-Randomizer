@@ -44,4 +44,5 @@
   <resource name="Drawing" type="GROUP"/>
   <resource name="Misc" type="GROUP"/>
   <resource name="Killtable" type="GROUP"/>
+  <resource name="Faucet HTTP" type="GROUP"/>
 </resources>
