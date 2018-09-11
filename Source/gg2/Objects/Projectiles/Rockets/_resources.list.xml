@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Rocket" type="RESOURCE"/>
+  <resource name="AirstrikeRocket" type="RESOURCE"/>
+  <resource name="DHRocket" type="RESOURCE"/>
+  <resource name="SentryRocket" type="RESOURCE"/>
+  <resource name="QRocket" type="RESOURCE"/>
+</resources>

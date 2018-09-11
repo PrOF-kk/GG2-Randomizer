@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="NatachaShot" type="RESOURCE"/>
+  <resource name="ManglerShot" type="RESOURCE"/>
+  <resource name="Shot" type="RESOURCE"/>
+  <resource name="RSShot" type="RESOURCE"/>
+  <resource name="PredatorShot" type="RESOURCE"/>
+  <resource name="QCshot" type="RESOURCE"/>
+  <resource name="DiplomatShot" type="RESOURCE"/>
+  <resource name="StunShot" type="RESOURCE"/>
+  <resource name="LaserShot" type="RESOURCE"/>
+  <resource name="FANShot" type="RESOURCE"/>
+</resources>

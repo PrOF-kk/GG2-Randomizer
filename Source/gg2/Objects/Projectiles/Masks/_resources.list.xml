@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="StabMask" type="RESOURCE"/>
+  <resource name="Tauntkillmask" type="RESOURCE"/>
+  <resource name="SapMask" type="RESOURCE"/>
+  <resource name="MeleeMask" type="RESOURCE"/>
+</resources>
