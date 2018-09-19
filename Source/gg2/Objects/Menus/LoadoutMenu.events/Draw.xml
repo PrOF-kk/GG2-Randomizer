@@ -37,7 +37,7 @@ draw_text(175+xoffset,390+yoffset,name);    //name
 draw_text(175+xoffset,390+yoffset+13,description[0]);  //info
 draw_set_color(make_color_rgb(36,118,36));
 draw_text(175+xoffset,390+yoffset+string_height(description[0])+13,description[1]);  //good
-draw_set_color(make_color_rgb(221,34,34));
+draw_set_color(make_color_rgb(208,0,0));
 draw_text(175+xoffset,390+yoffset+string_height(description[0])+string_height(description[1])+13,description[2]);  //bad
 
 draw_set_halign(fa_center)
