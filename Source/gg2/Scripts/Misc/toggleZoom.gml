@@ -6,7 +6,7 @@ with(argument0) {
         with(currentWeapon)
             hitDamage = baseDamage;
     } else {
-        runPower = baseRunPower;
+        runPower = /*baseRunPower*/0.9;
         jumpStrength = baseJumpStrength;
         with(currentWeapon)
             hitDamage = unscopedDamage;
