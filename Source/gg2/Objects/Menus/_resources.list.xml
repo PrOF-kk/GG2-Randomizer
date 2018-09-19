@@ -6,10 +6,8 @@
   <resource name="Lobby Elements" type="GROUP"/>
   <resource name="Hosting Menu Elements" type="GROUP"/>
   <resource name="Options Menus" type="GROUP"/>
+  <resource name="Loadout Menu Elements" type="GROUP"/>
   <resource name="DevMessageChecker" type="RESOURCE"/>
-  <resource name="Back" type="RESOURCE"/>
-  <resource name="LoadoutMenu" type="RESOURCE"/>
-  <resource name="LoadoutSwitcher" type="RESOURCE"/>
   <resource name="MenuController" type="RESOURCE"/>
   <resource name="WeaponBanlist" type="RESOURCE"/>
 </resources>

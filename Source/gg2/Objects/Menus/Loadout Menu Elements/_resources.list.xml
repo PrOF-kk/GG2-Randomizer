@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="LoadoutMenu" type="RESOURCE"/>
+  <resource name="LoadoutSwitcher" type="RESOURCE"/>
+  <resource name="Back" type="RESOURCE"/>
+</resources>
