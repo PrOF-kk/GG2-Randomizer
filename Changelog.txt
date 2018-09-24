@@ -1,0 +1,7 @@
+#This file is for temporary changelog keeping. This is not used by the game to update, but is useful when actually writing that
+#Changes should be written chronologically
+#This file should be cleared when preparing a new release
+-Fixed players getting kicked on their first time running the game
+-Fixed unscoping crashing the game
+-Changed the red colour for the loadout downsides to be more readable
+-Reworded almost every weapon stats for better understanging
