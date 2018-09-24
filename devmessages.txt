@@ -1,0 +1,4 @@
+Source
+https://github.com/PrOF-kk/GG2-Randomizer/master/RMupdate.zip
+Version
+35060!Version 3.5b6 has been released!##Changelog:#-Fixed players getting kicked on their first time running the game#-Fixed unscoping crashing the game#-Changed the red colour for the loadout downsides to be more readable#-Reworded almost every weapon stats for better understanging
