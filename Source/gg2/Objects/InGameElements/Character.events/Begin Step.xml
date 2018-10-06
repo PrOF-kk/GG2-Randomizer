@@ -201,7 +201,7 @@ if(!taunting &amp;&amp; !omnomnomnom &amp;&amp; !buffing &amp;&amp; !charge)
 }
 
 //Add hyve to the sodapopper's meter
-if ((keyState|pressedKeys) &amp; $40 or (keyState|pressedKeys) &amp; $20 or (pressedKeys &amp; $80)) &amp;&amp; !taunting &amp;&amp; !omnomnomnom &amp;&amp; !stunned {
+if ((keyState|pressedKeys) &amp; $40 or (keyState|pressedKeys) &amp; $20 or (pressedKeys &amp; $80)) &amp;&amp; !taunting &amp;&amp; !omnomnomnom &amp;&amp; !stunned and !((keyState|pressedKeys) &amp; $40 and (keyState|pressedKeys) &amp; $20){
     if weapon_index == WEAPON_SODAPOPPER {
         if !currentWeapon.hyve {
             ammo[109] += 0.5;
