@@ -1,7 +1,44 @@
 #This file is for temporary changelog keeping. This is not used by the game to update, but is useful when actually writing that
 #Changes should be written chronologically
-#This file should be cleared when preparing a new release
--Fixed players getting kicked on their first time running the game
--Fixed unscoping crashing the game
--Changed the red colour for the loadout downsides to be more readable
--Reworded almost every weapon stats for better understanging
+#This file should be cleared on the first commit after a release
+
+General
++ Crits now deal 2.5x damage (before, 1.75x)
++ Minicrits now deal 1.75x damage (before, 1.35x) 
+- Changed the red colour for the loadout downsides to be more readable
+- Reworded almost every weapon stats for better understanding
+
+Balance Changes
+	Scout
+	 Soda Popper
+	  * Hype now actually deals minicrits
+	  - -25% damage penalty
+	  - Changed -50% ammo reduction to -66%
+	Pyro
+	 Phlogistinator
+	  - Changed -23.3% damage penalty to -30%
+	 Napalm Grenade
+	  + Projectiles move faster, and there's more of them.
+	  + Grenades' response times changed on collision
+	  - Grenades' blast radius lowered by 25%
+	  + Changed -80% damage penalty to sentries to -30%
+	  + Grenades are now 75% bouncier
+	 Flaregun
+	  - +200% refire time to prevent uber/cabinet spam
+	  - -20% damage penalty
+	 Detonator
+	  - +200% refire time to prevent uber/cabinet spam
+	  - -20% damage penalty
+	  + +200% knockback
+	  + +25% self-knockback
+	  * Limited ammo
+	  - +1500% reload time
+	  + +15 max ammo
+	 Frostbite
+	  + Now does static airblast damage on top of existing airblast damage
+	  + Completely overhauled airblast
+	  
+Fixes
+- Fixed players getting kicked on their first time running the game
+- Fixed unscoping crashing the game
+- Fixed players gaining hype when not actually running
