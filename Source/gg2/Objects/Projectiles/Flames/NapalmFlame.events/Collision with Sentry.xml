@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(other.team != team) {
-    other.hp -= hitDamage*0.2;
+    other.hp -= hitDamage*0.7; // -80% buffed to -30%
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
     other.lastDamageCrit = crit;

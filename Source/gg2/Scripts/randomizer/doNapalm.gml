@@ -15,13 +15,14 @@ with(NapalmGrenade) {
  
 instance_create(argument1,argument2,Explosion);
 playsound(argument1,argument2,ExplosionSnd);
-for(i=0;i<30;i+=1){
+for(i=0;i<60;i+=1){
     shot = instance_create(argument1,argument2,NapalmFlame);
-    shot.direction=i*6;
+    shot.direction=i*3;
     shot.owner=argument0.object;
     shot.ownerPlayer=argument0;
     shot.team=argument0.team;
     if critical > 1 shot.crit=critical;
     shot.weapon=WEAPON_NAPALM;
+    with(shot) motion_add(direction, 2);
 }
 

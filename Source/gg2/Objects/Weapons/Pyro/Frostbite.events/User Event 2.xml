@@ -31,15 +31,16 @@
         }            
         
         with(Character) {
-                dir = point_direction(other.x, other.y, x, y);
+                //dir = point_direction(other.x, other.y, x, y);
+                movdir = point_direction(x, y, x+hspeed, y+vspeed);
                 dist = point_distance(other.x, other.y, x, y);
-                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                angle = abs((movdir+360)-(other.owner.aimDirection+360)) mod 360;
                 if collision_circle(x,y,25,other.poof,false,true) {
                     if(team != other.owner.team) {
-                        motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
+                        motion_add(other.owner.aimDirection, other.characterBlastStrength*(1+(cos(degtorad(angle))/2)));
                         vspeed -= 2;
-                        moveStatus = 3;
-                        hp -= 15*(1-dist/other.blastDistance);
+                        moveStatus = 1;
+                        hp -= (15*(1-dist/other.blastDistance))+15;
                         if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
                             secondToLastDamageDealer = lastDamageDealer;
                             alarm[4] = alarm[3];

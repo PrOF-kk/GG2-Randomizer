@@ -35,7 +35,7 @@
     reloadBuffer = 15;
     isRefilling = false;
     
-    hitDamage = 2.6;
+    hitDamage = 2.4;
     durationIncrease = 30;
     burnIncrease=1;
     shot = false;

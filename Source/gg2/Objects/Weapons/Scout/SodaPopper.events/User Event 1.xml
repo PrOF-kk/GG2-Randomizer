@@ -27,6 +27,7 @@
         shot.team = owner.team;
         shot.weapon = WEAPON_SODAPOPPER;
         shot.crit=crit;
+        shot.hitDamage *= 0.75;
         with(shot) {   
             hspeed += owner.hspeed;
         

@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">if(team != other.team) {
     if used == 0 {
-        alarm[2]=30;
+        alarm[2]=1;
         used = 1;
     }
 }

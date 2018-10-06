@@ -14,10 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-instance_destroy()
-    // speed = 0;
+//instance_destroy()
+    speed *= -1;
        // stickied = true;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

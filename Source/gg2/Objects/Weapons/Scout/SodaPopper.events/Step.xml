@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if hyve {
-    if crit &lt; CRIT_FACTOR crit = MINICRIT_FACTOR;
+    /*if crit &lt; CRIT_FACTOR */crit = MINICRIT_FACTOR;
     owner.ammo[109] -= 1;
     if owner.ammo[109] == 0 {
         hyve = 0;

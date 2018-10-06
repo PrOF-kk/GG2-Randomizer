@@ -22,7 +22,7 @@
     exploded = false;
     bubbled = false;
     reflector = noone;
-    alarm[2]=60;
+    alarm[2]=45;
     hfric=0.5;
     rotfric=0.7;
     rotspeed=random(20)-10;

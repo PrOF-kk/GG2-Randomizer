@@ -26,7 +26,7 @@
         load1.description[2,2] = "-33% ammo loaded#Slow movement &amp; no double#jump while holding the intel#Cannot capture points"
         load1.description[3,0] = "i: Running &amp; jumping fills hype";
         load1.description[3,1] = "Deals minicrits when hype is#active";
-        load1.description[3,2] = "-50% ammo loaded"
+        load1.description[3,2] = "-66% ammo loaded#-25% damage penalty"
         load1.description[4,0] = "i: Fires hitscan laserbeams"
         load1.description[4,1] = "Crits against sentries"
         load1.description[4,2] = "-33% ammo loaded"
@@ -45,7 +45,7 @@
         load1 = instance_create(40, 192, LoadoutSwitcher);
         load1.value = 80;
         load1.loaded = real(string_copy(string(global.pyroLoadout),2,2));
-        load1.description[1,1] = "+10% flame damage";
+        load1.description[1,1] = "+20% flame damage";
         load1.description[1,2] = "+30 airblast cost";
         load1.description[2,0] = "i: Converts most projectiles#into hp#i: Sucks players";
         load1.description[2,2] = "-66% afterburn duration";
@@ -54,14 +54,14 @@
         load1.description[3,2] = "-50% afterburn damage";
         load1.description[3,2] = "Airblast doesn't reflect#projectiles";
         load1.description[4,0] = "i: Fill Mmmph meter by dealing#damage";
-        load1.description[4,2] = "Cannot airblast#-10% damage";
+        load1.description[4,2] = "Cannot airblast#-30% damage";
         load2 = instance_create(464, 192, LoadoutSwitcher);
         load2.value = 85;
         load2.loaded = real(string_copy(string(global.pyroLoadout),4,2));
         load2.description[1,0] = "i: Sets enemies on fire when hit";
-        load2.description[1,1] = "Minicrits burning targets";
-        load2.description[2,0] = "i: Sets enemies on fire when hit#i: Secondary fire detonates the#flare";
-        load2.description[3,2] = "-80% damage against sentries"
+        load2.description[1,1] = "Crits burning targets";
+        load2.description[2,0] = "i: Sets enemies on fire when hit#i: Secondary fire detonates the#flare#i: Has limited* ammo";
+        load2.description[3,2] = "-30% damage against sentries"
         load2.description[4,1] = "Deals critical damage to#burning targets and sentries";
         offset = 10;
         break;

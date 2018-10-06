@@ -85,7 +85,6 @@
                 if (id==other.ownerPlayer.object)
                 {
                     moveStatus = 1;
-                    vspeed*=0.8;
                 }
                 else if (other.team == team)
                 {
