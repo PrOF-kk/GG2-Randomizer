@@ -15,18 +15,20 @@
       <arguments>
         <argument kind="STRING">if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; ammoCount &gt; 0) {
         with(NapalmGrenade) {
-            if ownerPlayer == other.ownerPlayer instance_destroy();
+            //if ownerPlayer == other.ownerPlayer instance_destroy(); //Lorgan. Why.
         }
         ammoCount -= 1;  
         shot = instance_create(x,y + yoffset + 1,NapalmGrenade);
         shot.direction=owner.aimDirection+ random(7)-4;
-        shot.speed=10;
+        shot.speed=12.5;
         shot.owner=owner;
         shot.crit=crit;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        with(shot)
+        with(shot) {
             hspeed+=owner.hspeed;
+            vspeed+=owner.vspeed;
+        }
         justShot=true;
         readyToShoot=false;
         alarm[5] = reloadBuffer + reloadTime;

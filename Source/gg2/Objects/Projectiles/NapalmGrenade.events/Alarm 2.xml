@@ -16,7 +16,7 @@
         <argument kind="STRING">if global.isHost {
     sendNapalm(ds_list_find_index(global.players,ownerPlayer),x,y);
     doNapalm(ownerPlayer,x,y);
-} else alarm[3] = 60 //the server has 2 seconds to send the detonation event. if it didn't happen after that just destroy the grenade
+} //else alarm[3] = 60 //the server has 2 seconds to send the detonation event. if it didn't happen after that just destroy the grenade
 
 </argument>
       </arguments>

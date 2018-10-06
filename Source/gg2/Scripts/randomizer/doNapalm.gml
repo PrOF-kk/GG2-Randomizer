@@ -7,7 +7,7 @@
 var critical;
 critical = 1;
 with(NapalmGrenade) {
-    if ownerPlayer == argument0 {
+    if ownerPlayer == argument0 and collision_circle(argument1, argument2, 4, NapalmGrenade,false,false){
         if crit > 1 critical = crit;
         instance_destroy();
     }

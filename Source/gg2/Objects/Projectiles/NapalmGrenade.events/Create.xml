@@ -22,9 +22,9 @@
     exploded = false;
     bubbled = false;
     reflector = noone;
-    alarm[2]=45;
-    hfric=0.5;
-    rotfric=0.7;
+    alarm[2]=60; //2 seconds to detonate
+    hfric=0.9;
+    rotfric=0.9;
     rotspeed=random(20)-10;
     image_speed=0;
     crit = 1;
