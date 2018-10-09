@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>7za.exe</filename>
+  <filepath>C:\Users\Valerio\Desktop\Repos\Gang-Garrison-2\Gang-Garrison-2\Source\gg2\Included Files\7za.exe</filepath>
+  <original>true</original>
+  <originalSize>328192</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>TEMP_DIRECTORY</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>true</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>false</removeAtGameEnd>
+</include>

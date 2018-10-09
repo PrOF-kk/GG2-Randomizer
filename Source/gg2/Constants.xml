@@ -2,6 +2,7 @@
 <constants>
   <constant name="VERSION" value="3561"/>
   <constant name="GAME_VERSION_STRING" value="&quot;3.5.6h1&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE" value="&quot;https://raw.githubusercontent.com/PrOF-kk/GG2-Randomizer/master/devmessages.txt&quot;"/>
   <constant name="PROTOCOL_UUID" value="&quot;74c9d4c3-41a3-8a0d-a7b2-d5272cd3a4ba&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="LOBBY_REG_PROTOCOL" value="&quot;b5dae2e8-424f-9ed0-0fcb-8c21c7ca1352&quot;"/>

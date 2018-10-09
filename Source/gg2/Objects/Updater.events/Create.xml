@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Downloading code. 
+
+var downloadHandle, url, tmpfile, window_oldshowborder, window_oldfullscreen;
+timeLeft = 0;
+counter = 0;
+AudioControlPlaySong(-1, false);
+window_oldshowborder = window_get_showborder();
+window_oldfullscreen = window_get_fullscreen();
+window_set_fullscreen(false);
+window_set_showborder(false);
+
+url = global.downloadSource;
+
+tmpfile = temp_directory + "\rmupdate.zip";
+
+execute_program(temp_directory + "\curl.exe", "-LJk " + url + " -o " + tmpfile, true);
+
+if (!file_exists(tmpfile)) {
+    window_set_showborder(window_oldshowborder);
+    window_set_fullscreen(window_oldfullscreen);
+    show_message("Error updating: Missing rmupdate.zip in temp directory, download failed(?)");
+    room_goto_fix(Menu);
+    exit;
+}
+
+// rename existing executable to avoid conflict when extracting
+if (file_exists("Randomizer Mod.exe"))
+{
+    var newName, n;
+    n = 1;
+    
+    // increment until unused name found
+    do
+    {
+        newName = "rm-old.delete.me." + string(n);
+        n += 1;
+    }
+    until(!file_exists(newName));
+
+    file_rename("Randomizer Mod.exe", newName);
+}
+
+
+
+// let's extract the downloaded file now.
+extractzip(tmpfile, working_directory);
+
+// run new version    
+execute_program("Randomizer Mod.exe", "", false);
+
+// exit
+game_end();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

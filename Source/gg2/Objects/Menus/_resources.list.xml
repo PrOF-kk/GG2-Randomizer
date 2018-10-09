@@ -7,7 +7,6 @@
   <resource name="Hosting Menu Elements" type="GROUP"/>
   <resource name="Options Menus" type="GROUP"/>
   <resource name="Loadout Menu Elements" type="GROUP"/>
-  <resource name="DevMessageChecker" type="RESOURCE"/>
   <resource name="MenuController" type="RESOURCE"/>
   <resource name="WeaponBanlist" type="RESOURCE"/>
 </resources>

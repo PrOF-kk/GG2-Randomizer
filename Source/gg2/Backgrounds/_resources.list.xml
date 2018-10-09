@@ -24,4 +24,5 @@
   <resource name="popupBackgroundB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>
   <resource name="LoadoutB" type="RESOURCE"/>
+  <resource name="UpdaterB" type="RESOURCE"/>
 </resources>

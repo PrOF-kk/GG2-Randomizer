@@ -24,6 +24,16 @@
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     
+    // Delete old left-over files created by the updater
+    var backupFilename;
+    backupFilename = file_find_first("gg2-old.delete.me.*", 0);
+    while(backupFilename != "")
+    {
+        file_delete(backupFilename);
+        backupFilename = file_find_next();
+    }
+    file_find_close();
+    
     var customMapRotationFile;
 
     //import wav files for music

@@ -73,7 +73,7 @@
     }
 
     fade = 0;
-    
+    statusString = "Check for updates"
     menuimage = choose(0,1,2,3);
 
     if(global.dedicatedMode == 1)

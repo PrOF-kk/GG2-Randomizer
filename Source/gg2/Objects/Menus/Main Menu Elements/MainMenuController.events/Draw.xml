@@ -14,29 +14,38 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{    
-    draw_sprite(MenuBackgroundS,menuimage,300,300);
-    //draw_sprite(MenuBackgroundVersionS,0,300,300);
+
+    var x1, x2, y1, y2;
+    x1 = 360;
+    x2 = 580;
+    y1 = 15;
+    y2 = 30 + string_height(statusString);
+
+    draw_sprite(MenuBackgroundS, menuimage, 300, 300);
+    //draw_sprite(MenuBackgroundVersionS, 0, 300, 300);
     draw_set_color(c_white);
     
-    var height, selected;
-    height = string_height("Updates:#"+global.mods);
+    var height,  selected;
     selected = false;
-    if mouse_x &gt;= 360
-        if mouse_x &lt;= 580
-            if mouse_y &gt;= 25
-                if mouse_y &lt;= 25+height {
+    if (mouse_x &gt;= x1)
+        if (mouse_x &lt;= x2)
+            if (mouse_y &gt;= y1)
+                if (mouse_y &lt;= y2) {
                     selected = true;
-                    if mouse_check_button_pressed(mb_left) splash_show_web("http://www.ganggarrison.com/forums/index.php?topic=28842.0",0);
+                    if (mouse_check_button_pressed(mb_left))
+                        if (!instance_exists(DevMessageChecker)) instance_create(32, 528, DevMessageChecker);
                 }
     draw_set_alpha(0.6);
     draw_set_color(c_black);
-    draw_rectangle(360,20,580,25+height,false);
+    draw_rectangle(x1, y1, x2, y2, false);
     draw_set_alpha(1);
-    draw_rectangle(360,20,580,25+height,true)
-    if selected draw_set_color(c_orange);
-    else draw_set_color(c_white);
+    draw_set_color(c_white);
+    draw_rectangle(x1, y1, x2, y2, true)
+    if (selected) draw_set_color(c_orange);
     draw_set_valign(fa_top);
-    draw_text(363,23,"Updates:#"+global.mods);
+    
+    draw_set_halign(fa_left);
+    draw_text(363, 23, statusString);
 }
 </argument>
       </arguments>

@@ -45,4 +45,5 @@
   <resource name="Misc" type="GROUP"/>
   <resource name="Killtable" type="GROUP"/>
   <resource name="Faucet HTTP" type="GROUP"/>
+  <resource name="Plugins" type="GROUP"/>
 </resources>

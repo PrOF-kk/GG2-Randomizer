@@ -17,4 +17,5 @@
   <resource name="FrozenStatuesS" type="RESOURCE"/>
   <resource name="ConsoleWindow2S" type="RESOURCE"/>
   <resource name="Fonts" type="GROUP"/>
+  <resource name="Updater" type="GROUP"/>
 </resources>

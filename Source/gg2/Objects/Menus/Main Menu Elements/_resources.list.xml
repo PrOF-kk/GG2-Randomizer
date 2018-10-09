@@ -2,4 +2,6 @@
 <resources>
   <resource name="MainMenuController" type="RESOURCE"/>
   <resource name="CreditsController" type="RESOURCE"/>
+  <resource name="DevMessageChecker" type="RESOURCE"/>
+  <resource name="DevMessagePopup" type="RESOURCE"/>
 </resources>

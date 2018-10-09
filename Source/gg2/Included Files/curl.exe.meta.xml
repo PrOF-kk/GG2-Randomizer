@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>curl.exe</filename>
+  <filepath>C:\Users\Valerio\Desktop\curl-7.61.1-win32-mingw\bin\curl.exe</filepath>
+  <original>true</original>
+  <originalSize>3756544</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>TEMP_DIRECTORY</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>true</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>false</removeAtGameEnd>
+</include>
