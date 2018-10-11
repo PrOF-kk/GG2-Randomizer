@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="mapEnd" type="RESOURCE"/>
+  <resource name="basicRoomSetup" type="RESOURCE"/>
+  <resource name="room_goto_fix" type="RESOURCE"/>
+  <resource name="gotoInternalMapRoom" type="RESOURCE"/>
+  <resource name="Arena" type="GROUP"/>
+  <resource name="pointCapture" type="RESOURCE"/>
+</resources>
