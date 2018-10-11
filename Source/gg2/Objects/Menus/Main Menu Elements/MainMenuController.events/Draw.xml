@@ -15,6 +15,9 @@
       <arguments>
         <argument kind="STRING">{    
 
+    if (alreadyChecked) statusString = "No updates found";
+    if (instance_exists(DevMessagePopup)) statusString = "Update found";
+
     var x1, x2, y1, y2;
     x1 = 360;
     x2 = 580;
@@ -32,8 +35,10 @@
             if (mouse_y &gt;= y1)
                 if (mouse_y &lt;= y2) {
                     selected = true;
-                    if (mouse_check_button_pressed(mb_left))
+                    if (mouse_check_button_pressed(mb_left) &amp;&amp; !alreadyChecked) {
                         if (!instance_exists(DevMessageChecker)) instance_create(32, 528, DevMessageChecker);
+                        alreadyChecked = true;
+                    }
                 }
     draw_set_alpha(0.6);
     draw_set_color(c_black);
