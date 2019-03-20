@@ -6,12 +6,21 @@
 
 var critical;
 critical = 1;
+var t, oid;
+t = 2147483647; //why not
 with(NapalmGrenade) {
-    if ownerPlayer == argument0 and collision_circle(argument1, argument2, 4, NapalmGrenade,false,false){
-        if crit > 1 critical = crit;
-        instance_destroy();
+    //find the least strong grenade
+    //should be desync-independent since only the eldest grenade will explode
+    //UNLESS the player is really laggy, but that's not my problem
+    if alarm[2] < t and ownerPlayer == argument0 {
+        t = alarm[2];
+        oid = id;
     }
-} 
+}
+with(oid) {
+    if crit > 1 critical = crit;
+    instance_destroy();
+}
  
 instance_create(argument1,argument2,Explosion);
 playsound(argument1,argument2,ExplosionSnd);
